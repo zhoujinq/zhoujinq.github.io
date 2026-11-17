@@ -8,6 +8,7 @@
 index.html                  全部结构、样式、脚本
 assets/maple-regular.woff2  Maple Mono CN 子集（正文）
 assets/maple-bold.woff2     Maple Mono CN 子集（粗体，只含用到的字）
+assets/og.png               社交分享卡，1200×630（源文件 _build/og-src.html）
 resume.pdf                  简历，A4
 ```
 
@@ -31,6 +32,7 @@ python -m http.server 8080
 | 终端里的命令 | 文末 `<script>` 里的 `CMD` 对象，加一个 key 就行；中文别名写在 `zh:[…]` |
 | 顶栏提示符 | `<div class="cwd">` |
 | 配色 | `:root` 里的 `--accent`（主题色只有一个） |
+| 分享卡 | 改 `_build/og-src.html`，用 headless Chrome 在 1200×630 下重新截图 |
 
 ## 字体
 
