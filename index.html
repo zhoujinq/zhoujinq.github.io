@@ -933,32 +933,27 @@ h1 .mark{
   /* ── 顶栏进度 + 章节高亮 ─────────────────────────────── */
   var prog = document.querySelector(".prog");
   var navLinks = [].slice.call(document.querySelectorAll(".nav a"));
+  var secs = ["about","projects","resume","contact"].map(function(id){
+    return document.getElementById(id);
+  }).filter(Boolean);
+
   function onScroll(){
     var h = document.documentElement;
     var max = h.scrollHeight - window.innerHeight;
     var p = max > 0 ? (h.scrollTop || document.body.scrollTop) / max : 0;
     if (prog) prog.style.setProperty("--p", (p * 100).toFixed(2) + "%");
+
+    /* 当前章节：取最后一个已经越过视口 42% 线的区块，不会残留旧状态 */
+    var mark = window.innerHeight * 0.42, cur = "";
+    for (var i = 0; i < secs.length; i++){
+      if (secs[i].getBoundingClientRect().top <= mark) cur = secs[i].id;
+    }
+    navLinks.forEach(function(a){
+      a.classList.toggle("on", a.getAttribute("href") === "#" + cur);
+    });
   }
   window.addEventListener("scroll", onScroll, { passive:true });
   onScroll();
-
-  if ("IntersectionObserver" in window){
-    var map = { about:"about", projects:"projects", resume:"resume", contact:"contact" };
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if (!e.isIntersecting) return;
-        var key = map[e.target.id];
-        if (!key) return;
-        navLinks.forEach(function(a){
-          a.classList.toggle("on", a.getAttribute("href") === "#" + key);
-        });
-      });
-    }, { rootMargin: "-45% 0px -50% 0px" });
-    ["about","projects","resume","contact"].forEach(function(id){
-      var el = document.getElementById(id);
-      if (el) io.observe(el);
-    });
-  }
 
   /* ── 复制邮箱 ───────────────────────────────────────── */
   var toastEl = null, toastTimer = 0;
