@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>~zhoujinq: index</title>
-<meta name="description" content="周锦全（Zhou Jinquan）— 卖人形机器人整机，也每天在用 API 造工具。六个自研工具的说明书。">
+<meta name="description" content="周锦全（Zhou Jinquan）— 卖人形机器人整机，也每天在用 API 造工具。七个自研工具的说明书。">
 <meta name="theme-color" content="#f7f8fa">
 <meta name="author" content="周锦全">
 <meta property="og:type" content="profile">
@@ -296,6 +296,15 @@ section{padding:clamp(34px,6vh,62px) 0 0}
 .shot-frame .d{font-size:11.5px;color:var(--faint)}
 .shot img{width:100%;height:auto;display:block;border-radius:8px;border:1px solid var(--line);background:#fff}
 
+/* 门禁输出：一段真的终端文本，用等宽块装 */
+.qa{
+  margin:0;padding:16px 18px;overflow-x:auto;white-space:pre;
+  background:#fbfcfe;border:1px solid var(--line);border-radius:8px;
+  font:inherit;font-size:12.5px;line-height:1.95;color:var(--ink-3);
+}
+.qa b{display:block;margin-bottom:8px;font-weight:700;color:var(--ink-2)}
+.qa i{display:block;margin-top:8px;font-style:normal;color:var(--accent-ink)}
+
 /* 简历 / 联系 */
 .two{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 @media (max-width:640px){ .two{grid-template-columns:1fr} }
@@ -506,7 +515,7 @@ h1 .mark{
     <div class="about">
       <p>通信工程科班出身（东南大学），做过 CV 算法，在马来西亚和法国常驻卖过货。现在是星尘智能的海外大科研销售经理，卖绳驱轮式双臂人形机器人整机 —— 但客户买的其实不是机器人，是一台能跑自己算法的载体。</p>
       <p>所以我每天干的活，一半是商务，一半是技术：把「我要做 XX 研究」翻译成可交付范围，判断现有 SDK 撑不撑得住、哪部分必须二次开发、哪些能力得算法团队补。这件事和卖 API 是同一件事 —— 先把能力边界说清楚，再谈钱。</p>
-      <p>工作之外，我把 AI 真的接进了自己的动作里：六个每天在用的自建工具，公司全员 Token 消耗排进前十。不是「关注 AI」，是靠它干活。</p>
+      <p>工作之外，我把 AI 真的接进了自己的动作里：七个每天在用的自建工具，公司全员 Token 消耗排进前十。不是「关注 AI」，是靠它干活。</p>
       <p class="aside">4 个月、8 台整机、307 万（已回款），15 家客户进样机、4 家签约。这些数字只说这一次 —— 它解释不了我在做什么。</p>
     </div>
   </section>
@@ -514,7 +523,7 @@ h1 .mark{
   <!-- PROJECTS -->
   <section id="projects">
     <div class="sec-head">
-      <h2>Projects</h2><span class="rule"></span><span class="cnt">6 个 · 自研自用</span>
+      <h2>Projects</h2><span class="rule"></span><span class="cnt">7 个 · 自研自用</span>
     </div>
     <nav class="p-index" aria-label="项目目录">
       <a href="#p1"><span>01</span>销售辅助系统</a>
@@ -523,6 +532,7 @@ h1 .mark{
       <a href="#p4"><span>04</span>Personal AI</a>
       <a href="#p5"><span>05</span>简历工坊</a>
       <a href="#p6"><span>06</span>高频选择助手</a>
+      <a href="#p7"><span>07</span>模型斩杀线</a>
     </nav>
 
     <article class="proj" id="p1" data-name="销售辅助系统" data-one="把客户资料、方案、报价、跟进节奏，收敛成一条能跑的流水线。">
@@ -682,10 +692,21 @@ h1 .mark{
       </div></div>
 
       <div class="seg"><div class="seg-l">效果</div><div class="seg-c">
-        <figure class="shot"><div class="shot-frame">
-          <span class="t">截图待补</span>
-          <span class="d">这一格留给实际界面，不拿数字凑</span>
-        </div></figure>
+        <figure class="shot">
+<pre class="qa"><b>resume-master QA · 周锦全_KimiAPI销售_v3.pdf</b>
+✓ 文本越界    全部在版心内
+✓ 页数        2 页
+✓ 末页留白    占用 86%
+✓ 禁忌词      未命中
+✓ 待补占位    无
+✓ 占位符      无残留
+✓ 联系方式    5 项
+✓ 外部链接    2 条
+✓ 日期格式    7 条统一为 YYYY.MM – YYYY.MM
+✓ 内容密度    16/23 条带数字或判断
+<i>结论：0 阻断 / 0 提醒</i></pre>
+          <figcaption>九项门禁 · 2026-11-17 这台机器上的实际输出</figcaption>
+        </figure>
       </div></div>
 
       <div class="seg"><div class="seg-l">栈</div><div class="seg-c">
@@ -725,6 +746,41 @@ h1 .mark{
         <p class="stack">偏好建模 · 规则 + 模型</p>
       </div></div>
     </article>
+
+    <article class="proj" id="p7" data-name="模型斩杀线" data-one="把「该用哪个模型」从看完评测就下结论，变成一张能查的帕累托图。">
+      <div class="p-top">
+        <span class="p-no">07</span>
+        <h3 class="p-name">模型斩杀线</h3>
+        <span class="p-state">在线 · 持续更新</span>
+      </div>
+      <p class="p-one">把「该用哪个模型」从看完评测就下结论，变成一张能查的帕累托图。</p>
+
+      <div class="seg"><div class="seg-l">为什么做</div><div class="seg-c">
+        <p>每家都发榜，每家都在自证第一。评测口径还不统一：推理档位、上下文长度、是否经中转 —— 比出来的往往不是能力，是配置。</p>
+        <p>所以反过来问：给定我手上的任务，哪个模型在「够聪明」的前提下最快、最便宜？</p>
+      </div></div>
+
+      <div class="seg"><div class="seg-l">怎么做</div><div class="seg-c">
+        <ul class="steps">
+          <li><b>采集：</b>70 条配置 / 34 个模型，六个纵轴可切 —— 首答案延迟、端到端耗时、输出速度、首字延迟、折价、任务耗时。</li>
+          <li><b>判据：</b>画帕累托前沿。线外的点都能被线上某个模型「不弱于它、且某一项更好」地替代，也就是该被淘汰的。</li>
+          <li><b>读法：</b>按体感优先级排序，从「首答案延迟」开始看，而不是从跑分开始。</li>
+        </ul>
+      </div></div>
+
+      <div class="seg"><div class="seg-l">效果</div><div class="seg-c">
+        <figure class="shot">
+          <a class="shot-link" href="assets/shot-cutline.webp" target="_blank" rel="noopener" title="打开原图">
+            <img src="assets/shot-cutline.webp" alt="模型斩杀线：横轴是 AA 智能指数，纵轴是首答案延迟，橙色折线是帕累托前沿，线上只剩 5 款模型" width="1200" height="1022" loading="lazy" decoding="async">
+          </a>
+          <figcaption>70 条配置 / 34 个模型，橙色折线以外的点都能被替代<span class="zoom">点击看原图 ↗</span></figcaption>
+        </figure>
+      </div></div>
+
+      <div class="seg"><div class="seg-l">栈</div><div class="seg-c">
+        <p class="stack">静态页面 · 帕累托前沿 · 数据快照</p>
+      </div></div>
+    </article>
   </section>
 
   <!-- 简历 / 联系 -->
@@ -733,7 +789,7 @@ h1 .mark{
     <div class="two">
       <div class="panel">
         <h3>Resume</h3>
-        <p>A4 一页。投什么岗位就派生出什么版本，母版只有一份。</p>
+        <p>投什么岗位派生出什么版本，母版只有一份。出片前跑九项门禁，不过不交付。</p>
         <a class="btn" href="./resume.pdf" target="_blank" rel="noopener">打开简历 PDF ↗</a>
       </div>
       <div class="panel" id="contact">
