@@ -280,9 +280,13 @@ section{padding:clamp(34px,6vh,62px) 0 0}
 .stack{font-size:13px;color:var(--muted)}
 
 /* 效果占位 */
-.shot{margin:0;max-width:460px}
+.shot{margin:0;max-width:100%}
+.shot-link{display:block;border:0;cursor:zoom-in}
+.shot-link:hover img{border-color:#c9d0dd}
+.shot .zoom{display:block;margin-top:3px;color:var(--faint);opacity:.85}
+.shot figcaption{margin-top:9px;font-size:12px;color:var(--faint);line-height:1.7}
 .shot-frame{
-  aspect-ratio:16/9;
+  height:130px;
   border:1px dashed #d3d8e2;border-radius:8px;
   background:linear-gradient(135deg, rgba(77,107,254,.03), transparent 60%), #fafbfd;
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;
@@ -290,7 +294,7 @@ section{padding:clamp(34px,6vh,62px) 0 0}
 }
 .shot-frame .t{font-size:13px;color:var(--muted)}
 .shot-frame .d{font-size:11.5px;color:var(--faint)}
-.shot img{width:100%;height:auto;display:block;border-radius:8px;border:1px solid var(--line)}
+.shot img{width:100%;height:auto;display:block;border-radius:8px;border:1px solid var(--line);background:#fff}
 
 /* 简历 / 联系 */
 .two{display:grid;grid-template-columns:1fr 1fr;gap:20px}
@@ -576,10 +580,11 @@ h1 .mark{
       </div></div>
 
       <div class="seg"><div class="seg-l">效果</div><div class="seg-c">
-        <figure class="shot"><div class="shot-frame">
-          <span class="t">截图待补</span>
-          <span class="d">这一格留给实际界面，不拿数字凑</span>
-        </div></figure>
+        <figure class="shot">
+          <a class="shot-link" href="assets/shot-n1.webp" target="_blank" rel="noopener" title="打开原图"><img src="assets/shot-n1.webp" alt="N1 备考教练的真题练习页：累计已做题数 15 题、已收录错题 11 题，按考期归档，逐题自动保存"
+               width="1200" height="880" loading="lazy" decoding="async"></a>
+          <figcaption>真题练习 · 51 套按考期归档，每题提交后自动保存<span class="zoom">点击看原图 ↗</span></figcaption>
+        </figure>
       </div></div>
 
       <div class="seg"><div class="seg-l">栈</div><div class="seg-c">
@@ -609,10 +614,11 @@ h1 .mark{
       </div></div>
 
       <div class="seg"><div class="seg-l">效果</div><div class="seg-c">
-        <figure class="shot"><div class="shot-frame">
-          <span class="t">截图待补</span>
-          <span class="d">这一格留给实际界面，不拿数字凑</span>
-        </div></figure>
+        <figure class="shot">
+          <a class="shot-link" href="assets/shot-book.webp" target="_blank" rel="noopener" title="打开原图"><img src="assets/shot-book.webp" alt="记账与对账面板：净资产四个指标、资产占比色块、A股/港股/美股三市场折算表，金额已脱敏"
+               width="1150" height="463" loading="lazy" decoding="async"></a>
+          <figcaption>对账面板 · 多市场折算与资产占比。金额已脱敏，比例保留<span class="zoom">点击看原图 ↗</span></figcaption>
+        </figure>
       </div></div>
 
       <div class="seg"><div class="seg-l">栈</div><div class="seg-c">
@@ -642,10 +648,11 @@ h1 .mark{
       </div></div>
 
       <div class="seg"><div class="seg-l">效果</div><div class="seg-c">
-        <figure class="shot"><div class="shot-frame">
-          <span class="t">截图待补</span>
-          <span class="d">这一格留给实际界面，不拿数字凑</span>
-        </div></figure>
+        <figure class="shot">
+          <a class="shot-link" href="assets/shot-handbook.webp" target="_blank" rel="noopener" title="打开原图"><img src="assets/shot-handbook.webp" alt="Agent 手册：左侧是九十七章的目录树，右侧是正文，顶部标注 31424 字、约 75 分钟"
+               width="1150" height="634" loading="lazy" decoding="async"></a>
+          <figcaption>Agent 手册 · 3.1 万字，97 个章节，从第一性原理拆到六个 Agent<span class="zoom">点击看原图 ↗</span></figcaption>
+        </figure>
       </div></div>
 
       <div class="seg"><div class="seg-l">栈</div><div class="seg-c">
