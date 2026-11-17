@@ -65,7 +65,10 @@
     padding:16px 18px 18px;font-family:var(--mono);font-size:13px;line-height:1.9;overflow:auto;
   }
   .term .bar{display:flex;gap:6px;margin-bottom:12px}
-  .term .bar i{width:9px;height:9px;border-radius:50%;background:#d9dde3;display:block}
+  .term .bar i{width:10px;height:10px;border-radius:50%;display:block}
+  .term .bar i:nth-child(1){background:#ff5f57}
+  .term .bar i:nth-child(2){background:#febc2e}
+  .term .bar i:nth-child(3){background:#28c840}
   .term .line{display:block;white-space:pre-wrap;word-break:break-word}
   .term .p{color:var(--blue);font-weight:600}
   .term .u{color:#7c8aa5}
@@ -126,7 +129,7 @@
 
 <nav>
   <div class="wrap">
-    <div class="brand"><b>zhoujinquan183</b>:~$ <span id="navhint">cd /</span></div>
+    <div class="brand"><b>zhoujinq</b>:~$ <span id="navhint">cd /</span></div>
     <ul>
       <li><a href="#about">./about</a></li>
       <li><a href="#work">./work</a></li>
@@ -142,7 +145,7 @@
     <p class="tagline">卖人形机器人整机，也每天在<em>用 API 造工具</em>。<br>我相信卖 AI 产品的人，得先自己把 AI 用出肌肉记忆。</p>
     <div class="contact">
       <a href="mailto:2336097716@qq.com">2336097716@qq.com</a>
-      <a href="https://github.com/zhoujinquan183" target="_blank" rel="noopener">github.com/zhoujinquan183</a>
+      <a href="https://github.com/zhoujinq" target="_blank" rel="noopener">github.com/zhoujinq</a>
       <span>深圳 / 北京</span>
     </div>
 
@@ -264,7 +267,7 @@
   <div class="wrap">
     <div>
       <a href="mailto:2336097716@qq.com">2336097716@qq.com</a>　·　
-      <a href="https://github.com/zhoujinquan183" target="_blank" rel="noopener">GitHub</a>　·　
+      <a href="https://github.com/zhoujinq" target="_blank" rel="noopener">GitHub</a>　·　
       <a href="./resume.pdf" target="_blank" rel="noopener">简历 PDF</a>
     </div>
     <button class="copy" id="copybtn" type="button">复制邮箱</button>
@@ -277,26 +280,18 @@
   var CURSOR = '<span class="cursor"></span>';
   var LINES = [
     {t:'p',   c:'whoami'},
-    {t:'out', s:'周锦全 — 一个把 AI 用进销售动作里的人'},
-    {t:'p',   c:'ls ~/projects'},
-    {t:'out', s:'sales-pipeline/   n1-coach/   weekly-retro/   personal-ai/   decision-helper/'},
-    {t:'p',   c:'cat now.txt'},
-    {t:'out', s:'在星尘智能卖绳驱人形机器人；4 个月 8 台、307 万已回款。'},
-    {t:'out', s:'下一步：把 API 卖到海外。'},
-    {t:'p',   c:'claude'},
-    {t:'err', s:'command not found'},
-    {t:'dim', s:'（但它确实帮我干了半年多的活）'}
+    {t:'out', s:'周锦全 — 一个把 AI 用进销售动作里的人'}
   ];
 
   function esc(s){
     return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   }
   function prompt(txt, withCursor){
-    return '<span class="line"><span class="u">zhoujinquan183:~$</span> <span class="cmd">' +
+    return '<span class="line"><span class="u">zhoujinq:~$</span> <span class="cmd">' +
            esc(txt) + '</span>' + (withCursor ? CURSOR : '') + '</span>';
   }
   function idle(){
-    return '<span class="line"><span class="u">zhoujinquan183:~$</span> ' + CURSOR + '</span>';
+    return '<span class="line"><span class="u">zhoujinq:~$</span> ' + CURSOR + '</span>';
   }
   function lineHTML(l){
     if(l.t === 'p') return prompt(l.c, false);

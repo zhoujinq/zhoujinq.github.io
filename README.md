@@ -13,13 +13,13 @@
 
 ## 3. 上线（GitHub Pages）
 
-你的账号已经有仓库权限，**仓库名必须是 `zhoujinquan183.github.io`** —— 只有这个命名才能拿到 `https://zhoujinquan183.github.io` 这个根域名。
+你的账号已经有仓库权限，**仓库名必须是 `zhoujinq.github.io`** —— 只有这个命名才能拿到 `https://zhoujinq.github.io` 这个根域名。
 
 网页操作版：
-1. 新建仓库，名字填 `zhoujinquan183.github.io`，选 Public。
+1. 新建仓库，名字填 `zhoujinq.github.io`，选 Public。
 2. 把 `index.html` 和 `resume.pdf` 拖进去，Commit。
 3. Settings → Pages → Source 选 `Deploy from a branch` → 分支 `main` / 目录 `/ (root)` → Save。
-4. 等 1–2 分钟，访问 `https://zhoujinquan183.github.io`。
+4. 等 1–2 分钟，访问 `https://zhoujinq.github.io`。
 
 命令行版：
 ```bash
@@ -28,13 +28,13 @@ git init
 git add index.html resume.pdf
 git commit -m "init homepage"
 git branch -M main
-git remote add origin https://github.com/zhoujinquan183/zhoujinquan183.github.io.git
+git remote add origin https://github.com/zhoujinq/zhoujinq.github.io.git
 git push -u origin main
 ```
 
 ## 为什么是 github.io（而不是 workbuddy.host）
 
-- `zhoujinquan183.github.io` 是 **GitHub Pages**：把静态文件放进一个叫 `zhoujinquan183.github.io` 的仓库，GitHub 就把它当站点伺服。免费、无需备案、全球 CDN。
+- `zhoujinq.github.io` 是 **GitHub Pages**：把静态文件放进一个叫 `zhoujinq.github.io` 的仓库，GitHub 就把它当站点伺服。免费、无需备案、全球 CDN。
 - 蒋炎岩老师的 `jiangyy.github.io` 就是这个机制，全球大量工程师/教授都这么用，**它本身就是"个人主页"的常见形态**，不是 GitHub 的员工页面。
 - WorkBuddy 发布的 `.app.workbuddy.host` 是**产品内的应用分享链接**（带 `sharecode`），本质是"我用工具做的任务"，不是站点。放简历里会显得像内部链接。
 
