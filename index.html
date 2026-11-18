@@ -17,7 +17,7 @@
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="zh_CN">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232b2418'/%3E%3Ctext x='16' y='22.5' font-family='monospace' font-size='19' font-weight='bold' fill='%23f7f3ea' text-anchor='middle'%3E%24%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231f242b'/%3E%3Cpath d='M8.5 10.5 L14 16 L8.5 21.5' fill='none' stroke='%2355e08a' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M16.5 21.5 L23.5 21.5' stroke='%2355e08a' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preload" href="assets/maple-regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/maple-bold.woff2" as="font" type="font/woff2" crossorigin>
 <style>
@@ -64,8 +64,22 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 
 .wrap{position:relative;width:100%;max-width:var(--w);margin:0 auto;padding:0 var(--pad) 0 calc(var(--pad) + 12px)}
 @media (min-width:860px){
-  .wrap::before{content:"";position:absolute;left:10px;top:0;bottom:0;width:1px;background:rgba(178,74,52,.18);pointer-events:none}
+  /* 第一屏：红线自上而下压出来 */
+  .wrap::before{
+    content:"";position:absolute;left:10px;top:0;width:1px;height:100vh;
+    background:rgba(178,74,52,.18);pointer-events:none;
+    transform-origin:top;transform:scaleY(0);
+    animation:marginDraw .9s cubic-bezier(.22,.9,.2,1) .05s forwards;
+  }
+  /* 余下部分：接上，延迟淡入，避免长页整条被 wipe 一遍 */
+  .wrap::after{
+    content:"";position:absolute;left:10px;top:100vh;bottom:0;width:1px;
+    background:rgba(178,74,52,.18);pointer-events:none;
+    opacity:0;animation:marginRest .5s linear .85s forwards;
+  }
 }
+@keyframes marginDraw{to{transform:scaleY(1)}}
+@keyframes marginRest{to{opacity:1}}
 
 /* ── 抬头 ───────────────────────────────────────────────── */
 .mast{padding:40px 0 0}
@@ -76,7 +90,11 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 .mast-top .who a{color:var(--ink-3);border-bottom-color:var(--line)}
 .mast-top .who a:hover{color:var(--accent);border-bottom-color:var(--accent)}
 
-.logo{margin:22px 0 2px;line-height:0;color:var(--ink)}
+.logo{margin:22px 0 2px;line-height:0;color:var(--ink);
+  clip-path:inset(0 100% 0 0);
+  animation:printIn .75s steps(69,end) .06s forwards;
+}
+@keyframes printIn{to{clip-path:inset(0 0 0 0)}}
 .logo svg{display:block;width:100%;max-width:460px;height:auto}
 .logo svg g{shape-rendering:crispEdges}
 
@@ -138,7 +156,13 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 
 /* ── 章节 ───────────────────────────────────────────────── */
 section{padding:52px 0 0}
-.sec-head{display:flex;align-items:baseline;gap:14px;margin:0 0 22px;padding-bottom:8px;border-bottom:2px solid var(--ink)}
+.sec-head{position:relative;display:flex;align-items:baseline;gap:14px;margin:0 0 22px;padding-bottom:9px}
+.sec-head::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--ink);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .62s cubic-bezier(.22,.9,.2,1);
+}
+.sec-head.in::after{transform:scaleX(1)}
 .sec-head h2{margin:0;font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase}
 .sec-head .cnt{margin-left:auto;font-size:12px;color:var(--muted);letter-spacing:.06em}
 
@@ -149,9 +173,12 @@ section{padding:52px 0 0}
 
 .card{
   background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;
-  transition:transform 200ms var(--ease),border-color 200ms var(--ease),box-shadow 200ms var(--ease);
+  opacity:0;transform:translateY(16px);
+  transition:opacity .52s var(--ease),transform .52s var(--ease),
+             border-color .2s var(--ease),box-shadow .2s var(--ease);
 }
-.card:hover{transform:translateY(-3px);border-color:var(--accent-line);box-shadow:0 14px 30px -22px rgba(43,36,24,.7)}
+.card.in{opacity:1;transform:none}
+.card:hover{border-color:var(--accent-line);box-shadow:0 16px 34px -24px rgba(43,36,24,.75)}
 .card-btn{
   display:block;width:100%;text-align:left;border:0;background:none;padding:0;cursor:pointer;
   font:inherit;color:inherit;
@@ -355,8 +382,8 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
 /* 入场 */
 .rise{opacity:0;transform:translateY(8px);animation:rise .5s var(--ease) forwards}
 @keyframes rise{to{opacity:1;transform:none}}
-.d1{animation-delay:.03s}.d2{animation-delay:.1s}.d3{animation-delay:.17s}
-.d4{animation-delay:.24s}.d5{animation-delay:.31s}
+.d1{animation-delay:.02s}.d2{animation-delay:.1s}.d3{animation-delay:.72s}
+.d4{animation-delay:.92s}.d5{animation-delay:1.02s}.d6{animation-delay:.82s}
 
 .skip{position:absolute;left:-9999px;top:0;z-index:99;background:var(--ink);color:var(--paper);padding:10px 16px;font-size:13px;border:0}
 .skip:focus{left:0}
@@ -375,8 +402,20 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
   .rise{opacity:1;transform:none}
   .caret{animation:none;opacity:1}
   .ov,.ov-panel{transition:none}
+  .logo{clip-path:none;animation:none}
+  .card{opacity:1;transform:none}
+  .sec-head::after{transform:none}
+  .wrap::before{transform:none;animation:none}
+  .wrap::after{opacity:1;animation:none}
 }
 </style>
+<noscript><style>
+  .card{opacity:1!important;transform:none!important}
+  .logo{clip-path:none!important;animation:none!important}
+  .sec-head::after{transform:none!important}
+  .wrap::before{transform:none!important;animation:none!important}
+  .wrap::after{opacity:1!important;animation:none!important}
+</style></noscript>
 </head>
 <body>
 <a class="skip" href="#main">跳到正文</a>
@@ -390,11 +429,11 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
       <span class="who">邮箱 <a href="mailto:2336097716@qq.com">2336097716@qq.com</a>，GitHub 链接：<a href="https://github.com/zhoujinq" target="_blank" rel="noopener">github.com/zhoujinq</a></span>
     </div>
 
-    <div class="logo rise d2"><svg viewBox="0 0 690 70" role="img" aria-label="ZHOU JINQUAN" xmlns="http://www.w3.org/2000/svg"><g fill="currentColor"><rect x="0.5" y="0.5" width="49" height="9"/><rect x="60.5" y="0.5" width="9" height="9"/><rect x="100.5" y="0.5" width="9" height="9"/><rect x="120.5" y="0.5" width="49" height="9"/><rect x="180.5" y="0.5" width="9" height="9"/><rect x="220.5" y="0.5" width="9" height="9"/><rect x="280.5" y="0.5" width="49" height="9"/><rect x="340.5" y="0.5" width="49" height="9"/><rect x="400.5" y="0.5" width="9" height="9"/><rect x="440.5" y="0.5" width="9" height="9"/><rect x="460.5" y="0.5" width="49" height="9"/><rect x="520.5" y="0.5" width="9" height="9"/><rect x="560.5" y="0.5" width="9" height="9"/><rect x="600.5" y="0.5" width="9" height="9"/><rect x="640.5" y="0.5" width="9" height="9"/><rect x="680.5" y="0.5" width="9" height="9"/><rect x="40.5" y="10.5" width="9" height="9"/><rect x="60.5" y="10.5" width="9" height="9"/><rect x="100.5" y="10.5" width="9" height="9"/><rect x="120.5" y="10.5" width="9" height="9"/><rect x="160.5" y="10.5" width="9" height="9"/><rect x="180.5" y="10.5" width="9" height="9"/><rect x="220.5" y="10.5" width="9" height="9"/><rect x="320.5" y="10.5" width="9" height="9"/><rect x="360.5" y="10.5" width="9" height="9"/><rect x="400.5" y="10.5" width="19" height="9"/><rect x="440.5" y="10.5" width="9" height="9"/><rect x="460.5" y="10.5" width="9" height="9"/><rect x="500.5" y="10.5" width="9" height="9"/><rect x="520.5" y="10.5" width="9" height="9"/><rect x="560.5" y="10.5" width="9" height="9"/><rect x="590.5" y="10.5" width="9" height="9"/><rect x="610.5" y="10.5" width="9" height="9"/><rect x="640.5" y="10.5" width="19" height="9"/><rect x="680.5" y="10.5" width="9" height="9"/><rect x="30.5" y="20.5" width="9" height="9"/><rect x="60.5" y="20.5" width="9" height="9"/><rect x="100.5" y="20.5" width="9" height="9"/><rect x="120.5" y="20.5" width="9" height="9"/><rect x="160.5" y="20.5" width="9" height="9"/><rect x="180.5" y="20.5" width="9" height="9"/><rect x="220.5" y="20.5" width="9" height="9"/><rect x="320.5" y="20.5" width="9" height="9"/><rect x="360.5" y="20.5" width="9" height="9"/><rect x="400.5" y="20.5" width="9" height="9"/><rect x="420.5" y="20.5" width="9" height="9"/><rect x="440.5" y="20.5" width="9" height="9"/><rect x="460.5" y="20.5" width="9" height="9"/><rect x="500.5" y="20.5" width="9" height="9"/><rect x="520.5" y="20.5" width="9" height="9"/><rect x="560.5" y="20.5" width="9" height="9"/><rect x="580.5" y="20.5" width="9" height="9"/><rect x="620.5" y="20.5" width="9" height="9"/><rect x="640.5" y="20.5" width="9" height="9"/><rect x="660.5" y="20.5" width="9" height="9"/><rect x="680.5" y="20.5" width="9" height="9"/><rect x="20.5" y="30.5" width="9" height="9"/><rect x="60.5" y="30.5" width="49" height="9"/><rect x="120.5" y="30.5" width="9" height="9"/><rect x="160.5" y="30.5" width="9" height="9"/><rect x="180.5" y="30.5" width="9" height="9"/><rect x="220.5" y="30.5" width="9" height="9"/><rect x="320.5" y="30.5" width="9" height="9"/><rect x="360.5" y="30.5" width="9" height="9"/><rect x="400.5" y="30.5" width="9" height="9"/><rect x="430.5" y="30.5" width="19" height="9"/><rect x="460.5" y="30.5" width="9" height="9"/><rect x="500.5" y="30.5" width="9" height="9"/><rect x="520.5" y="30.5" width="9" height="9"/><rect x="560.5" y="30.5" width="9" height="9"/><rect x="580.5" y="30.5" width="49" height="9"/><rect x="640.5" y="30.5" width="9" height="9"/><rect x="670.5" y="30.5" width="19" height="9"/><rect x="10.5" y="40.5" width="9" height="9"/><rect x="60.5" y="40.5" width="9" height="9"/><rect x="100.5" y="40.5" width="9" height="9"/><rect x="120.5" y="40.5" width="9" height="9"/><rect x="160.5" y="40.5" width="9" height="9"/><rect x="180.5" y="40.5" width="9" height="9"/><rect x="220.5" y="40.5" width="9" height="9"/><rect x="280.5" y="40.5" width="9" height="9"/><rect x="320.5" y="40.5" width="9" height="9"/><rect x="360.5" y="40.5" width="9" height="9"/><rect x="400.5" y="40.5" width="9" height="9"/><rect x="440.5" y="40.5" width="9" height="9"/><rect x="460.5" y="40.5" width="9" height="9"/><rect x="490.5" y="40.5" width="19" height="9"/><rect x="520.5" y="40.5" width="9" height="9"/><rect x="560.5" y="40.5" width="9" height="9"/><rect x="580.5" y="40.5" width="9" height="9"/><rect x="620.5" y="40.5" width="9" height="9"/><rect x="640.5" y="40.5" width="9" height="9"/><rect x="680.5" y="40.5" width="9" height="9"/><rect x="0.5" y="50.5" width="9" height="9"/><rect x="60.5" y="50.5" width="9" height="9"/><rect x="100.5" y="50.5" width="9" height="9"/><rect x="120.5" y="50.5" width="9" height="9"/><rect x="160.5" y="50.5" width="9" height="9"/><rect x="180.5" y="50.5" width="9" height="9"/><rect x="220.5" y="50.5" width="9" height="9"/><rect x="280.5" y="50.5" width="9" height="9"/><rect x="320.5" y="50.5" width="9" height="9"/><rect x="360.5" y="50.5" width="9" height="9"/><rect x="400.5" y="50.5" width="9" height="9"/><rect x="440.5" y="50.5" width="9" height="9"/><rect x="460.5" y="50.5" width="9" height="9"/><rect x="500.5" y="50.5" width="9" height="9"/><rect x="520.5" y="50.5" width="9" height="9"/><rect x="560.5" y="50.5" width="9" height="9"/><rect x="580.5" y="50.5" width="9" height="9"/><rect x="620.5" y="50.5" width="9" height="9"/><rect x="640.5" y="50.5" width="9" height="9"/><rect x="680.5" y="50.5" width="9" height="9"/><rect x="0.5" y="60.5" width="49" height="9"/><rect x="60.5" y="60.5" width="9" height="9"/><rect x="100.5" y="60.5" width="9" height="9"/><rect x="120.5" y="60.5" width="49" height="9"/><rect x="180.5" y="60.5" width="49" height="9"/><rect x="290.5" y="60.5" width="29" height="9"/><rect x="340.5" y="60.5" width="49" height="9"/><rect x="400.5" y="60.5" width="9" height="9"/><rect x="440.5" y="60.5" width="9" height="9"/><rect x="460.5" y="60.5" width="49" height="9"/><rect x="520.5" y="60.5" width="49" height="9"/><rect x="580.5" y="60.5" width="9" height="9"/><rect x="620.5" y="60.5" width="9" height="9"/><rect x="640.5" y="60.5" width="9" height="9"/><rect x="680.5" y="60.5" width="9" height="9"/></g></svg></div>
+    <div class="logo"><svg viewBox="0 0 690 70" role="img" aria-label="ZHOU JINQUAN" xmlns="http://www.w3.org/2000/svg"><g fill="currentColor"><rect x="0.5" y="0.5" width="49" height="9"/><rect x="60.5" y="0.5" width="9" height="9"/><rect x="100.5" y="0.5" width="9" height="9"/><rect x="120.5" y="0.5" width="49" height="9"/><rect x="180.5" y="0.5" width="9" height="9"/><rect x="220.5" y="0.5" width="9" height="9"/><rect x="280.5" y="0.5" width="49" height="9"/><rect x="340.5" y="0.5" width="49" height="9"/><rect x="400.5" y="0.5" width="9" height="9"/><rect x="440.5" y="0.5" width="9" height="9"/><rect x="460.5" y="0.5" width="49" height="9"/><rect x="520.5" y="0.5" width="9" height="9"/><rect x="560.5" y="0.5" width="9" height="9"/><rect x="600.5" y="0.5" width="9" height="9"/><rect x="640.5" y="0.5" width="9" height="9"/><rect x="680.5" y="0.5" width="9" height="9"/><rect x="40.5" y="10.5" width="9" height="9"/><rect x="60.5" y="10.5" width="9" height="9"/><rect x="100.5" y="10.5" width="9" height="9"/><rect x="120.5" y="10.5" width="9" height="9"/><rect x="160.5" y="10.5" width="9" height="9"/><rect x="180.5" y="10.5" width="9" height="9"/><rect x="220.5" y="10.5" width="9" height="9"/><rect x="320.5" y="10.5" width="9" height="9"/><rect x="360.5" y="10.5" width="9" height="9"/><rect x="400.5" y="10.5" width="19" height="9"/><rect x="440.5" y="10.5" width="9" height="9"/><rect x="460.5" y="10.5" width="9" height="9"/><rect x="500.5" y="10.5" width="9" height="9"/><rect x="520.5" y="10.5" width="9" height="9"/><rect x="560.5" y="10.5" width="9" height="9"/><rect x="590.5" y="10.5" width="9" height="9"/><rect x="610.5" y="10.5" width="9" height="9"/><rect x="640.5" y="10.5" width="19" height="9"/><rect x="680.5" y="10.5" width="9" height="9"/><rect x="30.5" y="20.5" width="9" height="9"/><rect x="60.5" y="20.5" width="9" height="9"/><rect x="100.5" y="20.5" width="9" height="9"/><rect x="120.5" y="20.5" width="9" height="9"/><rect x="160.5" y="20.5" width="9" height="9"/><rect x="180.5" y="20.5" width="9" height="9"/><rect x="220.5" y="20.5" width="9" height="9"/><rect x="320.5" y="20.5" width="9" height="9"/><rect x="360.5" y="20.5" width="9" height="9"/><rect x="400.5" y="20.5" width="9" height="9"/><rect x="420.5" y="20.5" width="9" height="9"/><rect x="440.5" y="20.5" width="9" height="9"/><rect x="460.5" y="20.5" width="9" height="9"/><rect x="500.5" y="20.5" width="9" height="9"/><rect x="520.5" y="20.5" width="9" height="9"/><rect x="560.5" y="20.5" width="9" height="9"/><rect x="580.5" y="20.5" width="9" height="9"/><rect x="620.5" y="20.5" width="9" height="9"/><rect x="640.5" y="20.5" width="9" height="9"/><rect x="660.5" y="20.5" width="9" height="9"/><rect x="680.5" y="20.5" width="9" height="9"/><rect x="20.5" y="30.5" width="9" height="9"/><rect x="60.5" y="30.5" width="49" height="9"/><rect x="120.5" y="30.5" width="9" height="9"/><rect x="160.5" y="30.5" width="9" height="9"/><rect x="180.5" y="30.5" width="9" height="9"/><rect x="220.5" y="30.5" width="9" height="9"/><rect x="320.5" y="30.5" width="9" height="9"/><rect x="360.5" y="30.5" width="9" height="9"/><rect x="400.5" y="30.5" width="9" height="9"/><rect x="430.5" y="30.5" width="19" height="9"/><rect x="460.5" y="30.5" width="9" height="9"/><rect x="500.5" y="30.5" width="9" height="9"/><rect x="520.5" y="30.5" width="9" height="9"/><rect x="560.5" y="30.5" width="9" height="9"/><rect x="580.5" y="30.5" width="49" height="9"/><rect x="640.5" y="30.5" width="9" height="9"/><rect x="670.5" y="30.5" width="19" height="9"/><rect x="10.5" y="40.5" width="9" height="9"/><rect x="60.5" y="40.5" width="9" height="9"/><rect x="100.5" y="40.5" width="9" height="9"/><rect x="120.5" y="40.5" width="9" height="9"/><rect x="160.5" y="40.5" width="9" height="9"/><rect x="180.5" y="40.5" width="9" height="9"/><rect x="220.5" y="40.5" width="9" height="9"/><rect x="280.5" y="40.5" width="9" height="9"/><rect x="320.5" y="40.5" width="9" height="9"/><rect x="360.5" y="40.5" width="9" height="9"/><rect x="400.5" y="40.5" width="9" height="9"/><rect x="440.5" y="40.5" width="9" height="9"/><rect x="460.5" y="40.5" width="9" height="9"/><rect x="490.5" y="40.5" width="19" height="9"/><rect x="520.5" y="40.5" width="9" height="9"/><rect x="560.5" y="40.5" width="9" height="9"/><rect x="580.5" y="40.5" width="9" height="9"/><rect x="620.5" y="40.5" width="9" height="9"/><rect x="640.5" y="40.5" width="9" height="9"/><rect x="680.5" y="40.5" width="9" height="9"/><rect x="0.5" y="50.5" width="9" height="9"/><rect x="60.5" y="50.5" width="9" height="9"/><rect x="100.5" y="50.5" width="9" height="9"/><rect x="120.5" y="50.5" width="9" height="9"/><rect x="160.5" y="50.5" width="9" height="9"/><rect x="180.5" y="50.5" width="9" height="9"/><rect x="220.5" y="50.5" width="9" height="9"/><rect x="280.5" y="50.5" width="9" height="9"/><rect x="320.5" y="50.5" width="9" height="9"/><rect x="360.5" y="50.5" width="9" height="9"/><rect x="400.5" y="50.5" width="9" height="9"/><rect x="440.5" y="50.5" width="9" height="9"/><rect x="460.5" y="50.5" width="9" height="9"/><rect x="500.5" y="50.5" width="9" height="9"/><rect x="520.5" y="50.5" width="9" height="9"/><rect x="560.5" y="50.5" width="9" height="9"/><rect x="580.5" y="50.5" width="9" height="9"/><rect x="620.5" y="50.5" width="9" height="9"/><rect x="640.5" y="50.5" width="9" height="9"/><rect x="680.5" y="50.5" width="9" height="9"/><rect x="0.5" y="60.5" width="49" height="9"/><rect x="60.5" y="60.5" width="9" height="9"/><rect x="100.5" y="60.5" width="9" height="9"/><rect x="120.5" y="60.5" width="49" height="9"/><rect x="180.5" y="60.5" width="49" height="9"/><rect x="290.5" y="60.5" width="29" height="9"/><rect x="340.5" y="60.5" width="49" height="9"/><rect x="400.5" y="60.5" width="9" height="9"/><rect x="440.5" y="60.5" width="9" height="9"/><rect x="460.5" y="60.5" width="49" height="9"/><rect x="520.5" y="60.5" width="49" height="9"/><rect x="580.5" y="60.5" width="9" height="9"/><rect x="620.5" y="60.5" width="9" height="9"/><rect x="640.5" y="60.5" width="9" height="9"/><rect x="680.5" y="60.5" width="9" height="9"/></g></svg></div>
 
     <p class="lead rise d3">努力跟上 AI Native 中<span class="tilde">~</span></p>
 
-    <nav class="nav-block rise d3" aria-label="页面导航">
+    <nav class="nav-block rise d6" aria-label="页面导航">
       <a href="#about"><i></i>关于</a>
       <a href="#projects"><i></i>项目</a>
       <a href="#resume"><i></i>简历</a>
@@ -524,7 +563,7 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
   <footer>
     <span class="ps-line"><span class="ps"><span class="dir">zhoujinq:~</span>$</span></span>
     <span>© 2026 周锦全</span>
-    <span><a class="ver" href="https://github.com/zhoujinq/zhoujinq.github.io/releases/tag/v1.1.0" target="_blank" rel="noopener">v1.1.0</a></span>
+    <span><a class="ver" href="https://github.com/zhoujinq/zhoujinq.github.io/releases/tag/v1.2.0" target="_blank" rel="noopener">v1.2.0</a></span>
     <span class="sp"><a class="totop" href="#main">↑ 回顶</a></span>
   </footer>
 
@@ -906,6 +945,34 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
     if (card) card.scrollIntoView({ behavior:"smooth", block:"center" });
     input.focus();
   });
+
+  /* ── 滚动到位：章节划线 + 卡片错峰 ───────────────────
+     不用 IntersectionObserver：它在某些渲染路径下不投递，
+     会造成"卡片永远不出现"。改成按滚动位置确定性判断。 */
+  var revealEls = [].slice.call(document.querySelectorAll(".sec-head, .card"));
+  function reveal(el){
+    if (el.classList.contains("in")) return;
+    if (el.classList.contains("card") && el.parentNode){
+      var idx = [].slice.call(el.parentNode.children).indexOf(el);
+      var d = (idx % 3) * 70;
+      el.style.transitionDelay = d + "ms";
+      setTimeout(function(){ el.style.transitionDelay = ""; }, 900 + d);
+    }
+    el.classList.add("in");
+  }
+  function checkReveal(){
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    for (var i = 0; i < revealEls.length; i++){
+      var el = revealEls[i];
+      if (el.classList.contains("in")) continue;
+      var r = el.getBoundingClientRect();
+      if (r.top < vh * 0.92 && r.bottom > 0) reveal(el);
+    }
+  }
+  window.addEventListener("scroll", checkReveal, { passive:true });
+  window.addEventListener("resize", checkReveal);
+  checkReveal();
+  setTimeout(checkReveal, 260);   /* 字体加载后布局会变，补一次 */
 
   sync();
   form.classList.add("unfocused");
