@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" role="img" aria-labelledby="title desc">
+  <title id="title">销售辅助系统工作流预览</title>
+  <desc id="desc">客户档案、沟通记录和方案版本汇入判断层，生成下一步动作与今日待办。仅展示工作流，不含真实客户数据。</desc>
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fffefa"/><stop offset="1" stop-color="#f5efe6"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="12" stdDeviation="18" flood-color="#4a3825" flood-opacity=".12"/></filter>
+  </defs>
+  <rect width="1200" height="750" fill="url(#paper)"/>
+  <g font-family="Maple Mono,Microsoft YaHei,monospace" fill="#2b2418">
+    <text x="70" y="82" font-size="22" fill="#8d8371" letter-spacing="4">SALES WORKFLOW / 01</text>
+    <text x="70" y="145" font-size="42" font-weight="700">今天该做什么，一眼看清。</text>
+    <text x="70" y="190" font-size="20" fill="#6f6553">工作流结构预览 · 不含真实客户数据</text>
+    <g filter="url(#shadow)">
+      <rect x="70" y="250" width="320" height="350" rx="16" fill="#fffdf8" stroke="#d9d0ba"/>
+      <rect x="470" y="250" width="280" height="350" rx="16" fill="#fffdf8" stroke="#d9d0ba"/>
+      <rect x="830" y="250" width="300" height="350" rx="16" fill="#fffdf8" stroke="#d9d0ba"/>
+    </g>
+    <text x="105" y="305" font-size="18" fill="#8d8371">01 / 信息归集</text>
+    <g font-size="25">
+      <rect x="105" y="340" width="250" height="58" rx="8" fill="#f7f3ea"/><text x="130" y="378">客户档案</text>
+      <rect x="105" y="420" width="250" height="58" rx="8" fill="#f7f3ea"/><text x="130" y="458">沟通记录</text>
+      <rect x="105" y="500" width="250" height="58" rx="8" fill="#f7f3ea"/><text x="130" y="538">方案版本</text>
+    </g>
+    <text x="505" y="305" font-size="18" fill="#8d8371">02 / 判断层</text>
+    <circle cx="610" cy="420" r="82" fill="#eee7f0" stroke="#a680a6" stroke-width="2"/>
+    <text x="610" y="410" text-anchor="middle" font-size="26" font-weight="700">下一步动作</text>
+    <text x="610" y="450" text-anchor="middle" font-size="20" fill="#735c78">＋ 风险点</text>
+    <text x="865" y="305" font-size="18" fill="#8d8371">03 / 执行</text>
+    <text x="865" y="370" font-size="29" font-weight="700">今日待办</text>
+    <g font-size="22" fill="#504a43">
+      <rect x="865" y="410" width="18" height="18" rx="3" fill="none" stroke="#735c78" stroke-width="2"/><text x="902" y="428">该找谁</text>
+      <rect x="865" y="465" width="18" height="18" rx="3" fill="none" stroke="#735c78" stroke-width="2"/><text x="902" y="483">该说什么</text>
+      <rect x="865" y="520" width="18" height="18" rx="3" fill="none" stroke="#735c78" stroke-width="2"/><text x="902" y="538">什么待兑现</text>
+    </g>
+    <g stroke="#a680a6" stroke-width="3" fill="none">
+      <path d="M390 425 H462"/><path d="M449 412 L463 425 L449 438"/>
+      <path d="M750 425 H822"/><path d="M809 412 L823 425 L809 438"/>
+    </g>
+    <text x="70" y="690" font-size="18" fill="#8d8371">客户信息 → 判断 → 行动，不再制造一张需要伺候的表。</text>
+  </g>
+</svg>
