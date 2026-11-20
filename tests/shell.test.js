@@ -52,7 +52,7 @@ test('cat、head、tail 读取站点虚拟文本', () => {
 test('grep 字面搜索、忽略大小写与行号', () => {
   const shell = createShell();
   const result = ok(shell, "grep -in 'ai' about").text;
-  assert.match(result, /^1:/);
+  assert.match(result, /^2:/);
   assert.match(result, /AI Native/);
   assert.equal(ok(shell, "grep -c '不存在' about").text, '0');
 });
@@ -117,13 +117,20 @@ test('ps 与 neofetch 只描述页面虚拟会话', () => {
   assert.doesNotMatch(info, /CPU|内存|显卡|Windows|macOS|Linux/);
 });
 
-test('页面命令返回明确动作', () => {
+test('页面命令在终端内返回 100～200 字简介，不跳转页面', () => {
   const shell = createShell();
-  assert.deepEqual(ok(shell, 'about').action, { type: 'jump', id: 'about' });
-  assert.deepEqual(ok(shell, 'projects').action, { type: 'jump', id: 'projects' });
-  assert.deepEqual(ok(shell, 'life').action, { type: 'jump', id: 'life' });
-  assert.deepEqual(ok(shell, 'links').action, { type: 'jump', id: 'contact' });
-  assert.deepEqual(ok(shell, 'index').action, { type: 'home' });
+  for (const command of ['about', 'projects', 'life']) {
+    const result = ok(shell, command);
+    assert.equal(result.action, null, `${command} 不应触发页面动作`);
+    const length = result.text.replace(/\s/g, '').length;
+    assert.ok(length >= 100 && length <= 200, `${command} 应返回 100～200 字，当前为 ${length}`);
+  }
+  assert.equal(ok(shell, 'links').action, null);
+  assert.match(ok(shell, 'links').text, /2336097716@qq\.com/);
+  assert.equal(ok(shell, 'index').action, null);
+  assert.match(ok(shell, 'index').text, /站点目录/);
+  assert.equal(ok(shell, 'exit').action, null);
+  assert.match(ok(shell, 'exit').text, /不会关闭或离开页面/);
   assert.deepEqual(ok(shell, 'clear').action, { type: 'clear' });
 });
 

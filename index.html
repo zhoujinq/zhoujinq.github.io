@@ -185,29 +185,80 @@ section{padding:52px 0 0}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
 @media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr);gap:18px}}
 @media (max-width:560px){.grid{grid-template-columns:1fr;gap:16px}}
-.project-book{position:relative;margin-top:28px}
-.project-book::before,.project-book::after{
-  content:"";position:absolute;z-index:0;top:6px;left:9px;right:9px;height:52px;
-  border:1px solid var(--line);border-radius:8px;background:#f1ebdd;
-}
-.project-book::after{top:3px;left:4px;right:4px;background:#f8f4eb}
-.project-book[open]::before,.project-book[open]::after{display:none}
+.project-book{position:relative;margin-top:34px;perspective:1400px}
 .project-book summary{
-  position:relative;z-index:1;min-height:54px;display:flex;align-items:center;gap:12px;padding:14px 18px;
-  border:1px solid var(--line);border-radius:8px;background:var(--card);cursor:pointer;list-style:none;
-  color:var(--ink-2);font-size:13.5px;box-shadow:0 8px 20px -18px rgba(43,36,24,.65);
+  position:relative;display:block;margin:0 6px 12px;cursor:pointer;list-style:none;isolation:isolate;
 }
 .project-book summary::-webkit-details-marker{display:none}
-.project-book summary::before{content:"＋";color:var(--accent);font-size:17px}
-.project-book[open] summary::before{content:"－"}
-.project-book summary .book-range{margin-left:auto;color:var(--muted);font-size:12px}
-.project-book .grid{margin-top:24px}
+.project-book summary::before,.project-book summary::after{
+  content:"";position:absolute;z-index:-1;inset:7px -5px -7px 5px;border:1px solid var(--line);
+  border-radius:3px;background:#e9dfcf;box-shadow:0 10px 24px -20px rgba(43,36,24,.8);transform:rotate(.3deg);
+}
+.project-book summary::after{inset:4px -2px -4px 2px;background:#f7f0e4;transform:rotate(-.18deg)}
+.book-spread{
+  position:relative;display:grid;grid-template-columns:1fr 1fr;min-height:238px;overflow:hidden;
+  border:1px solid #cfc4b3;border-radius:3px;background:#fffdf8;
+  box-shadow:0 18px 36px -28px rgba(43,36,24,.9),inset 0 0 35px rgba(109,87,52,.035);
+}
+.book-spread::before{
+  content:"";position:absolute;z-index:3;left:50%;top:0;bottom:0;width:28px;transform:translateX(-50%);
+  background:linear-gradient(90deg,transparent,rgba(70,53,30,.11) 46%,rgba(255,255,255,.7) 54%,transparent);
+  pointer-events:none;
+}
+.book-page{position:relative;display:flex;flex-direction:column;min-width:0;padding:22px 26px}
+.book-cover{border-right:1px solid rgba(124,105,76,.16);background:linear-gradient(105deg,#f2eadc,#fffdf8 76%)}
+.book-contents{background:linear-gradient(90deg,#faf6ed,#fffdf8 14%)}
+.book-contents::after{
+  content:"";position:absolute;right:0;bottom:0;width:34px;height:34px;
+  background:linear-gradient(135deg,#eee5d6 0 48%,#c7b9a5 50%,#fffaf0 52%);
+  box-shadow:-3px -3px 8px rgba(70,53,30,.07);
+}
+.book-kicker{font-size:10px;letter-spacing:.13em;color:var(--muted)}
+.book-volume{margin-top:18px;font-size:46px;font-weight:700;line-height:1;letter-spacing:-.07em;color:var(--ink)}
+.book-title{margin-top:8px;font-size:22px;font-weight:700;letter-spacing:.12em;color:var(--ink)}
+.book-subtitle{
+  margin-top:13px;font-family:"PingFang SC","Microsoft YaHei",sans-serif;font-size:12px;
+  line-height:1.8;color:var(--ink-3);
+}
+.book-edition{margin-top:auto;padding-top:14px;font-size:9px;letter-spacing:.12em;color:var(--faint)}
+.book-toc{display:grid;margin-top:11px}
+.book-entry{
+  display:flex;align-items:baseline;gap:11px;padding:4px 0;border-bottom:1px dotted #d8d0c4;
+  color:var(--ink-2);font-size:12px;line-height:1.4;
+}
+.book-entry b{flex:0 0 20px;color:var(--accent);font-size:11px;font-weight:400}
+.book-entry>span{min-width:0}
+.book-action{
+  display:flex;align-items:center;gap:8px;margin-top:auto;padding-top:11px;padding-right:32px;
+  color:var(--accent);font-size:12px;font-weight:700;
+}
+.book-action i{font-style:normal;transition:transform .25s var(--ease)}
+.book-action-close{display:none}
+.project-book[open] .book-action-open{display:none}
+.project-book[open] .book-action-close{display:inline}
+.project-book[open] .book-action i{transform:rotate(90deg)}
+.project-book .grid{margin-top:28px;transform-origin:top center;animation:book-open .38s var(--ease)}
+@keyframes book-open{
+  from{opacity:0;transform:rotateX(-5deg) translateY(-8px)}
+  to{opacity:1;transform:none}
+}
 .project-book[open] .card{opacity:1;transform:none}
+@media (max-width:720px){
+  .project-book summary{margin-left:3px;margin-right:3px}
+  .book-page{padding:18px 15px}
+  .book-volume{font-size:34px}
+  .book-title{font-size:18px}
+  .book-kicker{font-size:8.5px;letter-spacing:.08em}
+  .book-subtitle{font-size:10.5px}
+  .book-edition{font-size:8px;letter-spacing:.06em}
+  .book-entry{gap:6px;font-size:10.5px}
+  .book-entry b{flex-basis:17px;font-size:10px}
+  .book-action{font-size:11px}
+}
 .card.planned{border-style:dashed;background:rgba(255,253,248,.58)}
 .card.planned .media{background:linear-gradient(135deg,rgba(51,80,230,.035),rgba(143,103,55,.04))}
 .card.planned .card-foot{color:var(--muted)}
 summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
-.contact-panel{margin-top:24px}
 
 .card{
   background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;
@@ -275,10 +326,6 @@ summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-
 /* ── 联系 ───────────────────────────────────────────────── */
 .two{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 @media (max-width:640px){.two{grid-template-columns:1fr}}
-.panel{border:1px solid var(--line);border-radius:8px;background:var(--card);padding:20px;scroll-margin-top:24px}
-.panel h3{margin:0 0 10px;font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:uppercase;font-weight:400}
-.panel p{margin:0 0 14px;font-size:14px;color:var(--ink-3);line-height:1.8}
-.panel p:last-child{margin-bottom:0}
 .btn{
   display:inline-flex;align-items:center;gap:8px;font-size:13.5px;color:var(--accent);
   border:1px solid var(--accent-line);border-radius:5px;padding:9px 14px;background:var(--accent-soft);
@@ -286,18 +333,6 @@ summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-
 }
 .btn:hover{background:rgba(51,80,230,.13);border-color:var(--accent);transform:translateY(-1px)}
 .btn:active{transform:none}
-dl.links{margin:0;font-size:14px}
-dl.links dt{color:var(--muted);font-size:12px;letter-spacing:.08em;margin:0 0 2px}
-dl.links dd{margin:0 0 14px;color:var(--ink-2)}
-dl.links dd:last-child{margin-bottom:0}
-dl.links a{color:var(--ink-2);border-bottom-color:var(--line)}
-dl.links a:hover{color:var(--accent)}
-.copy{
-  font:inherit;font-size:11.5px;line-height:1;margin-left:9px;padding:4px 7px;color:var(--muted);
-  background:var(--card);cursor:pointer;border:1px solid var(--line);border-radius:4px;
-  transition:color 160ms var(--ease),border-color 160ms var(--ease),background 160ms var(--ease);
-}
-.copy:hover{color:var(--accent);border-color:var(--accent-line);background:var(--accent-soft)}
 
 footer{
   margin-top:52px;padding:18px 0 44px;border-top:1px solid var(--line);font-size:12.5px;color:var(--faint);
@@ -413,10 +448,6 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
   .term-card{max-width:none}
 }
 
-/* 跳转后闪一下 */
-.flash{animation:flash 1.3s var(--ease) 1}
-@keyframes flash{0%{background:rgba(51,80,230,.10)}100%{background:transparent}}
-
 /* 入场 */
 .rise{opacity:0;transform:translateY(8px);animation:rise .5s var(--ease) forwards}
 @keyframes rise{to{opacity:1;transform:none}}
@@ -425,14 +456,6 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
 
 .skip{position:absolute;left:-9999px;top:0;z-index:99;background:var(--ink);color:var(--paper);padding:10px 16px;font-size:13px;border:0}
 .skip:focus{left:0}
-
-.toast{
-  position:fixed;left:50%;bottom:26px;z-index:60;transform:translate(-50%,10px);
-  background:var(--ink);color:var(--paper);font-size:13px;line-height:1;padding:11px 16px;border-radius:6px;
-  opacity:0;pointer-events:none;box-shadow:0 10px 28px -14px rgba(43,36,24,.6);
-  transition:opacity 180ms var(--ease),transform 180ms var(--ease);
-}
-.toast.on{opacity:1;transform:translate(-50%,0)}
 
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -584,7 +607,29 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
       </article>
     </div>
     <details class="project-book">
-      <summary><span>翻开其余 6 个项目</span><span class="book-range">04—09 · 像书页一样收起</span></summary>
+      <summary>
+        <span class="book-spread">
+          <span class="book-page book-cover">
+            <span class="book-kicker">FIELD NOTES</span>
+            <span class="book-volume">04—09</span>
+            <span class="book-title">项目书</span>
+            <span class="book-subtitle">继续折腾的事，<br>和下一个真实的好奇心。</span>
+            <span class="book-edition">VIBE CODING / VOL. 02</span>
+          </span>
+          <span class="book-page book-contents">
+            <span class="book-kicker">目录 · 6 个后续项目</span>
+            <span class="book-toc">
+              <span class="book-entry"><b>04</b><span>Personal AI</span></span>
+              <span class="book-entry"><b>05</b><span>简历工坊</span></span>
+              <span class="book-entry"><b>06</b><span>外卖吃啥</span></span>
+              <span class="book-entry"><b>07</b><span>模型斩杀线</span></span>
+              <span class="book-entry"><b>08</b><span>破万卷 · 规划中</span></span>
+              <span class="book-entry"><b>09</b><span>第九个待定</span></span>
+            </span>
+            <span class="book-action"><span class="book-action-open">翻开项目书</span><span class="book-action-close">收起项目书</span><i>↗</i></span>
+          </span>
+        </span>
+      </summary>
       <div class="grid">
       <article class="card" data-id="p4" data-name="Personal AI 会成长的个人助手">
         <button class="card-btn" type="button" aria-label="打开 Personal AI 会成长的个人助手 详情">
@@ -707,20 +752,13 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
       <b>偏 ENFP，好奇心强。</b>很多项目不是为了显得厉害，只是想知道：“这件事，我能不能自己做出来？”
     </div>
 
-    <div class="panel contact-panel" id="contact">
-      <h3>Contact</h3>
-      <dl class="links">
-        <dt>邮箱</dt><dd><a href="mailto:2336097716@qq.com">2336097716@qq.com</a><button class="copy" type="button" data-copy="2336097716@qq.com">复制</button></dd>
-        <dt>GitHub</dt><dd><a href="https://github.com/zhoujinq" target="_blank" rel="noopener">github.com/zhoujinq</a></dd>
-      </dl>
-    </div>
   </section>
 
   </main>
 
   <footer>
     <span>© 2026 周锦全</span>
-    <span><a class="ver" href="https://github.com/zhoujinq/zhoujinq.github.io/releases/tag/v1.5.1" target="_blank" rel="noopener">v1.5.1</a></span>
+    <span><a class="ver" href="https://github.com/zhoujinq/zhoujinq.github.io/releases/tag/v1.6.0" target="_blank" rel="noopener">v1.6.0</a></span>
     <span class="sp"><a class="totop" href="#main">↑ 回顶</a></span>
   </footer>
 
@@ -866,8 +904,8 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
 
   var PROJECTS = ["销售辅助系统","N1 备考教练","记账投资助手","Personal AI 会成长的个人助手","简历工坊","外卖吃啥","模型斩杀线","破万卷（规划中）","第九个待定"];
   var FILES = {
-    "/about":"周锦全｜AI Native 时代的实践者、成长者、学徒。\n东南大学通信工程毕业。联洲tplink海外技术型销售。星尘智能海外大科研销售经理。\n早期做过 CV 算法，后来转向海外技术型销售。\n现在用 AI 减少真实工作里的重复动作，保持好奇，边学边做。",
-    "/life":"偏 ENFP，好奇心强，也认真过生活。\n多邻国与墨墨背单词都在长期坚持。\n喜欢打王者荣耀，擅长中单打野。\n喜欢看爽文，偏好番茄小说app的历史题材作品。\n喜欢的歌手是陈奕迅。",
+    "/about":"周锦全，东南大学通信工程毕业。早期做过 CV 算法，后来在联洲tplink做海外技术型销售，现在任星尘智能海外大科研销售经理。\n我习惯从工作和学习里的真实问题出发，用 AI 改造重复流程，把一个个想法做成能用的工具。比起堆履历，我更在意问题是否真的被解决；在 AI Native 时代仍在学习，也仍在动手。",
+    "/life":"偏 ENFP，好奇心强，也喜欢把日子过得具体。多邻国和墨墨背单词都在长期坚持，连胜按北京时间自然日更新。\n喜欢打王者荣耀，擅长中单打野；喜欢看爽文，偏好番茄小说app的历史题材作品；喜欢的歌手是陈奕迅。也玩街霸6，跑步一周 1～2 次，偶尔长跑。",
     "/contact":"邮箱：2336097716@qq.com\nGitHub：https://github.com/zhoujinq"
   };
   PROJECTS.forEach(function(name,i){ FILES["/projects/"+String(i+1).padStart(2,"0")] = name+"\n"+(i<7?"Vibe Coding 自主实践项目。":"规划占位，不假装已经完成。"); });
@@ -883,7 +921,7 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
     realpath:"realpath [-em] path...  规范化虚拟路径", stat:"stat [-c format] path...  查看虚拟文档信息", du:"du [-bhs] [path...]  统计虚拟文档大小",
     history:"history [N] | history -c | history -d N  命令历史", tree:"tree [path]  打印虚拟目录树", more:"more [file...]  一次性打印文本", less:"less [file...]  一次性打印文本",
     cd:"cd [dir]  切换虚拟目录", pwd:"pwd  显示当前虚拟目录", ps:"ps [-ef]  查看本页虚拟 shell", neofetch:"neofetch [--off|--stdout]  查看静态站点会话",
-    about:"about  打开关于我", projects:"projects  打开 Vibe Coding 项目", life:"life  打开性格与生活", links:"links  打开联系方式", index:"index  回到首屏", clear:"clear  清空终端", exit:"exit  回到首屏"
+    about:"about  在终端阅读关于我", projects:"projects  在终端阅读项目简介", life:"life  在终端阅读性格与生活", links:"links  在终端查看联系方式", index:"index  在终端查看站点目录", clear:"clear  清空终端", exit:"exit  显示退出说明，不离开页面"
   };
 
   function create(){
@@ -1194,14 +1232,15 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
     commands.more=commands.less=function(args,stdin){return commands.cat(args,stdin,"cat");};
     commands.ps=function(){return ok("PID PPID STAT ETIME ARGS\n1   0    S    "+Math.floor((Date.now()-started)/1000)+"s    virtual-shell");};
     commands.neofetch=function(args){var info="站点：zhoujinq.github.io（静态主页）\n会话：virtual-shell\n目录："+cwd+"\n文档："+Object.keys(FILES).length+" 个虚拟文本\n运行："+Math.floor((Date.now()-started)/1000)+" 秒";if(args[0]==="--stdout")return ok(info);if(args[0]==="--off")return ok(info);return ok("  ______\n /_  / /__\n  / /_/ _ \\\n /___\\___/\n\n"+info);};
-    commands.about=function(){return ok("关于我：真实经历、学习路径，以及为什么开始用 AI 改造工作。",{type:"jump",id:"about"});};
-    commands.projects=function(){return ok("Vibe Coding：项目是好奇心留下的学习痕迹。",{type:"jump",id:"projects"});};
-    commands.life=function(){return ok("性格与生活：长期坚持，也有具体热爱。",{type:"jump",id:"life"});};
-    commands.links=function(){return ok("联系方式", {type:"jump",id:"contact"});};
-    commands.index=commands.exit=function(){return ok("回到首屏。",{type:"home"});};
+    commands.about=function(){return ok(FILES["/about"]);};
+    commands.projects=function(){return ok("这里放了 9 个项目位置，前 3 个常展，后 6 个收在项目书里。销售辅助系统、N1 备考教练、记账投资助手来自真实需求；Personal AI、简历工坊、外卖吃啥和模型斩杀线记录继续折腾的过程。\n破万卷正在规划，第九个还没决定。我不把占位写成成果，也不为了凑数硬做项目；每个项目都从“这件事能不能自己做出来”开始。");};
+    commands.life=function(){return ok(FILES["/life"]);};
+    commands.links=function(){return ok(FILES["/contact"]);};
+    commands.index=function(){return ok("站点目录\n/about：经历与学习路径\n/projects：9 个项目与项目书\n/life：连胜、游戏、小说和音乐\n输入 about、projects 或 life 可直接阅读对应简介。");};
+    commands.exit=function(){return ok("这是主页里的虚拟终端，不会关闭或离开页面。输入 clear 清空输出，输入 help 查看命令。");};
     commands.clear=function(){return ok("",{type:"clear"});};
     commands.whoami=function(){return ok("周锦全｜AI Native 时代的实践者、成长者、学徒。");};
-    commands.help=function(){var lines=["# Help","──────","这是一个站点终端，读取的是内置虚拟文本，不访问你的电脑文件。","支持单引号、双引号、基础管道、Tab 补全和 ↑/↓ 历史。","","## commands"];Object.keys(USAGE).forEach(function(k){lines.push("  "+USAGE[k]);});lines.push("","## examples","  ls -l /projects","  cat about | head -n 2","  printf '%s\\n' banana apple banana | sort | uniq -c","  grep -in 'ai' about","  cd /projects    然后输入 pwd","  clear    清空输出；exit 回到首屏");return ok(lines.join("\n"));};
+    commands.help=function(){var lines=["# Help","──────","这是一个站点终端，读取的是内置虚拟文本，不访问你的电脑文件。","支持单引号、双引号、基础管道、Tab 补全和 ↑/↓ 历史。","","## commands"];Object.keys(USAGE).forEach(function(k){lines.push("  "+USAGE[k]);});lines.push("","## examples","  ls -l /projects","  cat about | head -n 2","  printf '%s\\n' banana apple banana | sort | uniq -c","  grep -in 'ai' about","  cd /projects    然后输入 pwd","  clear    清空输出；exit 查看终端说明");return ok(lines.join("\n"));};
 
     var aliases={cls:"clear","关于":"about","关于我":"about","项目":"projects","生活":"life","日常":"life","帮助":"help","联系":"links","我是谁":"whoami"};
     function runStage(tokens,stdin){
@@ -1258,13 +1297,6 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
     body.appendChild(p);
     body.scrollTop = body.scrollHeight;
     return p;
-  }
-  function jump(id){
-    var el = document.getElementById(id);
-    if (!el) return;
-    el.scrollIntoView({ behavior:"smooth", block:"start" });
-    el.classList.remove("flash"); void el.offsetWidth; el.classList.add("flash");
-    setTimeout(function(){ el.classList.remove("flash"); }, 1400);
   }
   function echo(cmd){
     push('<span class="ps"><span class="dir">'+esc(shell.prompt())+'</span></span> ' + esc(cmd), "cmd", true);
@@ -1355,17 +1387,6 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
     if (result.text){
       push(esc(result.text).replace(/\n/g,"<br>"), result.ok ? "out" : "err");
     }
-    if (result.action){
-      var action = result.action;
-      if (action.type === "jump"){
-        var section = document.getElementById(action.id);
-        var details = section && section.matches("details") ? section : section && section.querySelector("details");
-        if (details && action.id === "about") details.open = true;
-        jump(action.id);
-      } else if (action.type === "home"){
-        window.scrollTo({ top:0, behavior:"smooth" });
-      }
-    }
     form.querySelector(".ps").textContent = shell.prompt();
     body.hidden = !body.children.length;
     body.scrollTop = body.scrollHeight;
@@ -1421,38 +1442,6 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
     if (!a) return;
     e.preventDefault();
     openAt(parseInt(a.getAttribute("data-open"), 10));
-  });
-
-  /* 复制邮箱 */
-  var toastEl = null, toastTimer = 0;
-  function toast(msg){
-    if (!toastEl){
-      toastEl = document.createElement("div");
-      toastEl.className = "toast"; toastEl.setAttribute("role","status");
-      document.body.appendChild(toastEl);
-    }
-    toastEl.textContent = msg;
-    toastEl.classList.add("on");
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(function(){ toastEl.classList.remove("on"); }, 1600);
-  }
-  document.addEventListener("click", function(e){
-    var b = e.target.closest("[data-copy]");
-    if (!b) return;
-    var text = b.getAttribute("data-copy");
-    var done = function(){ toast("已复制 " + text); };
-    var fallback = function(){
-      var ta = document.createElement("textarea");
-      ta.value = text; ta.style.position = "fixed"; ta.style.top = "0"; ta.style.opacity = "0";
-      document.body.appendChild(ta); ta.focus(); ta.select();
-      var ok = false;
-      try { ok = document.execCommand("copy"); } catch (err){ ok = false; }
-      document.body.removeChild(ta);
-      toast(ok ? "已复制 " + text : "复制不了，手动选一下：" + text);
-    };
-    if (navigator.clipboard && navigator.clipboard.writeText){
-      navigator.clipboard.writeText(text).then(done, fallback);
-    } else { fallback(); }
   });
 
   /* 按 / 跳到命令行 */

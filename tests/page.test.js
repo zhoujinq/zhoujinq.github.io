@@ -38,6 +38,7 @@ test('终端去掉旧标题和 mac 字样，宽度跟随整页内容', () => {
   assert.doesNotMatch(html, /zhoujinq\s*—\s*-zsh|80×24|zhoujinq@mac|@mac|macOS/);
   assert.match(html, /\.term-card\{[^}]*width:100%;max-width:none/);
   assert.match(html, /form\.querySelector\("\.ps"\)\.textContent = shell\.prompt\(\)/);
+  assert.doesNotMatch(html, /type:"jump"|type:"home"|action\.type === "jump"|action\.type === "home"/);
 });
 
 test('项目共 9 个：前 3 个常展，后 6 个书页式折叠，规划项不伪装完成', () => {
@@ -46,7 +47,11 @@ test('项目共 9 个：前 3 个常展，后 6 个书页式折叠，规划项�
   assert.equal((featured.match(/<article class="card"/g) || []).length, 3);
   const folded = between('<details class="project-book">', '</details>');
   assert.equal((folded.match(/<article class="card(?: planned)?"/g) || []).length, 6);
-  assert.match(folded, /翻开其余 6 个项目/);
+  assert.match(folded, /class="book-spread"/);
+  assert.match(folded, /class="book-page book-cover"/);
+  assert.match(folded, /class="book-page book-contents"/);
+  assert.equal((folded.match(/class="book-entry"/g) || []).length, 6);
+  assert.match(folded, /翻开项目书/);
   assert.match(folded, /data-name="破万卷"/);
   assert.match(folded, /data-name="第九个待定"/);
   assert.equal((folded.match(/规划占位/g) || []).length, 2);
@@ -97,7 +102,8 @@ test('项目覆盖层的无障碍标题在每次渲染时重新关联', () => {
 test('页脚只保留版权、版本和回顶，版本与本次发布一致', () => {
   const footer = between('<footer>', '</footer>');
   assert.doesNotMatch(footer, /这个页面|@mac|纯静态|无追踪/);
-  assert.doesNotMatch(html, /这个页面\s*纯静态/);
-  assert.match(footer, /releases\/tag\/v1\.5\.1/);
-  assert.match(footer, />v1\.5\.1<\/a>/);
+  assert.doesNotMatch(html, /这个页面\s*纯静态|id="contact"|class="contact-panel"|data-copy/);
+  assert.match(html, /<header[\s\S]*?2336097716@qq\.com[\s\S]*?github\.com\/zhoujinq[\s\S]*?<\/header>/);
+  assert.match(footer, /releases\/tag\/v1\.6\.0/);
+  assert.match(footer, />v1\.6\.0<\/a>/);
 });
