@@ -114,15 +114,18 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 .nav-block a:nth-child(3) i{background:#2f7d4f}
 .nav-block a:hover i{opacity:1}
 
-/* ── macOS 终端 ─────────────────────────────────────────── */
+/* ── 首屏简介与小终端 ───────────────────────────────────── */
+.hero-intro{margin:24px 0 0;max-width:790px;font-size:14px;line-height:1.9;color:var(--ink-2)}
+.hero-intro span{display:block}
+.last-update{margin:13px 0 0;font-size:12.5px;color:var(--muted)}
 .term-card{
-  margin:26px 0 0;background:#fff;border:1px solid #b8b8b8;border-radius:12px;
+  margin:12px 0 0;width:100%;max-width:none;background:#fff;border:1px solid #b8b8b8;border-radius:11px;
   box-shadow:0 18px 42px -28px rgba(28,24,18,.62),0 2px 6px rgba(28,24,18,.08);
-  overflow:hidden;max-width:720px;
+  overflow:hidden;
 }
 .tc-bar{
-  position:relative;height:38px;display:flex;align-items:center;padding:0 14px;
-  border-bottom:1px solid #c8c8c8;background:linear-gradient(#f7f7f7,#e9e9e9);
+  height:32px;display:flex;align-items:center;padding:0 13px;
+  border-bottom:1px solid #d0d0d0;background:linear-gradient(#f7f7f7,#e9e9e9);
   box-shadow:inset 0 1px 0 rgba(255,255,255,.9);
 }
 .tc-lights{display:flex;align-items:center;gap:8px}
@@ -130,31 +133,26 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 .tc-lights i:nth-child(1){background:#ff5f57}
 .tc-lights i:nth-child(2){background:#febc2e}
 .tc-lights i:nth-child(3){background:#28c840}
-.tc-title{
-  position:absolute;left:50%;transform:translateX(-50%);max-width:56%;overflow:hidden;
-  color:#4b4b4b;font:500 12px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  white-space:nowrap;text-overflow:ellipsis;user-select:none;
-}
 .tc-body{
-  padding:18px 18px 2px;height:184px;overflow-y:auto;background:#fff;color:#1d1d1f;
-  font-family:var(--term);font-size:13.5px;line-height:1.7;scrollbar-width:thin;scrollbar-color:#c5c5c5 #fff;
+  padding:15px 17px 3px;max-height:290px;overflow-y:auto;background:#fff;color:#1d1d1f;
+  font-family:var(--term);font-size:13.5px;line-height:1.65;scrollbar-width:thin;scrollbar-color:#c5c5c5 #fff;
 }
+.tc-body:empty{display:none}
 .tc-body::-webkit-scrollbar{width:8px}
 .tc-body::-webkit-scrollbar-thumb{background:#c5c5c5;border-radius:8px;border:2px solid #fff}
 .tc-line{margin:0 0 3px;white-space:pre-wrap;word-break:break-word}
 .tc-line.cmd{color:#111;font-weight:500}
 .tc-line.out{color:#333}
+.tc-line.err{color:#a43830}
 .tc-line.dim{color:#777}
-.tc-line.gap{margin-top:12px}
+.tc-line.gap{margin-top:10px}
 .tc-line a{color:#175cd3;border-bottom-color:rgba(23,92,211,.3)}
 .ps{color:#111;user-select:none;font-weight:500}
-.ps .dir{color:#111;font-weight:400}
 .tc-prompt{
-  display:flex;align-items:center;padding:0 18px 17px;border:0;background:#fff;
+  display:flex;align-items:center;padding:9px 17px 12px;border:0;background:#fff;
   font-family:var(--term);color:#1d1d1f;
 }
 .tc-prompt label{font-size:13.5px;color:#111;white-space:nowrap;user-select:none}
-.tc-prompt label .dir{color:#111;font-weight:400}
 .tc-field{position:relative;flex:1;min-width:0;display:flex;align-items:center}
 .tc-field input{
   appearance:none;flex:1;min-width:0;border:0;outline:0;background:transparent;
@@ -168,7 +166,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 }
 .tc-prompt.unfocused .caret{opacity:.28;animation:none;background:transparent;box-shadow:inset 0 0 0 1px #111}
 @keyframes blink{0%,49%{opacity:.9}50%,100%{opacity:0}}
-.tc-help{margin:11px 0 0;font-size:13px;color:var(--muted)}
+.tc-help{margin:22px 0 0;font-size:13px;color:var(--muted)}
 .tc-help b{font-weight:700;color:var(--accent)}
 
 /* ── 章节 ───────────────────────────────────────────────── */
@@ -187,6 +185,29 @@ section{padding:52px 0 0}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
 @media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr);gap:18px}}
 @media (max-width:560px){.grid{grid-template-columns:1fr;gap:16px}}
+.project-book{position:relative;margin-top:28px}
+.project-book::before,.project-book::after{
+  content:"";position:absolute;z-index:0;top:6px;left:9px;right:9px;height:52px;
+  border:1px solid var(--line);border-radius:8px;background:#f1ebdd;
+}
+.project-book::after{top:3px;left:4px;right:4px;background:#f8f4eb}
+.project-book[open]::before,.project-book[open]::after{display:none}
+.project-book summary{
+  position:relative;z-index:1;min-height:54px;display:flex;align-items:center;gap:12px;padding:14px 18px;
+  border:1px solid var(--line);border-radius:8px;background:var(--card);cursor:pointer;list-style:none;
+  color:var(--ink-2);font-size:13.5px;box-shadow:0 8px 20px -18px rgba(43,36,24,.65);
+}
+.project-book summary::-webkit-details-marker{display:none}
+.project-book summary::before{content:"＋";color:var(--accent);font-size:17px}
+.project-book[open] summary::before{content:"－"}
+.project-book summary .book-range{margin-left:auto;color:var(--muted);font-size:12px}
+.project-book .grid{margin-top:24px}
+.project-book[open] .card{opacity:1;transform:none}
+.card.planned{border-style:dashed;background:rgba(255,253,248,.58)}
+.card.planned .media{background:linear-gradient(135deg,rgba(51,80,230,.035),rgba(143,103,55,.04))}
+.card.planned .card-foot{color:var(--muted)}
+summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+.contact-panel{margin-top:24px}
 
 .card{
   background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;
@@ -449,11 +470,8 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
     left:5%;top:31%;width:55%;height:34%;border-radius:14px;
     background:linear-gradient(135deg,rgba(199,146,233,.97),rgba(216,158,226,.96));
   }
-  .streak-caption{display:flex;align-items:center;gap:8px;margin:10px 3px 0;font-size:12.5px;color:var(--muted)}
+  .streak-caption{display:flex;align-items:center;margin:9px 3px 0;font-size:12.5px;color:var(--muted)}
   .streak-caption b{color:var(--ink-2);font-weight:700}
-  .streak-caption .brand-dot{width:8px;height:8px;border-radius:50%;background:#58cc02;flex:none}
-  .streak[data-streak="momo"] .brand-dot{background:#252227}
-  .streak-caption .auto{margin-left:auto;text-align:right}
 
   /* ── Life：三项具体热爱 ── */
   .sub-h{font-size:14px;font-weight:600;color:var(--ink-2);margin:32px 0 14px;letter-spacing:.02em}
@@ -479,8 +497,6 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
     .life{padding:17px 4px}
     .life+.life{border-left:0;border-top:1px solid var(--line-2)}
     .streak-widget{border-radius:18px}
-    .streak-caption{align-items:flex-start;flex-wrap:wrap}
-    .streak-caption .auto{margin-left:0;width:100%;padding-left:16px;text-align:left}
   }
 </style>
 <noscript><style>
@@ -508,22 +524,26 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
     <p class="lead rise d3">AI Native 时代的实践者、成长者、学徒<span class="tilde">~</span></p>
 
     <nav class="nav-block rise d6" aria-label="页面导航">
-      <a href="#about"><i></i>关于</a>
       <a href="#projects"><i></i>项目</a>
+      <a href="#about"><i></i>关于</a>
       <a href="#life"><i></i>生活</a>
     </nav>
 
-    <div class="term-card rise d4" id="shell">
+    <div class="hero-intro rise d4">
+      <span>我是周锦全，一个 AI Native 时代的实践者、成长者、学徒。</span>
+      <span>早期做过 CV 算法，后来转向海外技术型销售。现在我把工作和学习里的真实问题，</span>
+      <span>当成边学边做的入口：用 AI 减少重复劳动，也保留生活里的具体热爱。</span>
+    </div>
+    <p class="last-update rise d5">最近更新：2026-11-20</p>
+    <p class="tc-help rise d5">这好像是个终端，输入 <b>about</b> / <b>projects</b> / <b>life</b>，回车看看</p>
+
+    <div class="term-card rise d6" id="shell" aria-label="可交互终端">
       <div class="tc-bar" aria-hidden="true">
         <span class="tc-lights"><i></i><i></i><i></i></span>
-        <span class="tc-title">zhoujinq — -zsh — 80×24</span>
       </div>
-      <div class="tc-body" id="tcBody" aria-live="polite">
-        <p class="tc-line cmd"><span class="ps"><span class="dir">zhoujinq@mac ~</span> %</span> whoami</p>
-        <p class="tc-line out">保持好奇，边学边做；既用 AI 改造工作，也认真过生活。</p>
-      </div>
+      <div class="tc-body" id="tcBody" aria-live="polite"></div>
       <form class="tc-prompt" id="tcPrompt" autocomplete="off">
-        <label for="cmd"><span class="dir">zhoujinq@mac ~</span> %</label>
+        <label class="ps" for="cmd">zjq : / $</label>
         <span class="tc-field">
           <span id="ghost" aria-hidden="true"></span>
           <input id="cmd" name="cmd" type="text" aria-label="在此输入命令，回车执行"
@@ -532,15 +552,13 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
         </span>
       </form>
     </div>
-
-    <p class="tc-help rise d5">输入 <b>about</b> / <b>projects</b> / <b>life</b>，回车看看</p>
   </header>
 
   <main id="main" tabindex="-1">
 
   <section id="projects">
     <div class="sec-head">
-      <h2>Projects</h2><span class="cnt">7 个 · 点开看详情</span>
+      <h2>Vibe Coding</h2><span class="cnt">9 个 · 前 3 个常展，其余折叠</span>
     </div>
     <div class="grid">
       <article class="card" data-id="p1" data-name="销售辅助系统">
@@ -564,6 +582,10 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
           <div class="card-foot"><span class="dot"></span>自用中 · 每周跑<span class="open">点开 →</span></div>
         </button>
       </article>
+    </div>
+    <details class="project-book">
+      <summary><span>翻开其余 6 个项目</span><span class="book-range">04—09 · 像书页一样收起</span></summary>
+      <div class="grid">
       <article class="card" data-id="p4" data-name="Personal AI 会成长的个人助手">
         <button class="card-btn" type="button" aria-label="打开 Personal AI 会成长的个人助手 详情">
           <div class="media"><img src="assets/shot-handbook.webp" style="object-position:left top" alt="Personal AI 会成长的个人助手 的界面截图" loading="lazy" decoding="async"></div>
@@ -600,7 +622,22 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
           <div class="card-foot"><span class="dot"></span>在线 · 持续更新<span class="open">点开 →</span></div>
         </button>
       </article>
-    </div>
+      <article class="card planned" data-id="p8" data-name="破万卷">
+        <button class="card-btn" type="button" aria-label="打开 破万卷 规划说明">
+          <div class="media"><div class="flow-poster"><span class="tag">$ reading</span><span class="chain"><span class="fs">破万卷</span><b>→</b><span class="fs">规划中</span></span><span class="wm">08</span></div><span class="corner">规划占位</span></div>
+          <div class="card-meta"><span class="card-no">08</span><h3 class="card-name">破万卷</h3></div>
+          <div class="card-foot">规划中 · 后续补充<span class="open">说明 →</span></div>
+        </button>
+      </article>
+      <article class="card planned" data-id="p9" data-name="第九个待定">
+        <button class="card-btn" type="button" aria-label="打开 第九个项目 规划说明">
+          <div class="media"><div class="flow-poster"><span class="tag">$ next</span><span class="chain"><span class="fs">下一个好奇心</span><b>→</b><span class="fs">待定</span></span><span class="wm">09</span></div><span class="corner">规划占位</span></div>
+          <div class="card-meta"><span class="card-no">09</span><h3 class="card-name">第九个待定</h3></div>
+          <div class="card-foot">待定 · 不急着填满<span class="open">说明 →</span></div>
+        </button>
+      </article>
+      </div>
+    </details>
   </section>
 
   <details class="fold" id="about">
@@ -618,7 +655,7 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
   </details>
 
   <section id="life">
-    <div class="sec-head"><h2>Life</h2><span class="cnt">一点坚持，一点热爱</span></div>
+    <div class="sec-head"><h2>性格、生活</h2><span class="cnt">一点坚持，一点热爱</span></div>
 
     <div class="streak-grid">
       <figure class="streak" data-streak="duolingo">
@@ -628,7 +665,7 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
             <span class="num" data-days>1920</span><span class="unit">天</span>
           </div>
         </div>
-        <figcaption class="streak-caption"><span class="brand-dot"></span><b>多邻国</b><span class="auto" data-since>北京时间每天 0 点自动 +1</span></figcaption>
+        <figcaption class="streak-caption"><b>多邻国</b></figcaption>
       </figure>
 
       <figure class="streak" data-streak="momo">
@@ -638,7 +675,7 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
             <span class="num" data-days>1493</span><span class="unit">天</span>
           </div>
         </div>
-        <figcaption class="streak-caption"><span class="brand-dot"></span><b>墨墨背单词</b><span class="auto" data-since>北京时间每天 0 点自动 +1</span></figcaption>
+        <figcaption class="streak-caption"><b>墨墨背单词</b></figcaption>
       </figure>
     </div>
 
@@ -670,27 +707,20 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
       <b>偏 ENFP，好奇心强。</b>很多项目不是为了显得厉害，只是想知道：“这件事，我能不能自己做出来？”
     </div>
 
-    <div class="two" style="margin-top:22px">
-      <div class="panel" id="contact">
-        <h3>Contact</h3>
-        <dl class="links">
-          <dt>邮箱</dt><dd><a href="mailto:2336097716@qq.com">2336097716@qq.com</a><button class="copy" type="button" data-copy="2336097716@qq.com">复制</button></dd>
-          <dt>GitHub</dt><dd><a href="https://github.com/zhoujinq" target="_blank" rel="noopener">github.com/zhoujinq</a></dd>
-        </dl>
-      </div>
-      <div class="panel">
-        <h3>这个页面</h3>
-        <p>纯静态，无框架，无追踪。输入框是真的能敲命令的——试试 <b>about</b>、<b>projects</b>、<b>life</b>。</p>
-      </div>
+    <div class="panel contact-panel" id="contact">
+      <h3>Contact</h3>
+      <dl class="links">
+        <dt>邮箱</dt><dd><a href="mailto:2336097716@qq.com">2336097716@qq.com</a><button class="copy" type="button" data-copy="2336097716@qq.com">复制</button></dd>
+        <dt>GitHub</dt><dd><a href="https://github.com/zhoujinq" target="_blank" rel="noopener">github.com/zhoujinq</a></dd>
+      </dl>
     </div>
   </section>
 
   </main>
 
   <footer>
-    <span class="ps-line"><span class="ps"><span class="dir">zhoujinq@mac ~</span> %</span></span>
     <span>© 2026 周锦全</span>
-    <span><a class="ver" href="https://github.com/zhoujinq/zhoujinq.github.io/releases/tag/v1.4.0" target="_blank" rel="noopener">v1.4.0</a></span>
+    <span><a class="ver" href="https://github.com/zhoujinq/zhoujinq.github.io/releases/tag/v1.5.0" target="_blank" rel="noopener">v1.5.0</a></span>
     <span class="sp"><a class="totop" href="#main">↑ 回顶</a></span>
   </footer>
 
@@ -816,6 +846,392 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
   <div class="ov-seg"><h4>栈</h4><p class="stack"><p class="stack">静态页面 · 帕累托前沿 · 数据快照</p></p></div>
 </template>
 
+<template id="tpl-p8">
+  <div class="ov-head"><span class="ov-no">08</span><h2 class="ov-name">破万卷</h2></div>
+  <p class="ov-state">规划中 · 项目位已保留</p>
+  <p class="ov-one">第八个项目确定为「破万卷」，详细内容等整理好后补充。</p>
+  <div class="ov-seg"><h4>现在的状态</h4><p>这里不是假装已经完成的项目，只是给下一步学习和实践留一个明确的位置。</p></div>
+</template>
+
+<template id="tpl-p9">
+  <div class="ov-head"><span class="ov-no">09</span><h2 class="ov-name">第九个待定</h2></div>
+  <p class="ov-state">待定 · 不急着填满</p>
+  <p class="ov-one">第九个项目还没有决定，先留一个位置给下一个真实的好奇心。</p>
+  <div class="ov-seg"><h4>现在的状态</h4><p>等有真正想学、想做的东西再补上，不为了凑满 3×3 编造项目。</p></div>
+</template>
+
+<script id="shell-engine">
+(function(root){
+  "use strict";
+
+  var PROJECTS = ["销售辅助系统","N1 备考教练","记账投资助手","Personal AI 会成长的个人助手","简历工坊","外卖吃啥","模型斩杀线","破万卷（规划中）","第九个待定"];
+  var FILES = {
+    "/about":"周锦全｜AI Native 时代的实践者、成长者、学徒。\n东南大学通信工程毕业。联洲tplink海外技术型销售。星尘智能海外大科研销售经理。\n早期做过 CV 算法，后来转向海外技术型销售。\n现在用 AI 减少真实工作里的重复动作，保持好奇，边学边做。",
+    "/life":"偏 ENFP，好奇心强，也认真过生活。\n多邻国与墨墨背单词都在长期坚持。\n喜欢打王者荣耀，擅长中单打野。\n喜欢看爽文，偏好番茄小说app的历史题材作品。\n喜欢的歌手是陈奕迅。",
+    "/contact":"邮箱：2336097716@qq.com\nGitHub：https://github.com/zhoujinq"
+  };
+  PROJECTS.forEach(function(name,i){ FILES["/projects/"+String(i+1).padStart(2,"0")] = name+"\n"+(i<7?"Vibe Coding 自主实践项目。":"规划占位，不假装已经完成。"); });
+  var DIRS = { "/":true, "/projects":true, "/bin":true };
+  var USAGE = {
+    ls:"ls [-laAhSr1] [path...]  列出虚拟文件与目录", echo:"echo [-nEe] [text...]  输出文本", cat:"cat [-net] [file...]  读取站点文本",
+    head:"head [-n N | -N] [-qv] [file...]  前几行", tail:"tail [-n N | -N | -n +N] [-qv] [file...]  后几行或从第 N 行开始",
+    wc:"wc [-lwmcL] [file...]  统计文本", grep:"grep [-FivnxclLqHh] [-e text] [-m N] [text] [file...]  字面搜索",
+    find:"find [path...] [-name glob] [-iname glob] [-type f|d] [-mindepth N] [-maxdepth N] [-empty]  查找虚拟路径",
+    sort:"sort [-nrufb] [-k N[,M]] [-t char] [file...]  排序", uniq:"uniq [-cdui] [-f N] [-s N] [-w N] [file]  合并相邻重复行",
+    cut:"cut (-c list | -f list) [-d char] [-s] [file...]  提取字符或字段", tr:"tr [-cds] set1 [set2]  翻译、删除或压缩字符",
+    printf:"printf format [args...]  格式化输出", basename:"basename path [suffix]  取路径最后一段", dirname:"dirname path...  取父目录",
+    realpath:"realpath [-em] path...  规范化虚拟路径", stat:"stat [-c format] path...  查看虚拟文档信息", du:"du [-bhs] [path...]  统计虚拟文档大小",
+    history:"history [N] | history -c | history -d N  命令历史", tree:"tree [path]  打印虚拟目录树", more:"more [file...]  一次性打印文本", less:"less [file...]  一次性打印文本",
+    cd:"cd [dir]  切换虚拟目录", pwd:"pwd  显示当前虚拟目录", ps:"ps [-ef]  查看本页虚拟 shell", neofetch:"neofetch [--off|--stdout]  查看静态站点会话",
+    about:"about  打开关于我", projects:"projects  打开 Vibe Coding 项目", life:"life  打开性格与生活", links:"links  打开联系方式", index:"index  回到首屏", clear:"clear  清空终端", exit:"exit  回到首屏"
+  };
+
+  function create(){
+    var cwd = "/", oldCwd = "/", history = [], started = Date.now();
+    function ok(text,action){ return {ok:true,text:text == null?"":String(text),action:action||null}; }
+    function fail(cmd,msg){ return {ok:false,text:cmd+": "+msg,action:null}; }
+    function unsupported(cmd,opt){ return fail(cmd,"unsupported option: "+opt+"（用 "+cmd+" --help 查看支持范围）"); }
+    function utf8(text){ return new TextEncoder().encode(String(text)).length; }
+    function resolve(path){
+      path = path || ".";
+      if (path === "~") path = "/";
+      var raw = path.charAt(0) === "/" ? path : cwd.replace(/\/$/,"")+"/"+path;
+      var parts = [];
+      raw.split("/").forEach(function(part){ if (!part || part === ".") return; if (part === "..") parts.pop(); else parts.push(part); });
+      return "/"+parts.join("/");
+    }
+    function type(path){ if (DIRS[path]) return "d"; if (FILES[path] != null) return "f"; if (path.indexOf("/bin/") === 0 && USAGE[path.slice(5)]) return "f"; return null; }
+    function size(path){ if (FILES[path] != null) return utf8(FILES[path]); return 0; }
+    function children(path){
+      if (path === "/bin") return Object.keys(USAGE).sort();
+      var out = {};
+      Object.keys(DIRS).concat(Object.keys(FILES)).forEach(function(p){
+        if (p === path || p === "/") return;
+        var parent = p.slice(0,p.lastIndexOf("/")) || "/";
+        if (parent === path) out[p.slice(p.lastIndexOf("/")+1)] = true;
+      });
+      return Object.keys(out).sort();
+    }
+    function absName(path){ return path === "/" ? "/" : path; }
+    function decode(text){
+      return String(text).replace(/\\(n|t|r|\\|"|')/g,function(_,c){ return c==="n"?"\n":c==="t"?"\t":c==="r"?"\r":c; });
+    }
+    function lex(input){
+      var tokens=[], token="", quote=null, touched=false;
+      for (var i=0;i<input.length;i++){
+        var c=input[i];
+        if (quote){
+          if (c === quote){ quote=null; touched=true; continue; }
+          if (c === "\\" && quote === '"' && i+1<input.length){ token+=input[++i]; touched=true; continue; }
+          token+=c; touched=true; continue;
+        }
+        if (c === '"' || c === "'"){ quote=c; touched=true; continue; }
+        if (c === "\\" && i+1<input.length){ token+=input[++i]; touched=true; continue; }
+        if (c === "|"){ if (touched){ tokens.push(token); token=""; touched=false; } tokens.push("|"); continue; }
+        if (/\s/.test(c)){ if (touched){ tokens.push(token); token=""; touched=false; } continue; }
+        token+=c; touched=true;
+      }
+      if (quote) throw new Error("unclosed quote");
+      if (touched) tokens.push(token);
+      return tokens;
+    }
+    function contents(args,stdin,cmd){
+      if (!args.length) return {files:[{name:"",text:stdin}]};
+      var out=[];
+      for (var i=0;i<args.length;i++){
+        if (args[i] === "-"){ out.push({name:"",text:stdin}); continue; }
+        var p=resolve(args[i]), t=type(p);
+        if (t === "d") return {error:fail(cmd,"is a directory: "+args[i])};
+        if (t !== "f" || p.indexOf("/bin/") === 0) return {error:fail(cmd,"no such file: "+args[i])};
+        out.push({name:p,text:FILES[p]});
+      }
+      return {files:out};
+    }
+    function splitLines(text){ return text === "" ? [] : String(text).replace(/\n$/,"").split("\n"); }
+    function positions(spec,max){
+      var out=[];
+      spec.split(",").forEach(function(part){
+        var m=part.match(/^(\d+)?-(\d+)?$/), a,b;
+        if (m && (m[1] || m[2])){ a=m[1]?Number(m[1]):1; b=m[2]?Number(m[2]):max; for(var i=a;i<=b;i++) out.push(i); }
+        else if (/^\d+$/.test(part)) out.push(Number(part));
+      });
+      return out;
+    }
+    function glob(pattern,text){
+      var escaped=String(pattern).replace(/[.+^${}()|[\]\\]/g,"\\$&").replace(/\*/g,".*").replace(/\?/g,".");
+      return new RegExp("^"+escaped+"$").test(text);
+    }
+    function expandSet(set){
+      if (set === "[:lower:]") return "abcdefghijklmnopqrstuvwxyz";
+      if (set === "[:upper:]") return "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      if (set === "[:digit:]") return "0123456789";
+      if (set === "[:space:]") return " \t\n\r";
+      set=decode(set); var out="";
+      for(var i=0;i<set.length;i++){
+        if (i+2<set.length && set[i+1] === "-"){ var a=set.charCodeAt(i),b=set.charCodeAt(i+2); for(var n=a;n<=b;n++) out+=String.fromCharCode(n); i+=2; }
+        else out+=set[i];
+      }
+      return out;
+    }
+    function human(n){ if(n<1024) return n+"B"; if(n<1048576) return (n/1024).toFixed(1)+"K"; return (n/1048576).toFixed(1)+"M"; }
+    function walk(start,depth,maxDepth,out){
+      if (depth>maxDepth) return;
+      out.push({path:start,depth:depth});
+      if(type(start)==="d") children(start).forEach(function(name){ walk(start.replace(/\/$/,"")+"/"+name,depth+1,maxDepth,out); });
+    }
+
+    var commands = {};
+    commands.echo=function(args,stdin,cmd){
+      var escapes=false;
+      while(args.length && /^-[nEe]+$/.test(args[0])){ var f=args.shift(); if(f.indexOf("e")>=0) escapes=true; }
+      if(args[0] && args[0].charAt(0)==="-" && /^-/.test(args[0]) && !/^-[nEe]+$/.test(args[0])) return unsupported(cmd,args[0]);
+      var text=args.join(" "); return ok(escapes?decode(text):text);
+    };
+    commands.printf=function(args,stdin,cmd){
+      if(!args.length) return fail(cmd,"missing format");
+      var format=args.shift(), values=args, at=0, output="", rounds=0;
+      do {
+        var before=at;
+        output+=format.replace(/%([\-]?\d*(?:\.\d+)?)?([%scbdiuoxfeg])/g,function(_,width,code){
+          if(code==="%") return "%";
+          var raw=values[at++] == null?"":String(values[at-1]), val=raw, num;
+          if("diuox".indexOf(code)>=0){ num=parseInt(raw,10)||0; val=code==="o"?num.toString(8):code==="x"?num.toString(16):String(num); }
+          if("feg".indexOf(code)>=0){ num=Number(raw)||0; var precision=width&&width.indexOf(".")>=0?Number(width.split(".")[1]):6; val=code==="f"?num.toFixed(precision):code==="e"?num.toExponential(precision):String(num); }
+          if(code==="b") val=decode(raw);
+          if(width){ var w=parseInt(width,10); if(!isNaN(w)){ if(width.charAt(0)==="-") val=val.padEnd(Math.abs(w)," "); else val=val.padStart(w," "); } }
+          return val;
+        });
+        rounds++;
+        if(at===before) break;
+      } while(at<values.length && rounds<10000);
+      return ok(decode(output).replace(/\n+$/,""));
+    };
+    commands.ls=function(args,stdin,cmd){
+      var flags="", paths=[];
+      args.forEach(function(a){ if(a.charAt(0)==="-"&&a!=="-") flags+=a.slice(1); else paths.push(a); });
+      if(/[^laAhSr1]/.test(flags)) return unsupported(cmd,"-"+flags.match(/[^laAhSr1]/)[0]);
+      if(!paths.length) paths=["."];
+      var blocks=[];
+      for(var i=0;i<paths.length;i++){
+        var p=resolve(paths[i]), t=type(p);
+        if(!t) return fail(cmd,"no such file or directory: "+paths[i]);
+        if(t==="f"){ blocks.push(paths[i]); continue; }
+        var names=children(p);
+        if(flags.indexOf("S")>=0) names.sort(function(a,b){ return size(p.replace(/\/$/,"")+"/"+b)-size(p.replace(/\/$/,"")+"/"+a); });
+        if(flags.indexOf("r")>=0) names.reverse();
+        if(flags.indexOf("a")>=0) names=[".",".."].concat(names);
+        var lines=names.map(function(name){
+          if(name==="."||name==="..") return name;
+          var full=p.replace(/\/$/,"")+"/"+name, isDir=type(full)==="d";
+          if(flags.indexOf("l")>=0){ var bytes=flags.indexOf("h")>=0?human(size(full)):String(size(full)); return (isDir?"drwxr-xr-x":"-rw-r--r--")+"  -  "+(isDir?"-":bytes)+"  "+name+(isDir?"/":""); }
+          return name+(isDir?"/":"");
+        });
+        blocks.push((paths.length>1?paths[i]+":\n":"")+lines.join(flags.indexOf("1")>=0||flags.indexOf("l")>=0?"\n":"  "));
+      }
+      return ok(blocks.join("\n\n"));
+    };
+    commands.cat=function(args,stdin,cmd){
+      var flags="";
+      while(args.length&&/^-[net]+$/.test(args[0])) flags+=args.shift().slice(1);
+      if(args[0]&&args[0].charAt(0)==="-") return unsupported(cmd,args[0]);
+      var got=contents(args,stdin,cmd); if(got.error) return got.error;
+      var text=got.files.map(function(f){return f.text;}).join("\n");
+      if(flags.indexOf("t")>=0) text=text.replace(/\t/g,"^I");
+      if(flags.indexOf("n")>=0) text=splitLines(text).map(function(l,i){return String(i+1).padStart(6," ")+"  "+l;}).join("\n");
+      if(flags.indexOf("e")>=0) text=splitLines(text).join("$\n")+"$";
+      return ok(text);
+    };
+    function headTail(args,stdin,cmd,isHead){
+      var n=10, plus=false, q=false, v=false, files=[];
+      for(var i=0;i<args.length;i++){
+        var a=args[i];
+        if(a==="-n"){ var val=args[++i]; plus=val&&val.charAt(0)==="+"; n=Number(val||10); }
+        else if(/^-n/.test(a)&&a.length>2){ n=Number(a.slice(2)); }
+        else if(/^-\d+$/.test(a)) n=Number(a.slice(1));
+        else if(a==="-q") q=true; else if(a==="-v") v=true;
+        else if(a.charAt(0)==="-"&&a!=="-") return unsupported(cmd,a);
+        else files.push(a);
+      }
+      if(!isFinite(n)||n<0) return fail(cmd,"invalid line count");
+      var got=contents(files,stdin,cmd); if(got.error) return got.error;
+      return ok(got.files.map(function(f){
+        var lines=splitLines(f.text), picked=isHead?lines.slice(0,n):(plus?lines.slice(Math.max(0,n-1)):lines.slice(Math.max(0,lines.length-n)));
+        var header=got.files.length>1&&!q||v?(f.name||"standard input")+":\n":"";
+        return header+picked.join("\n");
+      }).join("\n\n"));
+    }
+    commands.head=function(a,s,c){return headTail(a,s,c,true);};
+    commands.tail=function(a,s,c){return headTail(a,s,c,false);};
+    commands.wc=function(args,stdin,cmd){
+      var flags="",files=[];
+      args.forEach(function(a){if(a.charAt(0)==="-"&&a!=="-") flags+=a.slice(1); else files.push(a);});
+      if(/[^lwmcL]/.test(flags)) return unsupported(cmd,"-"+flags.match(/[^lwmcL]/)[0]);
+      if(!flags) flags="lwc";
+      var got=contents(files,stdin,cmd); if(got.error)return got.error;
+      var totals={l:0,w:0,m:0,c:0,L:0};
+      var rows=got.files.map(function(f){
+        var lines=splitLines(f.text), vals={l:f.text===""?0:lines.length,w:f.text.trim()?f.text.trim().split(/\s+/).length:0,m:Array.from(f.text).length,c:utf8(f.text),L:lines.reduce(function(m,l){return Math.max(m,Array.from(l).length);},0)};
+        Object.keys(vals).forEach(function(k){totals[k]+=vals[k];});
+        var out=flags.split("").map(function(k){return String(vals[k]).padStart(7," ");}).join("");
+        return out+(f.name?" "+f.name:"");
+      });
+      if(got.files.length>1) rows.push(flags.split("").map(function(k){return String(totals[k]).padStart(7," ");}).join("")+" total");
+      return ok(rows.join("\n"));
+    };
+    commands.grep=function(args,stdin,cmd){
+      var flags="",patterns=[],files=[],pattern=null,m=Infinity;
+      for(var i=0;i<args.length;i++){
+        var a=args[i];
+        if(a==="-e"){patterns.push(args[++i]||"");continue;}
+        if(a==="-m"){m=Number(args[++i]);continue;}
+        if(a==="--"){for(i++;i<args.length;i++){if(pattern===null&&!patterns.length)pattern=args[i];else files.push(args[i]);}break;}
+        if(a.charAt(0)==="-"&&a!=="-") flags+=a.slice(1);
+        else if(pattern===null&&!patterns.length) pattern=a; else files.push(a);
+      }
+      if(/[^FivnxclLqHh]/.test(flags)) return unsupported(cmd,"-"+flags.match(/[^FivnxclLqHh]/)[0]);
+      if(!patterns.length) patterns=[pattern];
+      if(patterns[0]==null) return fail(cmd,"missing search text");
+      var got=contents(files,stdin,cmd); if(got.error)return got.error;
+      var output=[], any=false;
+      got.files.forEach(function(f){
+        var hits=[], count=0;
+        splitLines(f.text).forEach(function(line,index){
+          var hay=flags.indexOf("i")>=0?line.toLowerCase():line;
+          var matched=patterns.some(function(p){var needle=flags.indexOf("i")>=0?String(p).toLowerCase():String(p);return flags.indexOf("x")>=0?hay===needle:hay.indexOf(needle)>=0;});
+          if(flags.indexOf("v")>=0) matched=!matched;
+          if(matched&&count<m){count++;var prefix=(got.files.length>1&&flags.indexOf("h")<0||flags.indexOf("H")>=0)&&f.name?f.name+":":"";if(flags.indexOf("n")>=0)prefix+=(index+1)+":";hits.push(prefix+line);}
+        });
+        if(count)any=true;
+        if(flags.indexOf("q")>=0)return;
+        if(flags.indexOf("l")>=0){if(count)output.push(f.name);return;}
+        if(flags.indexOf("L")>=0){if(!count)output.push(f.name);return;}
+        if(flags.indexOf("c")>=0){output.push((got.files.length>1&&f.name?f.name+":":"")+count);return;}
+        output=output.concat(hits);
+      });
+      if(flags.indexOf("q")>=0)return ok("");
+      return ok(output.filter(function(x){return x!=="";}).join("\n"));
+    };
+    commands.find=function(args,stdin,cmd){
+      var paths=[],name=null,typeWant=null,min=0,max=Infinity,empty=false,iname=false,print0=false;
+      for(var i=0;i<args.length;i++){
+        var a=args[i];
+        if(a==="-name"||a==="-iname"){iname=a==="-iname";name=args[++i];}
+        else if(a==="-type")typeWant=args[++i];
+        else if(a==="-mindepth")min=Number(args[++i]);
+        else if(a==="-maxdepth")max=Number(args[++i]);
+        else if(a==="-empty")empty=true;
+        else if(a==="-print"){}
+        else if(a==="-print0")print0=true;
+        else if(a==="-path"||a==="-ipath"){iname=a==="-ipath";name=args[++i];}
+        else if(a.charAt(0)==="-"&&a!=="-")return unsupported(cmd,a);
+        else paths.push(a);
+      }
+      if(!paths.length)paths=["."];
+      var out=[];
+      for(var p=0;p<paths.length;p++){
+        var start=resolve(paths[p]);if(!type(start))return fail(cmd,"no such file or directory: "+paths[p]);
+        var nodes=[];walk(start,0,max,nodes);
+        nodes.forEach(function(node){
+          if(node.depth<min)return;var base=node.path.slice(node.path.lastIndexOf("/")+1)||"/";
+          if(typeWant&&type(node.path)!==typeWant)return;
+          if(empty&&!(type(node.path)==="d"&&children(node.path).length===0))return;
+          if(name){var target=iname?node.path.toLowerCase():node.path, needle=iname?String(name).toLowerCase():String(name);if(!glob(needle,target)&&!glob(needle,iname?base.toLowerCase():base))return;}
+          var rendered=paths[p].charAt(0)==="."?"."+node.path:node.path;out.push(rendered);
+        });
+      }
+      return ok(out.join(print0?"\0":"\n"));
+    };
+    commands.sort=function(args,stdin,cmd){
+      var flags="",files=[],key=null,delim=null;
+      for(var i=0;i<args.length;i++){var a=args[i];if(a==="-k")key=args[++i];else if(a==="-t")delim=args[++i];else if(a.charAt(0)==="-"&&a!=="-")flags+=a.slice(1);else files.push(a);}
+      if(/[^nrufb]/.test(flags))return unsupported(cmd,"-"+flags.match(/[^nrufb]/)[0]);
+      var got=contents(files,stdin,cmd);if(got.error)return got.error;
+      var lines=splitLines(got.files.map(function(f){return f.text;}).join("\n"));
+      var range=key?key.split(",").map(Number):null;
+      function val(line){var v=flags.indexOf("b")>=0?line.replace(/^\s+/,""):line;if(range){var parts=delim?line.split(delim):line.trim().split(/\s+/);v=parts.slice((range[0]||1)-1,range[1]||range[0]).join(delim||" ");}return flags.indexOf("f")>=0?v.toLowerCase():v;}
+      lines.sort(function(a,b){var av=val(a),bv=val(b),cmp=flags.indexOf("n")>=0?(parseFloat(av)||0)-(parseFloat(bv)||0):av<bv?-1:av>bv?1:0;return flags.indexOf("r")>=0?-cmp:cmp;});
+      if(flags.indexOf("u")>=0)lines=lines.filter(function(l,i){return i===0||l!==lines[i-1];});
+      return ok(lines.join("\n"));
+    };
+    commands.uniq=function(args,stdin,cmd){
+      var flags="",files=[],skipFields=0,skipChars=0,width=Infinity;
+      for(var i=0;i<args.length;i++){var a=args[i];if(a==="-f")skipFields=Number(args[++i]);else if(a==="-s")skipChars=Number(args[++i]);else if(a==="-w")width=Number(args[++i]);else if(a.charAt(0)==="-"&&a!=="-")flags+=a.slice(1);else files.push(a);}
+      if(/[^cdui]/.test(flags))return unsupported(cmd,"-"+flags.match(/[^cdui]/)[0]);
+      var got=contents(files,stdin,cmd);if(got.error)return got.error;
+      var lines=splitLines(got.files[0].text),groups=[];
+      function key(l){var v=l.split(/\s+/).slice(skipFields).join(" ").slice(skipChars,skipChars+width);return flags.indexOf("i")>=0?v.toLowerCase():v;}
+      lines.forEach(function(l){var k=key(l);if(!groups.length||groups[groups.length-1].key!==k)groups.push({key:k,line:l,count:1});else groups[groups.length-1].count++;});
+      var out=groups.filter(function(g){return flags.indexOf("d")>=0?g.count>1:flags.indexOf("u")>=0?g.count===1:true;}).map(function(g){return(flags.indexOf("c")>=0?String(g.count).padStart(7," ")+" ":"")+g.line;});
+      return ok(out.join("\n"));
+    };
+    commands.cut=function(args,stdin,cmd){
+      var mode=null,list=null,delim="\t",only=false,files=[];
+      for(var i=0;i<args.length;i++){var a=args[i];if(a==="-c"||a==="-f"){mode=a;list=args[++i];}else if(/^-[cf].+/.test(a)){mode=a.slice(0,2);list=a.slice(2);}else if(a==="-d")delim=args[++i];else if(/^-d.+/.test(a))delim=a.slice(2);else if(a==="-s")only=true;else if(a.charAt(0)==="-"&&a!=="-")return unsupported(cmd,a);else files.push(a);}
+      if(!mode||!list)return fail(cmd,"usage: cut -c list | cut -f list [-d char]");
+      var got=contents(files,stdin,cmd);if(got.error)return got.error;
+      var out=[];
+      got.files.forEach(function(f){splitLines(f.text).forEach(function(line){if(mode==="-c"){var chars=Array.from(line),pick=positions(list,chars.length);out.push(pick.map(function(n){return chars[n-1]||"";}).join(""));}else{var parts=line.split(delim);if(only&&parts.length===1){out.push(line);return;}var pick=positions(list,parts.length);out.push(pick.map(function(n){return parts[n-1]||"";}).join(delim));}});});
+      return ok(out.join("\n"));
+    };
+    commands.tr=function(args,stdin,cmd){
+      var flags="";while(args.length&&/^-[cds]+$/.test(args[0]))flags+=args.shift().slice(1);
+      if(args[0]&&args[0].charAt(0)==="-")return unsupported(cmd,args[0]);
+      var a=expandSet(args[0]||""),b=expandSet(args[1]||""),out="";
+      Array.from(stdin).forEach(function(ch){var i=a.indexOf(ch);if(flags.indexOf("c")>=0&&i<0)i=0;if(i>=0){if(flags.indexOf("d")<0)out+=b[i]||b[b.length-1]||"";}else out+=ch;});
+      if(flags.indexOf("s")>=0)out=out.replace(/(.)\1+/g,"$1");
+      return ok(out);
+    };
+    commands.basename=function(args){var suffix=null;if(args[0]==="-a")args.shift();if(args.length>1)suffix=args[args.length-1];return ok(args.slice(0,suffix?args.length-1:args.length).map(function(p){var name=p.replace(/\/+$/,"").split("/").pop()||"/";if(suffix&&name.slice(-suffix.length)===suffix)name=name.slice(0,-suffix.length);return name;}).join("\n"));};
+    commands.dirname=function(args){return ok(args.map(function(p){var parts=p.replace(/\/+$/,"").split("/");parts.pop();return parts.length?parts.join("/")||"/":".";}).join("\n"));};
+    commands.realpath=function(args,stdin,cmd){var must=false;args=args.filter(function(a){if(a==="-e"){must=true;return false;}if(a==="-m")return false;return true;});var out=[];for(var i=0;i<args.length;i++){var p=resolve(args[i]);if(must&&!type(p))return fail(cmd,"no such file or directory: "+args[i]);out.push(p);}return ok(out.join("\n"));};
+    commands.stat=function(args,stdin,cmd){var format=null,paths=[];for(var i=0;i<args.length;i++){if(args[i]==="-c")format=args[++i];else paths.push(args[i]);}var out=[];for(i=0;i<paths.length;i++){var p=resolve(paths[i]),t=type(p);if(!t)return fail(cmd,"no such file or directory: "+paths[i]);if(format)out.push(format.replace(/%n/g,p).replace(/%s/g,String(size(p))).replace(/%F/g,t==="d"?"directory":"regular file"));else out.push("  File: "+p+"\n  Size: "+size(p)+"  Type: "+(t==="d"?"directory":"regular file"));}return ok(out.join("\n"));};
+    function totalSize(p){var n=size(p);if(type(p)==="d")children(p).forEach(function(c){n+=totalSize(p.replace(/\/$/,"")+"/"+c);});return n;}
+    commands.du=function(args,stdin,cmd){var flags="",paths=[];args.forEach(function(a){if(a.charAt(0)==="-"&&a!=="-")flags+=a.slice(1);else paths.push(a);});if(/[^bhs]/.test(flags))return unsupported(cmd,"-"+flags.match(/[^bhs]/)[0]);if(!paths.length)paths=["."];var out=[];for(var i=0;i<paths.length;i++){var p=resolve(paths[i]);if(!type(p))return fail(cmd,"no such file or directory: "+paths[i]);var n=totalSize(p);out.push((flags.indexOf("h")>=0?human(n):String(n))+"\t"+p);}return ok(out.join("\n"));};
+    commands.history=function(args,stdin,cmd){if(args[0]==="-c"){history=[];return ok("");}if(args[0]==="-d"){var at=Number(args[1]);if(at<1||at>history.length)return fail(cmd,"history position out of range");history.splice(at-1,1);return ok("");}var n=Number(args[0])||history.length;return ok(history.slice(-n).map(function(h,i){return String(i+1).padStart(5," ")+"  "+h;}).join("\n"));};
+    commands.tree=function(args){var start=resolve(args[0]||".");if(!type(start))return fail("tree","no such file or directory");var lines=[start];function draw(path,prefix){var names=children(path);names.forEach(function(name,i){var last=i===names.length-1,full=path.replace(/\/$/,"")+"/"+name;lines.push(prefix+(last?"└── ":"├── ")+name+(type(full)==="d"?"/":""));if(type(full)==="d")draw(full,prefix+(last?"    ":"│   "));});}if(type(start)==="d")draw(start,"");return ok(lines.join("\n"));};
+    commands.cd=function(args,stdin,cmd){if(args[0]==="--help")return ok(USAGE.cd);var dest=args[0]==="-"?oldCwd:resolve(args[0]||"/");if(type(dest)!=="d")return fail(cmd,"no such directory: "+(args[0]||"/"));oldCwd=cwd;cwd=dest;return ok("");};
+    commands.pwd=function(){return ok(cwd);};
+    commands.more=commands.less=function(args,stdin){return commands.cat(args,stdin,"cat");};
+    commands.ps=function(){return ok("PID PPID STAT ETIME ARGS\n1   0    S    "+Math.floor((Date.now()-started)/1000)+"s    virtual-shell");};
+    commands.neofetch=function(args){var info="站点：zhoujinq.github.io（静态主页）\n会话：virtual-shell\n目录："+cwd+"\n文档："+Object.keys(FILES).length+" 个虚拟文本\n运行："+Math.floor((Date.now()-started)/1000)+" 秒";if(args[0]==="--stdout")return ok(info);if(args[0]==="--off")return ok(info);return ok("  ______\n /_  / /__\n  / /_/ _ \\\n /___\\___/\n\n"+info);};
+    commands.about=function(){return ok("关于我：真实经历、学习路径，以及为什么开始用 AI 改造工作。",{type:"jump",id:"about"});};
+    commands.projects=function(){return ok("Vibe Coding：项目是好奇心留下的学习痕迹。",{type:"jump",id:"projects"});};
+    commands.life=function(){return ok("性格与生活：长期坚持，也有具体热爱。",{type:"jump",id:"life"});};
+    commands.links=function(){return ok("联系方式", {type:"jump",id:"contact"});};
+    commands.index=commands.exit=function(){return ok("回到首屏。",{type:"home"});};
+    commands.clear=function(){return ok("",{type:"clear"});};
+    commands.whoami=function(){return ok("周锦全｜AI Native 时代的实践者、成长者、学徒。");};
+    commands.help=function(){var lines=["# Help","──────","这是一个站点终端，读取的是内置虚拟文本，不访问你的电脑文件。","支持单引号、双引号、基础管道、Tab 补全和 ↑/↓ 历史。","","## commands"];Object.keys(USAGE).forEach(function(k){lines.push("  "+USAGE[k]);});lines.push("","## examples","  ls -l /projects","  cat about | head -n 2","  printf '%s\\n' banana apple banana | sort | uniq -c","  grep -in 'ai' about","  cd /projects    然后输入 pwd","  clear    清空输出；exit 回到首屏");return ok(lines.join("\n"));};
+
+    var aliases={cls:"clear","关于":"about","关于我":"about","项目":"projects","生活":"life","日常":"life","帮助":"help","联系":"links","我是谁":"whoami"};
+    function runStage(tokens,stdin){
+      var name=tokens[0],args=tokens.slice(1);if(!name)return ok(stdin);
+      name=aliases[name]||name;
+      var fn=commands[name];if(!fn)return fail(name,"command not found: "+tokens[0]+"（试试 help）");
+      if(args.indexOf("--help")>=0&&USAGE[name])return ok(USAGE[name]);
+      try{return fn(args,stdin,name);}catch(e){return fail(name,e.message||"执行失败");}
+    }
+    function execute(raw){
+      raw=String(raw==null?"":raw).trim();if(!raw)return ok("");
+      if(raw==="!!"){if(!history.length)return fail("history","no previous command");raw=history[history.length-1];}
+      else if(/^!\d+$/.test(raw)){var n=Number(raw.slice(1));if(!history[n-1])return fail("history","event not found");raw=history[n-1];}
+      if(!/^history(?:\s|$)/.test(raw)) history.push(raw);
+      var tokens;
+      try{tokens=lex(raw);}catch(e){return fail("shell",e.message);}
+      var stages=[[]];tokens.forEach(function(t){if(t==="|")stages.push([]);else stages[stages.length-1].push(t);});
+      if(stages.some(function(s){return !s.length;}))return fail("shell","empty pipe stage");
+      var input="",result=ok("");
+      for(var i=0;i<stages.length;i++){result=runStage(stages[i],input);if(!result.ok)return result;input=result.text;}
+      return result;
+    }
+    return {execute:execute,prompt:function(){return "zjq : "+cwd+" $";},commands:function(){return Object.keys(commands).concat(Object.keys(aliases)).sort();},history:function(){return history.slice();}};
+  }
+  var api={create:create};
+  if(typeof module!=="undefined"&&module.exports)module.exports=api;
+  if(root)root.SiteShell=api;
+})(typeof window!=="undefined"?window:null);
+</script>
+
 <script>
 (function(){
   "use strict";
@@ -851,7 +1267,7 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
     setTimeout(function(){ el.classList.remove("flash"); }, 1400);
   }
   function echo(cmd){
-    push('<span class="ps"><span class="dir">zhoujinq@mac ~</span> %</span> ' + esc(cmd), "cmd", true);
+    push('<span class="ps"><span class="dir">'+esc(shell.prompt())+'</span></span> ' + esc(cmd), "cmd", true);
   }
 
   /* ── 覆盖层 ─────────────────────────────────────────── */
@@ -926,72 +1342,42 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
   });
 
   /* ── 终端 ───────────────────────────────────────────── */
-  var ABOUT_LINES = [
-    "东南大学通信工程毕业。联洲tplink海外技术型销售。星尘智能海外大科研销售经理。",
-    "早期做过 CV 算法；现在一半商务、一半技术，把科研需求翻译成可交付范围。",
-    "用 AI 改造真实工作，也保留生活里的具体热爱。点击“关于我”可以看完整经历。"
-  ];
-
-  var CMD = {
-    whoami: { zh:["我是谁"], run:function(){ push("保持好奇，边学边做；既用 AI 改造工作，也认真过生活。"); } },
-    about: { zh:["关于","关于我"], run:function(){
-      for (var i=0;i<ABOUT_LINES.length;i++) push(ABOUT_LINES[i]);
-    } },
-    projects: { zh:[], run:function(){ push("→ 实践项目：不是奖杯，是好奇心留下的学习痕迹"); jump("projects"); } },
-    ls: { zh:["项目","列表"], run:function(){
-      var out = [];
-      for (var i=0;i<IDS.length;i++){
-        out.push('<a href="#" data-open="'+i+'">0'+(i+1)+"</a>　" + esc(NAMES[IDS[i]]));
-      }
-      push(out.join("<br>"));
-    } },
-    cat: { zh:["看","展开"], run:function(arg){
-      var n = parseInt(arg, 10);
-      if (!n || n < 1 || n > IDS.length){ push('没有第 ' + esc(arg || "?") + ' 个项目。ls 看全部。'); return; }
-      push("→ " + esc(NAMES[IDS[n-1]]), "cmd", false);
-      openAt(n-1);
-    } },
-    life: { zh:["生活","日常"], run:function(){ push("→ 生活：长期连胜、王者荣耀、番茄小说、陈奕迅"); jump("life"); } },
-    links: { zh:["链接","联系","contact"], run:function(){ push("→ 联系方式"); jump("contact"); } },
-    help: { zh:["帮助"], run:function(){
-      push("whoami　about　projects　ls　cat 1　life　links　clear");
-      push('<span class="dim">中文也认：关于　项目　看 1　生活　帮助</span>', "dim");
-    } },
-    clear: { zh:["清屏","cls"], run:function(){
-      body.innerHTML = "";
-      push('<span class="ps"><span class="dir">zhoujinq@mac ~</span> %</span> whoami', "cmd");
-      push("保持好奇，边学边做；既用 AI 改造工作，也认真过生活。");
-    } },
-    sudo: { zh:[], run:function(){ push("zhoujinq 不在 sudoers 文件中。此事将被报告。"); } }
-  };
-  var ALIAS = {};
-  Object.keys(CMD).forEach(function(k){
-    ALIAS[k] = k;
-    (CMD[k].zh || []).forEach(function(z){ ALIAS[z] = k; });
-  });
+  var shell = window.SiteShell.create();
+  var hist = [], hi = -1, draft = "";
+  form.querySelector(".ps").textContent = shell.prompt();
 
   function run(raw){
     var t = raw.trim();
     if (!t) return;
     echo(t);
-    var parts = t.split(/\s+/);
-    var key = ALIAS[parts[0].toLowerCase()];
-    var arg = parts[1];
-    if (!key){
-      var m = t.match(/^([a-zA-Z\u4e00-\u9fa5]+?)\s*(\d+)$/);
-      if (m && ALIAS[m[1].toLowerCase()]){ key = ALIAS[m[1].toLowerCase()]; arg = m[2]; }
+    var result = shell.execute(t);
+    if (result.action && result.action.type === "clear") body.innerHTML = "";
+    if (result.text){
+      push(esc(result.text).replace(/\n/g,"<br>"), result.ok ? "out" : "err");
     }
-    if (!key){ push("command not found: " + esc(parts[0]) + '　<span class="dim">试试 help</span>'); return; }
-    CMD[key].run(arg);
+    if (result.action){
+      var action = result.action;
+      if (action.type === "jump"){
+        var section = document.getElementById(action.id);
+        var details = section && section.matches("details") ? section : section && section.querySelector("details");
+        if (details && action.id === "about") details.open = true;
+        jump(action.id);
+      } else if (action.type === "home"){
+        window.scrollTo({ top:0, behavior:"smooth" });
+      }
+    }
+    form.querySelector(".ps").textContent = shell.prompt();
+    body.hidden = !body.children.length;
+    body.scrollTop = body.scrollHeight;
   }
 
-  var hist = [], hi = -1, draft = "";
   function complete(){
     var v = input.value.trim().toLowerCase();
-    if (!v){ push('<span class="dim">' + Object.keys(ALIAS).filter(function(n){return /^[a-z]+$/.test(n)}).join("　") + "</span>", "out", true); return; }
-    var hits = Object.keys(ALIAS).filter(function(n){ return n.indexOf(v) === 0 && n !== v; });
-    if (hits.length === 1){ input.value = hits[0] + (hits[0] === "cat" ? " " : ""); sync(); }
-    else if (hits.length > 1){ push('<span class="dim">' + hits.join("　") + "</span>", "out", true); }
+    var available = shell.commands();
+    if (!v){ push('<span class="dim">'+esc(available.join("　"))+"</span>", "out", true); body.hidden=false; return; }
+    var hits = available.filter(function(n){ return n.indexOf(v) === 0 && n !== v; });
+    if (hits.length === 1){ input.value = hits[0] + " "; sync(); }
+    else if (hits.length > 1){ push('<span class="dim">'+esc(hits.join("　"))+"</span>", "out", true); body.hidden=false; }
   }
   var PAD = 8;
   function sync(){
@@ -1001,32 +1387,35 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
     if (w > max) w = max;
     form.style.setProperty("--caret-x", w + "px");
   }
+  function moveHistory(direction){
+    if (!hist.length) return;
+    if (direction < 0){
+      if (hi === -1){ draft = input.value; hi = hist.length - 1; } else if (hi > 0) hi--;
+    } else {
+      if (hi === -1) return;
+      if (hi < hist.length - 1) hi++; else { hi = -1; input.value = draft; sync(); return; }
+    }
+    input.value = hist[hi]; sync();
+  }
   form.addEventListener("submit", function(e){
     e.preventDefault();
     var v = input.value;
-    if (v.trim()){ hist.push(v.trim()); hi = -1; draft = ""; }
     input.value = ""; sync(); run(v);
+    hist = shell.history(); hi = -1; draft = "";
   });
   input.addEventListener("input", sync);
   input.addEventListener("keydown", function(e){
-    if (e.key === "ArrowUp"){
-      if (!hist.length) return;
-      e.preventDefault();
-      if (hi === -1){ draft = input.value; hi = hist.length - 1; } else if (hi > 0) hi--;
-      input.value = hist[hi]; sync();
-    } else if (e.key === "ArrowDown"){
-      if (hi === -1) return;
-      e.preventDefault();
-      if (hi < hist.length - 1){ hi++; input.value = hist[hi]; }
-      else { hi = -1; input.value = draft; }
-      sync();
-    } else if (e.key === "Tab"){ e.preventDefault(); complete(); }
-    else if (e.key.toLowerCase() === "l" && (e.ctrlKey || e.metaKey)){ e.preventDefault(); CMD.clear.run(); }
+    var key = e.key.toLowerCase();
+    if (e.key === "ArrowUp" || (e.ctrlKey && key === "p")){ e.preventDefault(); moveHistory(-1); }
+    else if (e.key === "ArrowDown" || (e.ctrlKey && key === "n")){ e.preventDefault(); moveHistory(1); }
+    else if (e.key === "Tab"){ e.preventDefault(); complete(); }
+    else if (key === "l" && (e.ctrlKey || e.metaKey)){ e.preventDefault(); body.innerHTML=""; body.hidden=true; }
+    else if (key === "c" && e.ctrlKey){ e.preventDefault(); echo(input.value+"^C"); input.value=""; sync(); body.hidden=false; }
   });
   input.addEventListener("focus", function(){ form.classList.remove("unfocused"); sync(); });
   input.addEventListener("blur",  function(){ form.classList.add("unfocused"); });
 
-  /* 终端里的 ls 链接 → 直接开卡片 */
+  /* 终端里的项目链接 → 直接开卡片 */
   document.addEventListener("click", function(e){
     var a = e.target.closest("[data-open]");
     if (!a) return;
@@ -1171,7 +1560,6 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
       var cfg = S[el.getAttribute("data-streak")];
       if (!cfg) return;
       el.querySelector("[data-days]").textContent = String(daysAt(cfg, now));
-      el.querySelector("[data-since]").textContent = "北京时间每天 0 点自动 +1";
     });
   }
   function mount(doc){
