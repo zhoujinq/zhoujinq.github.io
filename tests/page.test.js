@@ -20,7 +20,10 @@ test('首屏保留像素名字与三行 80～100 字简介，终端默认不输�
   assert.equal((intro.match(/<span>/g) || []).length, 3);
   const text = intro.replace(/<[^>]+>/g, '').replace(/\s/g, '');
   assert.ok(text.length >= 80 && text.length <= 100, `简介字数应为 80～100，当前为 ${text.length}`);
-  assert.match(html, /最近更新：2026-11-20/);
+  assert.match(intro, /<span>用 AI 改造自己的工作/);
+  assert.doesNotMatch(intro, /我是周锦全/);
+  assert.match(html, /\.hero-intro\{[^}]*font-family:"PingFang SC","Microsoft YaHei",sans-serif/);
+  assert.match(html, /主页信息最近更新：2026-11-20/);
   assert.match(html, /这好像是个终端，输入 <b>about<\/b> \/ <b>projects<\/b> \/ <b>life<\/b>，回车看看/);
   assert.match(html, /<label class="ps" for="cmd">zjq : \/ \$<\/label>/);
   const terminal = between('<div class="tc-body" id="tcBody"', '</div>');
@@ -95,6 +98,6 @@ test('页脚只保留版权、版本和回顶，版本与本次发布一致', ()
   const footer = between('<footer>', '</footer>');
   assert.doesNotMatch(footer, /这个页面|@mac|纯静态|无追踪/);
   assert.doesNotMatch(html, /这个页面\s*纯静态/);
-  assert.match(footer, /releases\/tag\/v1\.5\.0/);
-  assert.match(footer, />v1\.5\.0<\/a>/);
+  assert.match(footer, /releases\/tag\/v1\.5\.1/);
+  assert.match(footer, />v1\.5\.1<\/a>/);
 });
