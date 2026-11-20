@@ -32,29 +32,35 @@ test('首屏保留像素名字与三行 80～100 字简介，终端默认不输�
   assert.match(html, /commands\.about=function/);
   assert.match(html, /commands\.projects=function/);
   assert.match(html, /commands\.life=function/);
+  assert.match(html, /<meta name="theme-color" content="#060a13">/);
+  assert.match(html, /class="signal-field"/);
+  const blocks = ['<header class="mast">', '<section id="projects">', '<details class="fold" id="about">', '<section id="life">'];
+  const positions = blocks.map(block => html.indexOf(block));
+  positions.forEach(position => assert.notEqual(position, -1, '四大块必须完整保留'));
+  assert.ok(positions.every((position, index) => index === 0 || position > positions[index - 1]), '四大块顺序不能改变');
 });
 
 test('终端去掉旧标题和 mac 字样，宽度跟随整页内容', () => {
   assert.doesNotMatch(html, /zhoujinq\s*—\s*-zsh|80×24|zhoujinq@mac|@mac|macOS/);
   assert.match(html, /\.term-card\{[^}]*width:100%;max-width:none/);
+  assert.match(html, /\.tc-prompt\{[^}]*background:rgba\(12,23,39/);
+  assert.match(html, /\.tc-field input\{color:#e7f4ff/);
   assert.match(html, /form\.querySelector\("\.ps"\)\.textContent = shell\.prompt\(\)/);
   assert.doesNotMatch(html, /type:"jump"|type:"home"|action\.type === "jump"|action\.type === "home"/);
 });
 
-test('项目共 9 个：前 3 个常展，后 6 个书页式折叠，规划项不伪装完成', () => {
+test('项目共 9 个：前 3 个项目窗口与后 6 个实验模块直接可见，规划项不伪装完成', () => {
   assert.equal((html.match(/<article class="card(?: planned)?"/g) || []).length, 9);
-  const featured = between('<div class="grid">', '</div>\n    <details class="project-book">');
+  const featured = between('<div class="grid">', '</div>\n    <div class="project-rest"');
   assert.equal((featured.match(/<article class="card"/g) || []).length, 3);
-  const folded = between('<details class="project-book">', '</details>');
-  assert.equal((folded.match(/<article class="card(?: planned)?"/g) || []).length, 6);
-  assert.match(folded, /class="book-spread"/);
-  assert.match(folded, /class="book-page book-cover"/);
-  assert.match(folded, /class="book-page book-contents"/);
-  assert.equal((folded.match(/class="book-entry"/g) || []).length, 6);
-  assert.match(folded, /翻开项目书/);
-  assert.match(folded, /data-name="破万卷"/);
-  assert.match(folded, /data-name="第九个待定"/);
-  assert.equal((folded.match(/规划占位/g) || []).length, 2);
+  const rest = between('<div class="project-rest" aria-label="实验与规划项目">', '</div>\n  </section>');
+  assert.equal((rest.match(/<article class="card(?: planned)?"/g) || []).length, 6);
+  assert.match(rest, /data-name="破万卷"/);
+  assert.match(rest, /data-name="第九个待定"/);
+  assert.equal((rest.match(/规划占位/g) || []).length, 2);
+  assert.doesNotMatch(html, /project-book|book-spread|book-page|翻开项目书/);
+  assert.match(html, /\.project-rest\{[^}]*display:grid/);
+  assert.match(html, /\.card\{[^}]*opacity:1;transform:none/);
   assert.match(html, /id="tpl-p8"/);
   assert.match(html, /id="tpl-p9"/);
 });
@@ -68,6 +74,8 @@ test('关于我保留指定真实经历，不用业绩数字证明价值', () =>
     '开始用 AI 改造自己的工作'
   ]) assert.ok(about.includes(text), `关于我缺少：${text}`);
   assert.doesNotMatch(about, /307\s*万|300\s*万|8\s*台|10\s*台/);
+  assert.match(html, /\.fold \.about p::before/);
+  assert.match(html, /\.fold \.about p:not\(:last-child\)::after/);
 });
 
 test('Life 使用两张原图猫头鹰组件，删除圆点、星期和自动加一说明', () => {
@@ -104,6 +112,6 @@ test('页脚只保留版权、版本和回顶，版本与本次发布一致', ()
   assert.doesNotMatch(footer, /这个页面|@mac|纯静态|无追踪/);
   assert.doesNotMatch(html, /这个页面\s*纯静态|id="contact"|class="contact-panel"|data-copy/);
   assert.match(html, /<header[\s\S]*?2336097716@qq\.com[\s\S]*?github\.com\/zhoujinq[\s\S]*?<\/header>/);
-  assert.match(footer, /releases\/tag\/v1\.6\.0/);
-  assert.match(footer, />v1\.6\.0<\/a>/);
+  assert.match(footer, /releases\/tag\/v2\.0\.0/);
+  assert.match(footer, />v2\.0\.0<\/a>/);
 });
