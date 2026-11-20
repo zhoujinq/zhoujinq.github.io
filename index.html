@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>~zhoujinq: index</title>
-<meta name="description" content="周锦全（Zhou Jinquan）— 卖人形机器人整机，也每天在用 API 造工具。七个自研工具，点开看。">
+<meta name="description" content="周锦全（Zhou Jinquan）— AI Native 时代的实践者、成长者、学徒。保持好奇，边学边做，也认真生活。">
 <meta name="theme-color" content="#f7f3ea">
 <meta name="author" content="周锦全">
 <meta property="og:type" content="profile">
 <meta property="og:site_name" content="zhoujinq:~$">
-<meta property="og:title" content="周锦全 · 卖机器人，也自己写工具">
-<meta property="og:description" content="七个自研自用工具：销售流水线 / N1 备考 / 记账投资助手 / Personal AI / 简历工坊 / 外卖吃啥 / 模型斩杀线。">
+<meta property="og:title" content="周锦全 · AI Native 时代的实践者与成长者">
+<meta property="og:description" content="保持好奇，边学边做。这里有我的实践、长期坚持，以及生活里具体的热爱。">
 <meta property="og:url" content="https://zhoujinq.github.io/">
 <meta property="og:image" content="https://zhoujinq.github.io/assets/og.png">
 <meta property="og:image:width" content="1200">
@@ -42,6 +42,7 @@
   --ok:#2f7d4f;
   --wip:#b06219;
   --mono:"Maple Mono","Sarasa Mono SC","JetBrains Mono",Consolas,"Courier New",monospace;
+  --term:"SFMono-Regular",Menlo,Monaco,Consolas,"Liberation Mono",monospace;
   --w:1080px;
   --pad:32px;
   --ease:cubic-bezier(.2,.8,.2,1);
@@ -113,45 +114,61 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 .nav-block a:nth-child(3) i{background:#2f7d4f}
 .nav-block a:hover i{opacity:1}
 
-/* ── 终端 ───────────────────────────────────────────────── */
+/* ── macOS 终端 ─────────────────────────────────────────── */
 .term-card{
-  margin:22px 0 0;background:var(--card);border:1px solid var(--line);border-radius:8px;
-  box-shadow:0 1px 0 rgba(255,255,255,.9) inset, 0 10px 26px -22px rgba(43,36,24,.55);
-  overflow:hidden;max-width:640px;
+  margin:26px 0 0;background:#fff;border:1px solid #b8b8b8;border-radius:12px;
+  box-shadow:0 18px 42px -28px rgba(28,24,18,.62),0 2px 6px rgba(28,24,18,.08);
+  overflow:hidden;max-width:720px;
 }
-.tc-bar{display:flex;align-items:center;gap:7px;padding:10px 14px;border-bottom:1px solid var(--line-2);background:linear-gradient(#fdfbf5,#f8f4ea)}
-.tc-bar i{width:8px;height:8px;border-radius:50%;display:block}
-.tc-bar i:nth-child(1){background:#e0655c}
-.tc-bar i:nth-child(2){background:#dfa93f}
-.tc-bar i:nth-child(3){background:#5fa36a}
-.tc-body{padding:14px 16px 12px;max-height:190px;overflow-y:auto;font-size:13.5px;line-height:1.8;scrollbar-width:thin}
+.tc-bar{
+  position:relative;height:38px;display:flex;align-items:center;padding:0 14px;
+  border-bottom:1px solid #c8c8c8;background:linear-gradient(#f7f7f7,#e9e9e9);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9);
+}
+.tc-lights{display:flex;align-items:center;gap:8px}
+.tc-lights i{width:12px;height:12px;border-radius:50%;display:block;box-shadow:inset 0 0 0 1px rgba(0,0,0,.1)}
+.tc-lights i:nth-child(1){background:#ff5f57}
+.tc-lights i:nth-child(2){background:#febc2e}
+.tc-lights i:nth-child(3){background:#28c840}
+.tc-title{
+  position:absolute;left:50%;transform:translateX(-50%);max-width:56%;overflow:hidden;
+  color:#4b4b4b;font:500 12px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  white-space:nowrap;text-overflow:ellipsis;user-select:none;
+}
+.tc-body{
+  padding:18px 18px 2px;height:184px;overflow-y:auto;background:#fff;color:#1d1d1f;
+  font-family:var(--term);font-size:13.5px;line-height:1.7;scrollbar-width:thin;scrollbar-color:#c5c5c5 #fff;
+}
 .tc-body::-webkit-scrollbar{width:8px}
-.tc-body::-webkit-scrollbar-thumb{background:#ddd4bf;border-radius:8px;border:2px solid var(--card)}
-.tc-line{margin:0 0 2px;white-space:pre-wrap;word-break:break-word}
-.tc-line.cmd{color:var(--ink)}
-.tc-line.out{color:var(--ink-3)}
-.tc-line.dim{color:var(--muted)}
-.tc-line.gap{margin-top:10px}
-.tc-line a{color:var(--accent);border-bottom-color:var(--accent-line)}
-.ps{color:var(--accent);user-select:none}
-.ps .dir{color:var(--muted)}
-.tc-prompt{display:flex;align-items:center;padding:9px 16px 11px;border-top:1px solid var(--line-2);background:#fbf8f0}
-.tc-prompt label{font-size:13.5px;color:var(--accent);white-space:nowrap;user-select:none}
-.tc-prompt label .dir{color:var(--muted)}
+.tc-body::-webkit-scrollbar-thumb{background:#c5c5c5;border-radius:8px;border:2px solid #fff}
+.tc-line{margin:0 0 3px;white-space:pre-wrap;word-break:break-word}
+.tc-line.cmd{color:#111;font-weight:500}
+.tc-line.out{color:#333}
+.tc-line.dim{color:#777}
+.tc-line.gap{margin-top:12px}
+.tc-line a{color:#175cd3;border-bottom-color:rgba(23,92,211,.3)}
+.ps{color:#111;user-select:none;font-weight:500}
+.ps .dir{color:#111;font-weight:400}
+.tc-prompt{
+  display:flex;align-items:center;padding:0 18px 17px;border:0;background:#fff;
+  font-family:var(--term);color:#1d1d1f;
+}
+.tc-prompt label{font-size:13.5px;color:#111;white-space:nowrap;user-select:none}
+.tc-prompt label .dir{color:#111;font-weight:400}
 .tc-field{position:relative;flex:1;min-width:0;display:flex;align-items:center}
 .tc-field input{
   appearance:none;flex:1;min-width:0;border:0;outline:0;background:transparent;
-  font:inherit;font-size:13.5px;color:var(--ink);caret-color:transparent;padding:6px 0 6px 8px;min-height:34px;
+  font:inherit;font-size:13.5px;color:#111;caret-color:transparent;padding:5px 0 5px 8px;min-height:30px;
 }
 #ghost{position:absolute;left:0;top:0;visibility:hidden;white-space:pre;font:inherit;font-size:13.5px}
 .caret{
-  position:absolute;top:50%;left:0;width:.6em;height:1.15em;background:var(--accent);
-  transform:translate(var(--caret-x,8px),-50%);pointer-events:none;opacity:.85;
+  position:absolute;top:50%;left:0;width:.62em;height:1.2em;background:#111;
+  transform:translate(var(--caret-x,8px),-50%);pointer-events:none;opacity:.9;
   animation:blink 1.1s steps(1,end) infinite;
 }
-.tc-prompt.unfocused .caret{opacity:0;animation:none}
-@keyframes blink{0%,49%{opacity:.85}50%,100%{opacity:0}}
-.tc-help{margin:10px 0 0;font-size:13px;color:var(--muted)}
+.tc-prompt.unfocused .caret{opacity:.28;animation:none;background:transparent;box-shadow:inset 0 0 0 1px #111}
+@keyframes blink{0%,49%{opacity:.9}50%,100%{opacity:0}}
+.tc-help{margin:11px 0 0;font-size:13px;color:var(--muted)}
 .tc-help b{font-weight:700;color:var(--accent)}
 
 /* ── 章节 ───────────────────────────────────────────────── */
@@ -234,7 +251,7 @@ section{padding:52px 0 0}
 .fold .about p:last-child{margin-bottom:0}
 .fold .about .aside{color:var(--muted);font-size:14px}
 
-/* ── 简历 / 联系 ─────────────────────────────────────────── */
+/* ── 联系 ───────────────────────────────────────────────── */
 .two{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 @media (max-width:640px){.two{grid-template-columns:1fr}}
 .panel{border:1px solid var(--line);border-radius:8px;background:var(--card);padding:20px;scroll-margin-top:24px}
@@ -409,35 +426,62 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
   .wrap::after{opacity:1;animation:none}
 }
 
-  /* ── Life：连胜 ── */
-  .streak-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:26px}
-  @media(max-width:620px){.streak-grid{grid-template-columns:1fr}}
-  .streak{position:relative;display:flex;align-items:center;gap:18px;padding:20px 22px;background:var(--card);border:1px solid var(--line);border-radius:4px;overflow:hidden}
-  .streak::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.45;
-    background-image:repeating-linear-gradient(0deg,rgba(96,76,44,.05) 0 1px,transparent 1px 6px)}
-  .streak .fl{width:52px;height:64px;flex:none;image-rendering:pixelated}
-  .streak-body{position:relative;z-index:1}
-  .streak-num{display:flex;align-items:baseline;gap:6px}
-  .streak-num .num{font-family:var(--mono);font-size:46px;line-height:.95;font-weight:700;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
-  .streak-num .unit{font-family:var(--mono);font-size:13px;color:var(--muted)}
-  .streak-meta{margin-top:7px;display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center;font-size:12.5px;color:var(--muted);font-family:var(--mono)}
-  .streak-meta b{color:var(--ink-2);font-weight:600}
+  /* ── Life：原图 2D 连胜组件 ── */
+  .streak-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-bottom:18px}
+  @media(max-width:700px){.streak-grid{grid-template-columns:1fr;gap:20px}}
+  .streak{min-width:0;margin:0}
+  .streak-widget{
+    position:relative;aspect-ratio:900/425;border-radius:24px;overflow:hidden;isolation:isolate;
+    background:#d887bd;box-shadow:0 18px 32px -24px rgba(79,39,66,.65),0 2px 5px rgba(79,39,66,.08);
+  }
+  .streak-widget>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+  .streak-rewrite{
+    position:absolute;z-index:1;display:flex;align-items:center;justify-content:center;gap:.16em;
+    color:#fff;text-shadow:0 2px 10px rgba(74,20,49,.18);white-space:nowrap;
+  }
+  .streak-rewrite .num{font-family:var(--mono);font-size:clamp(30px,4.6vw,52px);line-height:1;font-weight:700;letter-spacing:-.045em;font-variant-numeric:tabular-nums}
+  .streak-rewrite .unit{font-size:clamp(14px,1.8vw,22px);font-weight:700}
+  .streak[data-streak="duolingo"] .streak-rewrite{
+    left:4%;top:4%;width:57%;height:33%;border-radius:14px;
+    background:linear-gradient(135deg,rgba(181,39,105,.98),rgba(190,55,127,.96));
+  }
+  .streak[data-streak="momo"] .streak-rewrite{
+    left:5%;top:31%;width:55%;height:34%;border-radius:14px;
+    background:linear-gradient(135deg,rgba(199,146,233,.97),rgba(216,158,226,.96));
+  }
+  .streak-caption{display:flex;align-items:center;gap:8px;margin:10px 3px 0;font-size:12.5px;color:var(--muted)}
+  .streak-caption b{color:var(--ink-2);font-weight:700}
+  .streak-caption .brand-dot{width:8px;height:8px;border-radius:50%;background:#58cc02;flex:none}
+  .streak[data-streak="momo"] .brand-dot{background:#252227}
+  .streak-caption .auto{margin-left:auto;text-align:right}
 
-  /* ── Life：兴趣 ── */
-  .sub-h{font-size:14px;font-weight:600;color:var(--ink-2);margin:30px 0 14px;letter-spacing:.02em}
+  /* ── Life：三项具体热爱 ── */
+  .sub-h{font-size:14px;font-weight:600;color:var(--ink-2);margin:32px 0 14px;letter-spacing:.02em}
   .sub-h::before{content:"// ";color:var(--faint);font-family:var(--mono)}
-  .life-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-  @media(max-width:680px){.life-grid{grid-template-columns:1fr}}
-  .life{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:16px 18px;transition:border-color .2s var(--ease),transform .2s var(--ease)}
-  .life:hover{border-color:var(--accent-line);transform:translateY(-2px)}
-  .life h3{margin:0 0 8px;font-size:13px}
-  .life h3 .li{display:inline-block;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;color:var(--accent);
-    background:var(--accent-soft);border:1px solid var(--accent-line);border-radius:2px;padding:2px 7px}
-  .life p{margin:0;font-size:13.5px;line-height:1.8;color:var(--ink-2)}
-  .vibe{margin-top:16px;padding:16px 18px;border-left:2px solid var(--accent);background:var(--accent-soft);
+  .life-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .life{padding:20px 22px 22px;background:transparent}
+  .life+.life{border-left:1px solid var(--line)}
+  .life h3{margin:0 0 9px;font-size:16px;line-height:1.5;color:var(--ink)}
+  .life p{margin:0;font-size:13.5px;line-height:1.85;color:var(--ink-2)}
+  .more-life{border-bottom:1px solid var(--line)}
+  .more-life summary{padding:13px 0;cursor:pointer;list-style:none;color:var(--muted);font-size:13px}
+  .more-life summary::-webkit-details-marker{display:none}
+  .more-life summary::before{content:"＋";display:inline-block;margin-right:8px;color:var(--accent)}
+  .more-life[open] summary::before{content:"－"}
+  .more-life .more-body{padding:0 0 18px;color:var(--ink-2);font-size:13.5px;line-height:1.9;max-width:62em}
+  .more-life .more-body p{margin:0 0 6px}
+  .more-life .more-body p:last-child{margin-bottom:0}
+  .vibe{margin-top:20px;padding:17px 19px;border-left:2px solid var(--accent);background:var(--accent-soft);
     font-size:14px;line-height:1.9;color:var(--ink-2);border-radius:0 4px 4px 0}
   .vibe b{color:var(--ink)}
-  @media(max-width:620px){.streak-num .num{font-size:38px}.streak{padding:16px 18px;gap:14px}.streak .fl{width:44px;height:54px}}
+  @media(max-width:680px){
+    .life-grid{grid-template-columns:1fr}
+    .life{padding:17px 4px}
+    .life+.life{border-left:0;border-top:1px solid var(--line-2)}
+    .streak-widget{border-radius:18px}
+    .streak-caption{align-items:flex-start;flex-wrap:wrap}
+    .streak-caption .auto{margin-left:0;width:100%;padding-left:16px;text-align:left}
+  }
 </style>
 <noscript><style>
   .card{opacity:1!important;transform:none!important}
@@ -461,7 +505,7 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
 
     <div class="logo"><svg viewBox="0 0 690 70" role="img" aria-label="ZHOU JINQUAN" xmlns="http://www.w3.org/2000/svg"><g fill="currentColor"><rect x="0.5" y="0.5" width="49" height="9"/><rect x="60.5" y="0.5" width="9" height="9"/><rect x="100.5" y="0.5" width="9" height="9"/><rect x="120.5" y="0.5" width="49" height="9"/><rect x="180.5" y="0.5" width="9" height="9"/><rect x="220.5" y="0.5" width="9" height="9"/><rect x="280.5" y="0.5" width="49" height="9"/><rect x="340.5" y="0.5" width="49" height="9"/><rect x="400.5" y="0.5" width="9" height="9"/><rect x="440.5" y="0.5" width="9" height="9"/><rect x="460.5" y="0.5" width="49" height="9"/><rect x="520.5" y="0.5" width="9" height="9"/><rect x="560.5" y="0.5" width="9" height="9"/><rect x="600.5" y="0.5" width="9" height="9"/><rect x="640.5" y="0.5" width="9" height="9"/><rect x="680.5" y="0.5" width="9" height="9"/><rect x="40.5" y="10.5" width="9" height="9"/><rect x="60.5" y="10.5" width="9" height="9"/><rect x="100.5" y="10.5" width="9" height="9"/><rect x="120.5" y="10.5" width="9" height="9"/><rect x="160.5" y="10.5" width="9" height="9"/><rect x="180.5" y="10.5" width="9" height="9"/><rect x="220.5" y="10.5" width="9" height="9"/><rect x="320.5" y="10.5" width="9" height="9"/><rect x="360.5" y="10.5" width="9" height="9"/><rect x="400.5" y="10.5" width="19" height="9"/><rect x="440.5" y="10.5" width="9" height="9"/><rect x="460.5" y="10.5" width="9" height="9"/><rect x="500.5" y="10.5" width="9" height="9"/><rect x="520.5" y="10.5" width="9" height="9"/><rect x="560.5" y="10.5" width="9" height="9"/><rect x="590.5" y="10.5" width="9" height="9"/><rect x="610.5" y="10.5" width="9" height="9"/><rect x="640.5" y="10.5" width="19" height="9"/><rect x="680.5" y="10.5" width="9" height="9"/><rect x="30.5" y="20.5" width="9" height="9"/><rect x="60.5" y="20.5" width="9" height="9"/><rect x="100.5" y="20.5" width="9" height="9"/><rect x="120.5" y="20.5" width="9" height="9"/><rect x="160.5" y="20.5" width="9" height="9"/><rect x="180.5" y="20.5" width="9" height="9"/><rect x="220.5" y="20.5" width="9" height="9"/><rect x="320.5" y="20.5" width="9" height="9"/><rect x="360.5" y="20.5" width="9" height="9"/><rect x="400.5" y="20.5" width="9" height="9"/><rect x="420.5" y="20.5" width="9" height="9"/><rect x="440.5" y="20.5" width="9" height="9"/><rect x="460.5" y="20.5" width="9" height="9"/><rect x="500.5" y="20.5" width="9" height="9"/><rect x="520.5" y="20.5" width="9" height="9"/><rect x="560.5" y="20.5" width="9" height="9"/><rect x="580.5" y="20.5" width="9" height="9"/><rect x="620.5" y="20.5" width="9" height="9"/><rect x="640.5" y="20.5" width="9" height="9"/><rect x="660.5" y="20.5" width="9" height="9"/><rect x="680.5" y="20.5" width="9" height="9"/><rect x="20.5" y="30.5" width="9" height="9"/><rect x="60.5" y="30.5" width="49" height="9"/><rect x="120.5" y="30.5" width="9" height="9"/><rect x="160.5" y="30.5" width="9" height="9"/><rect x="180.5" y="30.5" width="9" height="9"/><rect x="220.5" y="30.5" width="9" height="9"/><rect x="320.5" y="30.5" width="9" height="9"/><rect x="360.5" y="30.5" width="9" height="9"/><rect x="400.5" y="30.5" width="9" height="9"/><rect x="430.5" y="30.5" width="19" height="9"/><rect x="460.5" y="30.5" width="9" height="9"/><rect x="500.5" y="30.5" width="9" height="9"/><rect x="520.5" y="30.5" width="9" height="9"/><rect x="560.5" y="30.5" width="9" height="9"/><rect x="580.5" y="30.5" width="49" height="9"/><rect x="640.5" y="30.5" width="9" height="9"/><rect x="670.5" y="30.5" width="19" height="9"/><rect x="10.5" y="40.5" width="9" height="9"/><rect x="60.5" y="40.5" width="9" height="9"/><rect x="100.5" y="40.5" width="9" height="9"/><rect x="120.5" y="40.5" width="9" height="9"/><rect x="160.5" y="40.5" width="9" height="9"/><rect x="180.5" y="40.5" width="9" height="9"/><rect x="220.5" y="40.5" width="9" height="9"/><rect x="280.5" y="40.5" width="9" height="9"/><rect x="320.5" y="40.5" width="9" height="9"/><rect x="360.5" y="40.5" width="9" height="9"/><rect x="400.5" y="40.5" width="9" height="9"/><rect x="440.5" y="40.5" width="9" height="9"/><rect x="460.5" y="40.5" width="9" height="9"/><rect x="490.5" y="40.5" width="19" height="9"/><rect x="520.5" y="40.5" width="9" height="9"/><rect x="560.5" y="40.5" width="9" height="9"/><rect x="580.5" y="40.5" width="9" height="9"/><rect x="620.5" y="40.5" width="9" height="9"/><rect x="640.5" y="40.5" width="9" height="9"/><rect x="680.5" y="40.5" width="9" height="9"/><rect x="0.5" y="50.5" width="9" height="9"/><rect x="60.5" y="50.5" width="9" height="9"/><rect x="100.5" y="50.5" width="9" height="9"/><rect x="120.5" y="50.5" width="9" height="9"/><rect x="160.5" y="50.5" width="9" height="9"/><rect x="180.5" y="50.5" width="9" height="9"/><rect x="220.5" y="50.5" width="9" height="9"/><rect x="280.5" y="50.5" width="9" height="9"/><rect x="320.5" y="50.5" width="9" height="9"/><rect x="360.5" y="50.5" width="9" height="9"/><rect x="400.5" y="50.5" width="9" height="9"/><rect x="440.5" y="50.5" width="9" height="9"/><rect x="460.5" y="50.5" width="9" height="9"/><rect x="500.5" y="50.5" width="9" height="9"/><rect x="520.5" y="50.5" width="9" height="9"/><rect x="560.5" y="50.5" width="9" height="9"/><rect x="580.5" y="50.5" width="9" height="9"/><rect x="620.5" y="50.5" width="9" height="9"/><rect x="640.5" y="50.5" width="9" height="9"/><rect x="680.5" y="50.5" width="9" height="9"/><rect x="0.5" y="60.5" width="49" height="9"/><rect x="60.5" y="60.5" width="9" height="9"/><rect x="100.5" y="60.5" width="9" height="9"/><rect x="120.5" y="60.5" width="49" height="9"/><rect x="180.5" y="60.5" width="49" height="9"/><rect x="290.5" y="60.5" width="29" height="9"/><rect x="340.5" y="60.5" width="49" height="9"/><rect x="400.5" y="60.5" width="9" height="9"/><rect x="440.5" y="60.5" width="9" height="9"/><rect x="460.5" y="60.5" width="49" height="9"/><rect x="520.5" y="60.5" width="49" height="9"/><rect x="580.5" y="60.5" width="9" height="9"/><rect x="620.5" y="60.5" width="9" height="9"/><rect x="640.5" y="60.5" width="9" height="9"/><rect x="680.5" y="60.5" width="9" height="9"/></g></svg></div>
 
-    <p class="lead rise d3">努力跟上 AI Native 中<span class="tilde">~</span></p>
+    <p class="lead rise d3">AI Native 时代的实践者、成长者、学徒<span class="tilde">~</span></p>
 
     <nav class="nav-block rise d6" aria-label="页面导航">
       <a href="#about"><i></i>关于</a>
@@ -470,13 +514,16 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
     </nav>
 
     <div class="term-card rise d4" id="shell">
-      <div class="tc-bar" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="tc-bar" aria-hidden="true">
+        <span class="tc-lights"><i></i><i></i><i></i></span>
+        <span class="tc-title">zhoujinq — -zsh — 80×24</span>
+      </div>
       <div class="tc-body" id="tcBody" aria-live="polite">
-        <p class="tc-line cmd"><span class="ps"><span class="dir">zhoujinq:~</span>$</span> whoami</p>
-        <p class="tc-line out">周锦全 —— 一个把 AI 用进销售动作里的人。</p>
+        <p class="tc-line cmd"><span class="ps"><span class="dir">zhoujinq@mac ~</span> %</span> whoami</p>
+        <p class="tc-line out">保持好奇，边学边做；既用 AI 改造工作，也认真过生活。</p>
       </div>
       <form class="tc-prompt" id="tcPrompt" autocomplete="off">
-        <label for="cmd"><span class="dir">zhoujinq:~</span>$</label>
+        <label for="cmd"><span class="dir">zhoujinq@mac ~</span> %</label>
         <span class="tc-field">
           <span id="ghost" aria-hidden="true"></span>
           <input id="cmd" name="cmd" type="text" aria-label="在此输入命令，回车执行"
@@ -486,7 +533,7 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
       </form>
     </div>
 
-    <p class="tc-help rise d5">可以试试输入 <b>about</b> 后回车</p>
+    <p class="tc-help rise d5">输入 <b>about</b> / <b>projects</b> / <b>life</b>，回车看看</p>
   </header>
 
   <main id="main" tabindex="-1">
@@ -563,56 +610,64 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
       <span class="tip"><span class="t-open">点开看经历</span><span class="t-close">收起</span></span>
     </summary>
     <div class="about">
-      <p>通信工程科班出身（东南大学），做过 CV 算法，在马来西亚和法国常驻卖过货。现在是星尘智能的海外大科研销售经理，卖绳驱轮式双臂人形机器人整机 —— 但客户买的其实不是机器人，是一台能跑自己算法的载体。</p>
-      <p>所以我每天干的活，一半是商务，一半是技术：把「我要做 XX 研究」翻译成可交付范围，判断现有 SDK 撑不撑得住、哪部分必须二次开发、哪些能力得算法团队补。这件事和卖 API 是同一件事 —— 先把能力边界说清楚，再谈钱。</p>
-      <p>工作之外，我把 AI 真的接进了自己的动作里：七个每天在用的自建工具，公司全员 Token 消耗排进前十。不是「关注 AI」，是靠它干活。</p>
-      <p class="aside">4 个月、8 台整机、307 万（已回款），15 家客户进样机、4 家签约。这些数字只说这一次 —— 它解释不了我在做什么。</p>
+      <p>我是周锦全，一个 AI Native 时代的实践者、成长者、学徒。Projects 对我来说不是奖杯，更像是好奇心留下的学习痕迹：想知道一件事能不能自己做出来，就去学、去试、去把它跑起来。</p>
+      <p>东南大学通信工程毕业。联洲tplink海外技术型销售。星尘智能海外大科研销售经理。</p>
+      <p>早期做过 CV 算法，后来转向海外技术型销售。现在的工作一半商务、一半技术：把科研客户想做的研究翻译成可交付范围，也要判断现有 SDK 的边界、二次开发和算法补能力的部分。</p>
+      <p>开始用 AI 改造自己的工作，不是为了追一个热门标签，而是因为每天都遇到真实的重复动作：整理客户与沟通记录、安排学习、汇总信息、减少反复决策。于是我把它们一个个做成自己能用的工具，也在做的过程中继续学。</p>
     </div>
   </details>
 
   <section id="life">
-    <div class="sec-head"><h2>Life</h2><span class="cnt">离线模式</span></div>
+    <div class="sec-head"><h2>Life</h2><span class="cnt">一点坚持，一点热爱</span></div>
 
     <div class="streak-grid">
-      <div class="streak" data-streak="duolingo">
-        <svg class="fl" viewBox="0 0 9 11" shape-rendering="crispEdges" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><g fill="#58cc02"><rect x="4" y="0" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="5" y="1" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="5" y="2" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="6" y="3" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="2" y="5" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="5" y="5" width="1" height="1"/><rect x="6" y="5" width="1" height="1"/><rect x="7" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="3" y="6" width="1" height="1"/><rect x="4" y="6" width="1" height="1"/><rect x="5" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="7" y="6" width="1" height="1"/><rect x="1" y="7" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/><rect x="6" y="7" width="1" height="1"/><rect x="7" y="7" width="1" height="1"/><rect x="1" y="8" width="1" height="1"/><rect x="2" y="8" width="1" height="1"/><rect x="3" y="8" width="1" height="1"/><rect x="4" y="8" width="1" height="1"/><rect x="5" y="8" width="1" height="1"/><rect x="6" y="8" width="1" height="1"/><rect x="2" y="9" width="1" height="1"/><rect x="3" y="9" width="1" height="1"/><rect x="4" y="9" width="1" height="1"/><rect x="5" y="9" width="1" height="1"/><rect x="3" y="10" width="1" height="1"/><rect x="4" y="10" width="1" height="1"/></g><g fill="#a6e86f"><rect x="3" y="6" width="1" height="1"/><rect x="4" y="6" width="1" height="1"/><rect x="5" y="6" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/><rect x="3" y="8" width="1" height="1"/><rect x="4" y="8" width="1" height="1"/><rect x="5" y="8" width="1" height="1"/><rect x="3" y="9" width="1" height="1"/><rect x="4" y="9" width="1" height="1"/></g></svg>
-        <div class="streak-body">
-          <div class="streak-num"><span class="num" data-days>—</span><span class="unit">天</span></div>
-          <div class="streak-meta"><b>多邻国</b><span data-since>数据同步中</span></div>
+      <figure class="streak" data-streak="duolingo">
+        <div class="streak-widget">
+          <img src="assets/duolingo-widget.jpg" alt="多邻国 2D 小组件与猫头鹰角色" loading="lazy" decoding="async">
+          <div class="streak-rewrite" aria-label="多邻国连胜天数">
+            <span class="num" data-days>1920</span><span class="unit">天</span>
+          </div>
         </div>
-      </div>
-      <div class="streak" data-streak="momo">
-        <svg class="fl" viewBox="0 0 9 11" shape-rendering="crispEdges" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><g fill="#d97706"><rect x="4" y="0" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="5" y="1" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="5" y="2" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="6" y="3" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="2" y="5" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="5" y="5" width="1" height="1"/><rect x="6" y="5" width="1" height="1"/><rect x="7" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="3" y="6" width="1" height="1"/><rect x="4" y="6" width="1" height="1"/><rect x="5" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="7" y="6" width="1" height="1"/><rect x="1" y="7" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/><rect x="6" y="7" width="1" height="1"/><rect x="7" y="7" width="1" height="1"/><rect x="1" y="8" width="1" height="1"/><rect x="2" y="8" width="1" height="1"/><rect x="3" y="8" width="1" height="1"/><rect x="4" y="8" width="1" height="1"/><rect x="5" y="8" width="1" height="1"/><rect x="6" y="8" width="1" height="1"/><rect x="2" y="9" width="1" height="1"/><rect x="3" y="9" width="1" height="1"/><rect x="4" y="9" width="1" height="1"/><rect x="5" y="9" width="1" height="1"/><rect x="3" y="10" width="1" height="1"/><rect x="4" y="10" width="1" height="1"/></g><g fill="#fbbf6b"><rect x="3" y="6" width="1" height="1"/><rect x="4" y="6" width="1" height="1"/><rect x="5" y="6" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/><rect x="3" y="8" width="1" height="1"/><rect x="4" y="8" width="1" height="1"/><rect x="5" y="8" width="1" height="1"/><rect x="3" y="9" width="1" height="1"/><rect x="4" y="9" width="1" height="1"/></g></svg>
-        <div class="streak-body">
-          <div class="streak-num"><span class="num" data-days>—</span><span class="unit">天</span></div>
-          <div class="streak-meta"><b>墨墨背单词</b><span data-since>数据同步中</span></div>
+        <figcaption class="streak-caption"><span class="brand-dot"></span><b>多邻国</b><span class="auto" data-since>北京时间每天 0 点自动 +1</span></figcaption>
+      </figure>
+
+      <figure class="streak" data-streak="momo">
+        <div class="streak-widget">
+          <img src="assets/momo-widget.jpg" alt="墨墨背单词 2D 小组件与猫头鹰角色" loading="lazy" decoding="async">
+          <div class="streak-rewrite" aria-label="墨墨背单词连胜天数">
+            <span class="num" data-days>1493</span><span class="unit">天</span>
+          </div>
         </div>
-      </div>
+        <figcaption class="streak-caption"><span class="brand-dot"></span><b>墨墨背单词</b><span class="auto" data-since>北京时间每天 0 点自动 +1</span></figcaption>
+      </figure>
     </div>
 
-    <h3 class="sub-h">下班以后</h3>
+    <h3 class="sub-h">生活里，具体喜欢这三件事</h3>
     <div class="life-grid">
       <div class="life">
-        <h3><span class="li">游戏</span></h3>
-        <p>王者荣耀打了几年。街霸 6 是新的——输多赢少，但每次输完都想再来一把，这大概就是格斗游戏的魅力。</p>
+        <h3>王者荣耀</h3>
+        <p>喜欢打王者荣耀，擅长中单打野。</p>
       </div>
       <div class="life">
-        <h3><span class="li">跑步</span></h3>
-        <p>一周一到两次，偶尔拉个长距离。不为配速，只为把脑子里那些没结论的事跑散一点。</p>
+        <h3>番茄小说</h3>
+        <p>喜欢看爽文，偏好番茄小说app的历史题材作品。</p>
       </div>
       <div class="life">
-        <h3><span class="li">阅读</span></h3>
-        <p>番茄小说常客，只看历史。马伯庸和当年明月是让我知道"历史可以很好看"的两个人。</p>
-      </div>
-      <div class="life">
-        <h3><span class="li">音乐</span></h3>
-        <p>陈奕迅是随时能接住情绪的那一个；写得最顺的时候，循环的是芙莉莲的 OST。</p>
+        <h3>陈奕迅</h3>
+        <p>喜欢的歌手是陈奕迅。</p>
       </div>
     </div>
 
+    <details class="more-life">
+      <summary>再多了解一点</summary>
+      <div class="more-body">
+        <p>也玩《街霸6》；跑步一周 1～2 次，偶尔长跑。</p>
+        <p>喜欢的作家有马伯庸、当年明月；听得最多的专辑是《芙莉莲》的 OST。</p>
+      </div>
+    </details>
+
     <div class="vibe">
-      <b>偏 ENFP。</b>好奇心是双刃剑——什么都想试一下，代价是同时开了太多摊子。
-      所以我给自己造了七个工具：不是为了自律，是怕自己忘。
+      <b>偏 ENFP，好奇心强。</b>很多项目不是为了显得厉害，只是想知道：“这件事，我能不能自己做出来？”
     </div>
 
     <div class="two" style="margin-top:22px">
@@ -625,7 +680,7 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
       </div>
       <div class="panel">
         <h3>这个页面</h3>
-        <p>纯静态，无框架，无追踪。输入框是真的能敲命令的——试试 <b>about</b>、<b>ls</b>、<b>life</b>。</p>
+        <p>纯静态，无框架，无追踪。输入框是真的能敲命令的——试试 <b>about</b>、<b>projects</b>、<b>life</b>。</p>
       </div>
     </div>
   </section>
@@ -633,9 +688,9 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
   </main>
 
   <footer>
-    <span class="ps-line"><span class="ps"><span class="dir">zhoujinq:~</span>$</span></span>
+    <span class="ps-line"><span class="ps"><span class="dir">zhoujinq@mac ~</span> %</span></span>
     <span>© 2026 周锦全</span>
-    <span><a class="ver" href="https://github.com/zhoujinq/zhoujinq.github.io/releases/tag/v1.3.0" target="_blank" rel="noopener">v1.3.0</a></span>
+    <span><a class="ver" href="https://github.com/zhoujinq/zhoujinq.github.io/releases/tag/v1.4.0" target="_blank" rel="noopener">v1.4.0</a></span>
     <span class="sp"><a class="totop" href="#main">↑ 回顶</a></span>
   </footer>
 
@@ -720,7 +775,7 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
   <div class="ov-head"><span class="ov-no">05</span><h2 class="ov-name">简历工坊</h2></div>
   <p class="ov-state">自用 · 按需跑</p>
   <p class="ov-one">事实只写一次，按岗位派生版本。</p>
-  <div class="ov-seg"><h4>为什么做</h4><p>投不同岗位要改不同简历，改到第三版就开始前后不一致：一处写 307 万，一处写 300 万；这里说 8 台，那里说 10 台。</p>
+  <div class="ov-seg"><h4>为什么做</h4><p>投不同岗位要改不同简历，改到第三版就开始前后不一致：同一项经历在不同版本里写法不一，数字口径也可能对不上。</p>
         <p>不是不认真，是没有单一事实源。</p></div>
   <div class="ov-seg"><h4>怎么做</h4><ul class="steps">
           <li><b>事实分层：</b>数字、口径、可讲范围先单独存一份，正文只引用，不改写。</li>
@@ -796,7 +851,7 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
     setTimeout(function(){ el.classList.remove("flash"); }, 1400);
   }
   function echo(cmd){
-    push('<span class="ps"><span class="dir">zhoujinq:~</span>$</span> ' + esc(cmd), "cmd", true);
+    push('<span class="ps"><span class="dir">zhoujinq@mac ~</span> %</span> ' + esc(cmd), "cmd", true);
   }
 
   /* ── 覆盖层 ─────────────────────────────────────────── */
@@ -822,7 +877,10 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
     ovBody.scrollTop = 0;
 
     var name = ovBody.querySelector(".ov-name");
-    if (name) document.getElementById("ov").setAttribute("aria-label", name.textContent);
+    if (name){
+      name.id = "ovName";
+      document.getElementById("ov").setAttribute("aria-label", name.textContent);
+    }
   }
 
   function openAt(i){
@@ -869,16 +927,17 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
 
   /* ── 终端 ───────────────────────────────────────────── */
   var ABOUT_LINES = [
-    "在深圳卖人形机器人整机。卖的不是硬件，是一台能跑你自己算法的载体。",
-    "工作之外写工具：不为发布，只为第二天少做一次重复决策。七个，都在这页上面。",
-    '点卡片看详情，比看简历快。'
+    "东南大学通信工程毕业。联洲tplink海外技术型销售。星尘智能海外大科研销售经理。",
+    "早期做过 CV 算法；现在一半商务、一半技术，把科研需求翻译成可交付范围。",
+    "用 AI 改造真实工作，也保留生活里的具体热爱。点击“关于我”可以看完整经历。"
   ];
 
   var CMD = {
-    whoami: { zh:["我是谁"], run:function(){ push("周锦全 —— 一个把 AI 用进销售动作里的人。"); } },
+    whoami: { zh:["我是谁"], run:function(){ push("保持好奇，边学边做；既用 AI 改造工作，也认真过生活。"); } },
     about: { zh:["关于","关于我"], run:function(){
       for (var i=0;i<ABOUT_LINES.length;i++) push(ABOUT_LINES[i]);
     } },
+    projects: { zh:[], run:function(){ push("→ 实践项目：不是奖杯，是好奇心留下的学习痕迹"); jump("projects"); } },
     ls: { zh:["项目","列表"], run:function(){
       var out = [];
       for (var i=0;i<IDS.length;i++){
@@ -892,16 +951,16 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
       push("→ " + esc(NAMES[IDS[n-1]]), "cmd", false);
       openAt(n-1);
     } },
-    life: { zh:["生活","日常"], run:function(){ push("→ 生活：连胜、游戏、跑步、书和歌"); jump("life"); } },
+    life: { zh:["生活","日常"], run:function(){ push("→ 生活：长期连胜、王者荣耀、番茄小说、陈奕迅"); jump("life"); } },
     links: { zh:["链接","联系","contact"], run:function(){ push("→ 联系方式"); jump("contact"); } },
     help: { zh:["帮助"], run:function(){
-      push("whoami　ls　cat 1　about　life　links　clear");
+      push("whoami　about　projects　ls　cat 1　life　links　clear");
       push('<span class="dim">中文也认：关于　项目　看 1　生活　帮助</span>', "dim");
     } },
     clear: { zh:["清屏","cls"], run:function(){
       body.innerHTML = "";
-      push('<span class="ps"><span class="dir">zhoujinq:~</span>$</span> whoami', "cmd");
-      push("周锦全 —— 一个把 AI 用进销售动作里的人。");
+      push('<span class="ps"><span class="dir">zhoujinq@mac ~</span> %</span> whoami', "cmd");
+      push("保持好奇，边学边做；既用 AI 改造工作，也认真过生活。");
     } },
     sudo: { zh:[], run:function(){ push("zhoujinq 不在 sudoers 文件中。此事将被报告。"); } }
   };
@@ -1053,27 +1112,85 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
 })();
 </script>
 
-<script>
-/* 连胜：把截图当天的天数填进 days，base 填截图日期（YYYY-MM-DD）。
-   之后每天自动 +1；days 为 null 时显示「数据同步中」。 */
-(function(){
+<script id="streak-engine">
+/* 连胜：以 2026-11-20 的真实截图值为基准，按北京时间自然日自动 +1。
+   纯函数同时暴露给 Node 测试；浏览器加载后自动挂载。 */
+(function(root){
+  "use strict";
   var S = {
-    duolingo: { days: null, base: '2026-11-20' },
-    momo:     { days: null, base: '2026-11-20' }
+    duolingo: { days: 1920, base: "2026-11-20" },
+    momo:     { days: 1493, base: "2026-11-20" }
   };
   var DAY = 86400000;
-  var today = new Date(); today.setHours(0,0,0,0);
-  document.querySelectorAll('[data-streak]').forEach(function(el){
-    var cfg = S[el.getAttribute('data-streak')]; if(!cfg) return;
-    var numEl = el.querySelector('[data-days]');
-    var sinceEl = el.querySelector('[data-since]');
-    if (cfg.days == null){ numEl.textContent = '—'; sinceEl.textContent = '数据同步中'; return; }
-    var base = new Date(cfg.base + 'T00:00:00');
-    var add = Math.max(0, Math.round((today - base) / DAY));
-    numEl.textContent = (cfg.days + add);
-    sinceEl.textContent = '每天 0 点自动 +1';
-  });
-})();
+  var OFFSET_SHANGHAI = 8 * 3600000;
+
+  function assertDate(date){
+    if (!(date instanceof Date) || isNaN(date.getTime())) throw new Error("date 必须是有效日期");
+  }
+  function calendarParts(date){
+    assertDate(date);
+    var parts = new Intl.DateTimeFormat("en-US", {
+      timeZone:"Asia/Shanghai", year:"numeric", month:"2-digit", day:"2-digit"
+    }).formatToParts(date);
+    var out = {};
+    parts.forEach(function(p){ if (p.type !== "literal") out[p.type] = p.value; });
+    return { y:Number(out.year), m:Number(out.month), d:Number(out.day) };
+  }
+  function dayNumber(date){
+    var p = calendarParts(date);
+    return Math.floor(Date.UTC(p.y, p.m - 1, p.d) / DAY);
+  }
+  function baseDayNumber(base){
+    if (typeof base !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(base)) {
+      throw new Error("base 必须使用 YYYY-MM-DD");
+    }
+    var bits = base.split("-").map(Number);
+    var stamp = Date.UTC(bits[0], bits[1] - 1, bits[2]);
+    var check = new Date(stamp);
+    if (check.getUTCFullYear() !== bits[0] || check.getUTCMonth() + 1 !== bits[1] || check.getUTCDate() !== bits[2]) {
+      throw new Error("base 不是有效日期");
+    }
+    return Math.floor(stamp / DAY);
+  }
+  function daysAt(cfg, now){
+    if (!cfg || typeof cfg.days !== "number" || !isFinite(cfg.days) || cfg.days < 0 || Math.floor(cfg.days) !== cfg.days) {
+      throw new Error("days 必须是非负整数");
+    }
+    now = now || new Date();
+    var add = Math.max(0, dayNumber(now) - baseDayNumber(cfg.base));
+    return cfg.days + add;
+  }
+  function msToNextMidnight(now){
+    now = now || new Date();
+    var p = calendarParts(now);
+    var next = Date.UTC(p.y, p.m - 1, p.d + 1) - OFFSET_SHANGHAI;
+    return next - now.getTime();
+  }
+  function render(doc, now){
+    doc.querySelectorAll("[data-streak]").forEach(function(el){
+      var cfg = S[el.getAttribute("data-streak")];
+      if (!cfg) return;
+      el.querySelector("[data-days]").textContent = String(daysAt(cfg, now));
+      el.querySelector("[data-since]").textContent = "北京时间每天 0 点自动 +1";
+    });
+  }
+  function mount(doc){
+    function tick(){
+      render(doc, new Date());
+      root.setTimeout(tick, msToNextMidnight(new Date()) + 25);
+    }
+    render(doc, new Date());
+    root.setTimeout(tick, msToNextMidnight(new Date()) + 25);
+    doc.addEventListener("visibilitychange", function(){
+      if (!doc.hidden) render(doc, new Date());
+    });
+  }
+
+  var api = { config:S, daysAt:daysAt, msToNextMidnight:msToNextMidnight, render:render, mount:mount };
+  if (typeof module !== "undefined" && module.exports) module.exports = api;
+  if (root) root.Streak = api;
+  if (typeof document !== "undefined") mount(document);
+})(typeof window !== "undefined" ? window : null);
 </script>
 </body>
 </html>

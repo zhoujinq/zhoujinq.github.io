@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>响应式验收</title>
+  <style>
+    html,body{margin:0;background:#222}
+    iframe{display:block;width:390px;height:653px;border:0;background:#f7f3ea;transform-origin:top left}
+  </style>
+</head>
+<body>
+  <iframe id="phone" src="../index.html" title="个人主页响应式验收"></iframe>
+  <script>
+    const params = new URLSearchParams(location.search);
+    const frame = document.getElementById('phone');
+    frame.style.width = (Number(params.get('w')) || 390) + 'px';
+    frame.style.height = (Number(params.get('h')) || 653) + 'px';
+    frame.style.transform = 'scale(' + (Number(params.get('scale')) || 1) + ')';
+  </script>
+</body>
+</html>
