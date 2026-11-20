@@ -408,6 +408,36 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
   .wrap::before{transform:none;animation:none}
   .wrap::after{opacity:1;animation:none}
 }
+
+  /* ── Life：连胜 ── */
+  .streak-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:26px}
+  @media(max-width:620px){.streak-grid{grid-template-columns:1fr}}
+  .streak{position:relative;display:flex;align-items:center;gap:18px;padding:20px 22px;background:var(--card);border:1px solid var(--line);border-radius:4px;overflow:hidden}
+  .streak::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.45;
+    background-image:repeating-linear-gradient(0deg,rgba(96,76,44,.05) 0 1px,transparent 1px 6px)}
+  .streak .fl{width:52px;height:64px;flex:none;image-rendering:pixelated}
+  .streak-body{position:relative;z-index:1}
+  .streak-num{display:flex;align-items:baseline;gap:6px}
+  .streak-num .num{font-family:var(--mono);font-size:46px;line-height:.95;font-weight:700;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+  .streak-num .unit{font-family:var(--mono);font-size:13px;color:var(--muted)}
+  .streak-meta{margin-top:7px;display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center;font-size:12.5px;color:var(--muted);font-family:var(--mono)}
+  .streak-meta b{color:var(--ink-2);font-weight:600}
+
+  /* ── Life：兴趣 ── */
+  .sub-h{font-size:14px;font-weight:600;color:var(--ink-2);margin:30px 0 14px;letter-spacing:.02em}
+  .sub-h::before{content:"// ";color:var(--faint);font-family:var(--mono)}
+  .life-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  @media(max-width:680px){.life-grid{grid-template-columns:1fr}}
+  .life{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:16px 18px;transition:border-color .2s var(--ease),transform .2s var(--ease)}
+  .life:hover{border-color:var(--accent-line);transform:translateY(-2px)}
+  .life h3{margin:0 0 8px;font-size:13px}
+  .life h3 .li{display:inline-block;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;color:var(--accent);
+    background:var(--accent-soft);border:1px solid var(--accent-line);border-radius:2px;padding:2px 7px}
+  .life p{margin:0;font-size:13.5px;line-height:1.8;color:var(--ink-2)}
+  .vibe{margin-top:16px;padding:16px 18px;border-left:2px solid var(--accent);background:var(--accent-soft);
+    font-size:14px;line-height:1.9;color:var(--ink-2);border-radius:0 4px 4px 0}
+  .vibe b{color:var(--ink)}
+  @media(max-width:620px){.streak-num .num{font-size:38px}.streak{padding:16px 18px;gap:14px}.streak .fl{width:44px;height:54px}}
 </style>
 <noscript><style>
   .card{opacity:1!important;transform:none!important}
@@ -436,7 +466,7 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
     <nav class="nav-block rise d6" aria-label="页面导航">
       <a href="#about"><i></i>关于</a>
       <a href="#projects"><i></i>项目</a>
-      <a href="#resume"><i></i>简历</a>
+      <a href="#life"><i></i>生活</a>
     </nav>
 
     <div class="term-card rise d4" id="shell">
@@ -540,20 +570,62 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
     </div>
   </details>
 
-  <section id="resume">
-    <div class="sec-head"><h2>Resume &amp; Contact</h2></div>
-    <div class="two">
-      <div class="panel">
-        <h3>Resume</h3>
-        <p>投什么岗位派生出什么版本，母版只有一份。出片前跑九项门禁，不过不交付。</p>
-        <a class="btn" href="./resume.pdf" target="_blank" rel="noopener">打开简历 PDF ↗</a>
+  <section id="life">
+    <div class="sec-head"><h2>Life</h2><span class="cnt">离线模式</span></div>
+
+    <div class="streak-grid">
+      <div class="streak" data-streak="duolingo">
+        <svg class="fl" viewBox="0 0 9 11" shape-rendering="crispEdges" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><g fill="#58cc02"><rect x="4" y="0" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="5" y="1" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="5" y="2" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="6" y="3" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="2" y="5" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="5" y="5" width="1" height="1"/><rect x="6" y="5" width="1" height="1"/><rect x="7" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="3" y="6" width="1" height="1"/><rect x="4" y="6" width="1" height="1"/><rect x="5" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="7" y="6" width="1" height="1"/><rect x="1" y="7" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/><rect x="6" y="7" width="1" height="1"/><rect x="7" y="7" width="1" height="1"/><rect x="1" y="8" width="1" height="1"/><rect x="2" y="8" width="1" height="1"/><rect x="3" y="8" width="1" height="1"/><rect x="4" y="8" width="1" height="1"/><rect x="5" y="8" width="1" height="1"/><rect x="6" y="8" width="1" height="1"/><rect x="2" y="9" width="1" height="1"/><rect x="3" y="9" width="1" height="1"/><rect x="4" y="9" width="1" height="1"/><rect x="5" y="9" width="1" height="1"/><rect x="3" y="10" width="1" height="1"/><rect x="4" y="10" width="1" height="1"/></g><g fill="#a6e86f"><rect x="3" y="6" width="1" height="1"/><rect x="4" y="6" width="1" height="1"/><rect x="5" y="6" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/><rect x="3" y="8" width="1" height="1"/><rect x="4" y="8" width="1" height="1"/><rect x="5" y="8" width="1" height="1"/><rect x="3" y="9" width="1" height="1"/><rect x="4" y="9" width="1" height="1"/></g></svg>
+        <div class="streak-body">
+          <div class="streak-num"><span class="num" data-days>—</span><span class="unit">天</span></div>
+          <div class="streak-meta"><b>多邻国</b><span data-since>数据同步中</span></div>
+        </div>
       </div>
+      <div class="streak" data-streak="momo">
+        <svg class="fl" viewBox="0 0 9 11" shape-rendering="crispEdges" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><g fill="#d97706"><rect x="4" y="0" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="5" y="1" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="5" y="2" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="6" y="3" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="2" y="5" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="5" y="5" width="1" height="1"/><rect x="6" y="5" width="1" height="1"/><rect x="7" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="3" y="6" width="1" height="1"/><rect x="4" y="6" width="1" height="1"/><rect x="5" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="7" y="6" width="1" height="1"/><rect x="1" y="7" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/><rect x="6" y="7" width="1" height="1"/><rect x="7" y="7" width="1" height="1"/><rect x="1" y="8" width="1" height="1"/><rect x="2" y="8" width="1" height="1"/><rect x="3" y="8" width="1" height="1"/><rect x="4" y="8" width="1" height="1"/><rect x="5" y="8" width="1" height="1"/><rect x="6" y="8" width="1" height="1"/><rect x="2" y="9" width="1" height="1"/><rect x="3" y="9" width="1" height="1"/><rect x="4" y="9" width="1" height="1"/><rect x="5" y="9" width="1" height="1"/><rect x="3" y="10" width="1" height="1"/><rect x="4" y="10" width="1" height="1"/></g><g fill="#fbbf6b"><rect x="3" y="6" width="1" height="1"/><rect x="4" y="6" width="1" height="1"/><rect x="5" y="6" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/><rect x="3" y="8" width="1" height="1"/><rect x="4" y="8" width="1" height="1"/><rect x="5" y="8" width="1" height="1"/><rect x="3" y="9" width="1" height="1"/><rect x="4" y="9" width="1" height="1"/></g></svg>
+        <div class="streak-body">
+          <div class="streak-num"><span class="num" data-days>—</span><span class="unit">天</span></div>
+          <div class="streak-meta"><b>墨墨背单词</b><span data-since>数据同步中</span></div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="sub-h">下班以后</h3>
+    <div class="life-grid">
+      <div class="life">
+        <h3><span class="li">游戏</span></h3>
+        <p>王者荣耀打了几年。街霸 6 是新的——输多赢少，但每次输完都想再来一把，这大概就是格斗游戏的魅力。</p>
+      </div>
+      <div class="life">
+        <h3><span class="li">跑步</span></h3>
+        <p>一周一到两次，偶尔拉个长距离。不为配速，只为把脑子里那些没结论的事跑散一点。</p>
+      </div>
+      <div class="life">
+        <h3><span class="li">阅读</span></h3>
+        <p>番茄小说常客，只看历史。马伯庸和当年明月是让我知道"历史可以很好看"的两个人。</p>
+      </div>
+      <div class="life">
+        <h3><span class="li">音乐</span></h3>
+        <p>陈奕迅是随时能接住情绪的那一个；写得最顺的时候，循环的是芙莉莲的 OST。</p>
+      </div>
+    </div>
+
+    <div class="vibe">
+      <b>偏 ENFP。</b>好奇心是双刃剑——什么都想试一下，代价是同时开了太多摊子。
+      所以我给自己造了七个工具：不是为了自律，是怕自己忘。
+    </div>
+
+    <div class="two" style="margin-top:22px">
       <div class="panel" id="contact">
         <h3>Contact</h3>
         <dl class="links">
           <dt>邮箱</dt><dd><a href="mailto:2336097716@qq.com">2336097716@qq.com</a><button class="copy" type="button" data-copy="2336097716@qq.com">复制</button></dd>
           <dt>GitHub</dt><dd><a href="https://github.com/zhoujinq" target="_blank" rel="noopener">github.com/zhoujinq</a></dd>
         </dl>
+      </div>
+      <div class="panel">
+        <h3>这个页面</h3>
+        <p>纯静态，无框架，无追踪。输入框是真的能敲命令的——试试 <b>about</b>、<b>ls</b>、<b>life</b>。</p>
       </div>
     </div>
   </section>
@@ -563,7 +635,7 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
   <footer>
     <span class="ps-line"><span class="ps"><span class="dir">zhoujinq:~</span>$</span></span>
     <span>© 2026 周锦全</span>
-    <span><a class="ver" href="https://github.com/zhoujinq/zhoujinq.github.io/releases/tag/v1.2.0" target="_blank" rel="noopener">v1.2.0</a></span>
+    <span><a class="ver" href="https://github.com/zhoujinq/zhoujinq.github.io/releases/tag/v1.3.0" target="_blank" rel="noopener">v1.3.0</a></span>
     <span class="sp"><a class="totop" href="#main">↑ 回顶</a></span>
   </footer>
 
@@ -820,11 +892,11 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
       push("→ " + esc(NAMES[IDS[n-1]]), "cmd", false);
       openAt(n-1);
     } },
-    resume: { zh:["简历"], run:function(){ push('打开 <a href="./resume.pdf" target="_blank" rel="noopener">resume.pdf</a>'); window.open("./resume.pdf","_blank"); } },
+    life: { zh:["生活","日常"], run:function(){ push("→ 生活：连胜、游戏、跑步、书和歌"); jump("life"); } },
     links: { zh:["链接","联系","contact"], run:function(){ push("→ 联系方式"); jump("contact"); } },
     help: { zh:["帮助"], run:function(){
-      push("whoami　ls　cat 1　about　resume　links　clear");
-      push('<span class="dim">中文也认：关于　项目　看 1　简历　帮助</span>', "dim");
+      push("whoami　ls　cat 1　about　life　links　clear");
+      push('<span class="dim">中文也认：关于　项目　看 1　生活　帮助</span>', "dim");
     } },
     clear: { zh:["清屏","cls"], run:function(){
       body.innerHTML = "";
@@ -978,6 +1050,29 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
   form.classList.add("unfocused");
   window.addEventListener("resize", sync);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(sync);
+})();
+</script>
+
+<script>
+/* 连胜：把截图当天的天数填进 days，base 填截图日期（YYYY-MM-DD）。
+   之后每天自动 +1；days 为 null 时显示「数据同步中」。 */
+(function(){
+  var S = {
+    duolingo: { days: null, base: '2026-11-20' },
+    momo:     { days: null, base: '2026-11-20' }
+  };
+  var DAY = 86400000;
+  var today = new Date(); today.setHours(0,0,0,0);
+  document.querySelectorAll('[data-streak]').forEach(function(el){
+    var cfg = S[el.getAttribute('data-streak')]; if(!cfg) return;
+    var numEl = el.querySelector('[data-days]');
+    var sinceEl = el.querySelector('[data-since]');
+    if (cfg.days == null){ numEl.textContent = '—'; sinceEl.textContent = '数据同步中'; return; }
+    var base = new Date(cfg.base + 'T00:00:00');
+    var add = Math.max(0, Math.round((today - base) / DAY));
+    numEl.textContent = (cfg.days + add);
+    sinceEl.textContent = '每天 0 点自动 +1';
+  });
 })();
 </script>
 </body>
