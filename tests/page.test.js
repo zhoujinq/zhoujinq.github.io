@@ -40,35 +40,37 @@ test('首屏保留像素名字与三行 80～100 字简介，终端默认不输�
   assert.ok(positions.every((position, index) => index === 0 || position > positions[index - 1]), '四大块顺序不能改变');
 });
 
-test('项目区是三行：3 张主卡、3 张带图次卡、3 页折叠文字', () => {
+test('项目区只有两行：3 张主卡，第二行三组前卡后夹页', () => {
   assert.equal((html.match(/<article class="card" data-id="p\d"/g) || []).length, 3);
   assert.equal((html.match(/<article class="card secondary" data-id="p\d"/g) || []).length, 3);
   assert.equal((html.match(/<article class="card folded" data-id="p\d"/g) || []).length, 3);
   assert.doesNotMatch(html, /<details class="project-book"/, '项目书应已删除');
+  assert.doesNotMatch(html, /class="shelf"|class="folder-grid"|还有 3 个 · 折起来放着/, '不能另起第三行');
   const order = ['销售助手 · 客户管理系统', 'AI 模型斩杀线', 'Personal AI · 会成长的个人助手',
     'API 商机雷达', '个人理财投资助手', '日语 N1 备考教练', '破万卷', '外卖吃啥', '简历工坊 Pro'];
   order.forEach((name, i) => {
     assert.ok(html.includes(`data-id="p${i + 1}" data-name="${name}"`), `第 ${i + 1} 个项目应为 ${name}`);
   });
   assert.match(html, /9 个项目 · 都能点开/);
-  assert.match(html, /还有 3 个 · 折起来放着/);
   assert.doesNotMatch(html, /<span class="dot"><\/span>在线/, '卡片不再标在线状态');
   assert.doesNotMatch(html, /虚构快照|数字全虚构/, '不再出现虚构快照类状态文字');
 });
 
-test('次卡带图不写副标题，折叠页只露标题和一行小字', () => {
-  const secondary = between('<div class="grid secondary-grid">', '<div class="shelf">');
+test('04～06 是小图卡，07～09 分别夹在对应卡片后面', () => {
+  const secondary = between('<div class="grid secondary-grid">', '  </section>\n  <section id="about">');
   const subCards = secondary.match(/<article class="card secondary[\s\S]*?<\/article>/g) || [];
+  const slips = secondary.match(/<article class="card folded[\s\S]*?<\/article>/g) || [];
   assert.equal(subCards.length, 3);
+  assert.equal(slips.length, 3, '三张夹页必须和次卡处于同一网格，不能另起一行');
   for (const card of subCards) {
     assert.match(card, /<div class="media"><img src="assets\/shot-[a-z0-9]+\.webp"/, '次卡必须有图');
     assert.doesNotMatch(card, /f-sub/, '次卡不再加副标题');
   }
-  assert.match(html, /\.card\.secondary \.media\{aspect-ratio:16\/9\}/, '次卡应比主卡矮');
+  assert.match(html, /\.card\.secondary \.media\{aspect-ratio:16\/8\}/, '次卡图片应明显小于主卡');
   assert.match(html, /\.folded \.media\{display:none\}/, '折叠页不直接展示截图');
-  const shelf = between('<div class="shelf">', '<section id="about">');
-  const slips = shelf.match(/<article class="card folded[\s\S]*?<\/article>/g) || [];
-  assert.equal(slips.length, 3);
+  for (const [front, back, column] of [[4, 7, 1], [5, 8, 2], [6, 9, 3]]) {
+    assert.match(html, new RegExp(`\\.card\\.secondary\\[data-id="p${front}"\\],\\s*\\.card\\.folded\\[data-id="p${back}"\\]\\{grid-column:${column};grid-row:1\\}`), `p${back} 应夹在 p${front} 后面`);
+  }
   for (const slip of slips) {
     assert.match(slip, /<div class="media"><img src="assets\/shot-[a-z0-9]+\.webp"/, '折叠页仍要自带截图供详情使用');
     assert.match(slip, /<span class="f-sub">[^<]{6,}<\/span>/, '折叠页必须有一行小字副标题');
@@ -162,6 +164,6 @@ test('页脚只保留版权、版本和回顶，版本与本次发布一致', ()
   assert.doesNotMatch(footer, /这个页面|@mac|纯静态|无追踪/);
   assert.doesNotMatch(html, /这个页面\s*纯静态|id="contact"|class="contact-panel"|data-copy/);
   assert.match(html, /<header[\s\S]*?2336097716@qq\.com[\s\S]*?github\.com\/zhoujinq[\s\S]*?<\/header>/);
-  assert.match(footer, /<span class="ver">v2\.5\.0<\/span>/);
+  assert.match(footer, /<span class="ver">v2\.6\.0<\/span>/);
   assert.doesNotMatch(footer, /github\.com/, '页脚不再外链代码仓库');
 });

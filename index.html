@@ -304,52 +304,76 @@ summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-
 .card-foot .open{margin-left:auto;color:var(--faint)}
 
 
-/* ── 第二行：三个带图的次卡，比主卡矮一点 ───────────────── */
-.secondary-grid{margin-top:22px}
-.card.secondary .media{aspect-ratio:16/9}
-.card.secondary .card-meta{padding:12px 14px 5px}
-.card.secondary .card-name{font-size:15px;min-height:0;-webkit-line-clamp:1}
-.card.secondary .card-foot{padding:0 14px 12px;font-size:11.5px}
-
-/* ── 第三行：三个折起来的文字页，标题加一行小字 ───────────── */
-.shelf{margin-top:26px}
-.shelf-head{display:flex;align-items:baseline;gap:12px;margin-bottom:14px;font-size:12px;letter-spacing:.06em;color:var(--muted)}
-.shelf-title{color:var(--ink-3)}
-.shelf-hint{margin-left:auto;font-size:11.5px;color:var(--faint)}
-.folder-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.folded .media{display:none}
-.card.folded{position:relative;z-index:0;border-radius:6px;overflow:visible}
-.card.folded::before{
-  content:"";position:absolute;inset:5px -3px -5px 7px;z-index:-1;border:1px solid #e0d4bf;border-radius:6px;
-  background:#f0e7d6;transform:rotate(-1.7deg);transition:transform .25s var(--ease);
+/* ── 第二行：04–06 小图卡，07–09 分别夹在后面 ───────────── */
+.tablet-br{display:none}
+.featured-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.secondary-grid{
+  margin-top:24px;grid-template-columns:repeat(3,minmax(0,1fr));padding-bottom:62px;
 }
+.card.secondary{position:relative;z-index:2;width:calc(100% - 8px);align-self:start}
+.card.secondary .media{aspect-ratio:16/8}
+.card.secondary .card-meta{padding:11px 14px 5px}
+.card.secondary .card-name{font-size:15px;min-height:0;-webkit-line-clamp:1}
+.card.secondary .card-foot{padding:0 14px 11px;font-size:11.5px}
+
+.card.secondary[data-id="p4"],.card.folded[data-id="p7"]{grid-column:1;grid-row:1}
+.card.secondary[data-id="p5"],.card.folded[data-id="p8"]{grid-column:2;grid-row:1}
+.card.secondary[data-id="p6"],.card.folded[data-id="p9"]{grid-column:3;grid-row:1}
+.folded .media{display:none}
+.card.folded{
+  position:relative;z-index:1;align-self:end;width:calc(100% - 8px);height:62px;margin-left:8px;
+  border:0;border-radius:0;background:transparent;overflow:visible;box-shadow:none;
+  transform:translateY(78px);
+}
+.card.folded.in{transform:translateY(62px)}
+.card.folded:hover{border-color:transparent;box-shadow:none}
+.card.folded::before,.card.folded::after{
+  content:"";position:absolute;left:0;right:0;top:-64px;bottom:0;pointer-events:none;
+  border:1px solid #d9cbb6;border-radius:8px;background:#f2e8d6;
+  box-shadow:0 12px 24px -20px rgba(43,36,24,.85);
+  transform:rotate(.35deg);transition:transform .25s var(--ease),background .2s var(--ease),border-color .2s var(--ease);
+}
+.card.folded::before{z-index:-1}
+.card.folded::after{z-index:-2;left:5px;right:-3px;top:-59px;bottom:-4px;background:#e7dbc5;transform:rotate(-.65deg)}
 .card.folded .card-btn{
-  display:block;width:100%;text-align:left;border:1px solid var(--line);border-radius:6px;
-  background:#fbf6ec;padding:11px 14px 12px;box-shadow:0 8px 18px -16px rgba(43,36,24,.8);
-  transition:transform .25s var(--ease),background .2s var(--ease),border-color .2s var(--ease);
+  position:relative;display:flex;flex-direction:column;justify-content:center;width:100%;height:62px;
+  padding:6px 14px 8px;text-align:left;border:0;background:transparent;border-radius:0 0 8px 8px;
+  transition:transform .25s var(--ease);
 }
 .card.folded .f-line{display:flex;align-items:center;gap:8px;width:100%;min-width:0}
-.card.folded .f-no{font-size:11px;color:var(--faint);letter-spacing:.06em;flex:none}
+.card.folded .f-no{font-size:10.5px;color:var(--faint);letter-spacing:.06em;flex:none}
 .card.folded .card-name{
-  flex:1;min-width:0;margin:0;font-size:12.5px;font-weight:400;line-height:1.5;letter-spacing:0;
+  flex:1;min-width:0;margin:0;font-size:12.5px;font-weight:700;line-height:1.5;letter-spacing:0;
   min-height:0;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink-2);
 }
 .card.folded .f-open{font-size:12px;color:var(--faint);flex:none}
 .card.folded .f-sub{display:block;margin-top:3px;font-size:11px;line-height:1.6;color:var(--muted)}
-.card.folded:hover::before,.card.folded:focus-within::before{transform:rotate(-3deg) translateY(-3px)}
-.card.folded:hover .card-btn,.card.folded:focus-within .card-btn{
-  transform:translateY(-2px);background:#fffdf8;border-color:var(--accent-line);
-}
+.card.folded:hover::before,.card.folded:focus-within::before{transform:rotate(.7deg) translateY(3px);background:#f8efdf;border-color:var(--accent-line)}
+.card.folded:hover::after,.card.folded:focus-within::after{transform:rotate(-.9deg) translateY(3px)}
+.card.folded:hover .card-btn,.card.folded:focus-within .card-btn{transform:translateY(3px)}
 .card.folded .card-btn:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+@media (min-width:721px) and (max-width:900px){
+  .featured-grid,.secondary-grid{gap:18px}
+  .tablet-br{display:initial}
+  .featured-grid .card-meta{padding:12px 12px 6px;gap:7px}
+  .featured-grid .card-name{font-size:15px;line-height:1.4;min-height:2.8em}
+  .featured-grid .card-foot{padding-left:12px;padding-right:12px}
+  .card.secondary .card-name{font-size:14px}
+  .card .card-foot .open{display:none}
+  .card-foot{white-space:nowrap;font-size:11px}
+  .card.secondary .card-foot{font-size:10.5px}
+}
 @media (max-width:720px){
+  .featured-grid{grid-template-columns:1fr;gap:16px}
+  .secondary-grid{grid-template-columns:1fr;row-gap:84px}
+  .card.secondary[data-id="p5"],.card.folded[data-id="p8"]{grid-column:1;grid-row:2}
+  .card.secondary[data-id="p6"],.card.folded[data-id="p9"]{grid-column:1;grid-row:3}
   .card.secondary .media img{object-position:left 15% !important}
-  .folder-grid{grid-template-columns:1fr;gap:16px}
-  .shelf-head{flex-wrap:wrap;row-gap:4px}
-  .shelf-hint{margin-left:0}
 }
 @media (prefers-reduced-motion:reduce){
-  .card.folded,.card.folded::before,.card.folded .card-btn{transition:none}
-  .card.folded:hover::before,.card.folded:focus-within::before{transform:rotate(-1.7deg)}
+  .card.folded,.card.folded::before,.card.folded::after,.card.folded .card-btn{transition:none}
+  .card.folded:hover::before,.card.folded:focus-within::before{transform:rotate(.35deg)}
+  .card.folded:hover::after,.card.folded:focus-within::after{transform:rotate(-.65deg)}
   .card.folded:hover .card-btn,.card.folded:focus-within .card-btn{transform:none}
 }
 
@@ -700,7 +724,7 @@ body{background-image:none}
       <article class="card" data-id="p1" data-name="销售助手 · 客户管理系统">
         <button class="card-btn" type="button" aria-label="打开 销售助手 · 客户管理系统 详情">
           <div class="media"><img src="assets/shot-sales.svg" style="object-position:center" alt="销售助手的工作流结构预览" loading="lazy" decoding="async"></div>
-          <div class="card-meta"><span class="card-no">01</span><h3 class="card-name">销售助手 · 客户管理系统</h3></div>
+          <div class="card-meta"><span class="card-no">01</span><h3 class="card-name">销售助手 ·<br class="tablet-br"> 客户管理系统</h3></div>
           <div class="card-foot">6 家客户 · 8 条跟进<span class="open">点开 →</span></div>
         </button>
       </article>
@@ -741,32 +765,27 @@ body{background-image:none}
           <div class="card-foot">51 套真题 · 每天一小时<span class="open">点开 →</span></div>
         </button>
       </article>
-    </div>
-    <div class="shelf">
-      <div class="shelf-head"><span class="shelf-title">还有 3 个 · 折起来放着</span><span class="shelf-hint">点开一样有截图和网址</span></div>
-      <div class="folder-grid">
-        <article class="card folded" data-id="p7" data-name="破万卷">
-          <button class="card-btn" type="button" aria-label="打开 破万卷 详情">
-            <div class="media"><img src="assets/shot-powan.webp" alt="破万卷界面预览" loading="lazy" decoding="async"></div>
-            <span class="f-line"><span class="f-no">07</span><span class="card-name">破万卷</span><span class="f-open">↗</span></span>
-            <span class="f-sub">AI 读一百条，你读一篇</span>
-          </button>
-        </article>
-        <article class="card folded" data-id="p8" data-name="外卖吃啥">
-          <button class="card-btn" type="button" aria-label="打开 外卖吃啥 详情">
-            <div class="media"><img src="assets/shot-eat.webp" alt="外卖吃啥界面预览" loading="lazy" decoding="async"></div>
-            <span class="f-line"><span class="f-no">08</span><span class="card-name">外卖吃啥</span><span class="f-open">↗</span></span>
-            <span class="f-sub">今天别纠结，转一下就开饭</span>
-          </button>
-        </article>
-        <article class="card folded" data-id="p9" data-name="简历工坊 Pro">
-          <button class="card-btn" type="button" aria-label="打开 简历工坊 Pro 详情">
-            <div class="media"><img src="assets/shot-resume.webp" alt="简历工坊 Pro界面预览" loading="lazy" decoding="async"></div>
-            <span class="f-line"><span class="f-no">09</span><span class="card-name">简历工坊 Pro</span><span class="f-open">↗</span></span>
-            <span class="f-sub">先统一事实，再谈版式</span>
-          </button>
-        </article>
-      </div>
+      <article class="card folded" data-id="p7" data-name="破万卷">
+        <button class="card-btn" type="button" aria-label="打开 破万卷 详情">
+          <div class="media"><img src="assets/shot-powan.webp" alt="破万卷界面预览" loading="lazy" decoding="async"></div>
+          <span class="f-line"><span class="f-no">07</span><span class="card-name">破万卷</span><span class="f-open">↗</span></span>
+          <span class="f-sub">AI 读一百条，你读一篇</span>
+        </button>
+      </article>
+      <article class="card folded" data-id="p8" data-name="外卖吃啥">
+        <button class="card-btn" type="button" aria-label="打开 外卖吃啥 详情">
+          <div class="media"><img src="assets/shot-eat.webp" alt="外卖吃啥界面预览" loading="lazy" decoding="async"></div>
+          <span class="f-line"><span class="f-no">08</span><span class="card-name">外卖吃啥</span><span class="f-open">↗</span></span>
+          <span class="f-sub">今天别纠结，转一下就开饭</span>
+        </button>
+      </article>
+      <article class="card folded" data-id="p9" data-name="简历工坊 Pro">
+        <button class="card-btn" type="button" aria-label="打开 简历工坊 Pro 详情">
+          <div class="media"><img src="assets/shot-resume.webp" alt="简历工坊 Pro界面预览" loading="lazy" decoding="async"></div>
+          <span class="f-line"><span class="f-no">09</span><span class="card-name">简历工坊 Pro</span><span class="f-open">↗</span></span>
+          <span class="f-sub">先统一事实，再谈版式</span>
+        </button>
+      </article>
     </div>
   </section>
   <section id="about">
@@ -834,7 +853,7 @@ body{background-image:none}
 
   </main>
 
-  <footer><span>© 2026 周锦全</span><span class="ver">v2.5.0</span><span class="sp"><a class="totop" href="#top">↑ 回顶</a></span></footer>
+  <footer><span>© 2026 周锦全</span><span class="ver">v2.6.0</span><span class="sp"><a class="totop" href="#top">↑ 回顶</a></span></footer>
 
 </div>
 

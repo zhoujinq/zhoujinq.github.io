@@ -2,13 +2,13 @@
 
 个人主页：一个 `index.html` + 本地素材，没有构建步骤，没有外部请求，断网也能打开。
 
-线上：<https://zhoujinq.github.io/> ｜ 版本 v2.5.0（2026-11-22）
+线上：<https://zhoujinq.github.io/> ｜ 版本 v2.6.0（2026-11-22）
 
 ## 页面结构
 
-四大块：**首屏**（像素名字、三行简介、终端）→ **项目**（3 张主卡 + 3 张带图次卡 + 3 页折叠文字）→ **关于我**（默认折叠）→ **生活**。
+四大块：**首屏**（像素名字、三行简介、终端）→ **项目**（两行九项目）→ **关于我**（默认折叠）→ **生活**。
 
-项目区分三行：主卡 3 个（销售助手 / 模型斩杀线 / Personal AI）、带图次卡 3 个（API 商机雷达 / 个人理财投资助手 / 日语 N1）、折叠文字页 3 个（破万卷 / 外卖吃啥 / 简历工坊 Pro，只露标题加一行小字）。详情里直接贴原始网址，不写在线状态、不写虚构快照、不放代码仓库。
+项目区只有两行：第一行是 3 张主卡（销售助手 / 模型斩杀线 / Personal AI）；第二行是 3 张小图卡（04 API 商机雷达 / 05 个人理财投资助手 / 06 日语 N1），07 破万卷、08 外卖吃啥、09 简历工坊 Pro 分别作为文件夹页夹在后面，只露标题加一行小字。详情里直接贴原始网址，不写在线状态、不写虚构快照、不放代码仓库。
 
 ```
 index.html                  结构、样式、终端与覆盖层脚本，全在这里
@@ -41,7 +41,7 @@ python -m http.server 8080
 | 想改什么 | 改哪里 |
 |---|---|
 | 项目卡 | 主卡 3 个 `<article class="card">`、次卡 3 个 `.card secondary`、折叠页 3 个 `.card folded` |
-| 项目详情 | 文末 `<template id="tpl-pN">`，只保留一条 `打开网站 ↗` 外链 |
+| 项目详情 | 文末 `<template id="tpl-pN">`，只保留一条文字与 href 一致的原始网址 |
 | 终端里的文件与命令 | `<script id="shell-engine">` 里的 `PROJECTS`、`FILES`、`commands` |
 | 最近更新日期 | `.last-update` 一行 |
 | 配色 | `:root`；另有一处候选覆盖，改色前先读 `progress.md` §3 |
@@ -63,7 +63,7 @@ chars = set(open("index.html", encoding="utf-8").read()) | {chr(c) for c in rang
 ## 测试与上线
 
 ```bash
-node --test tests/page.test.js tests/shell.test.js tests/streak.test.js   # 31 项
+node --test tests/page.test.js tests/shell.test.js tests/streak.test.js   # 32 项
 ```
 
 仓库名必须是 `zhoujinq.github.io`，Pages 才伺服在根域名。推 `main` 自动构建；页脚版本号是静态文本，不再外链 Release。
