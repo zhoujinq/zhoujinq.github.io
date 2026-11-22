@@ -401,6 +401,10 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
 .ov-state{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);margin:0 0 14px}
 .ov-state::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--ok)}
 .ov-state.wip::before{background:var(--wip)}
+.ov-links{display:flex;flex-wrap:wrap;gap:8px;margin:2px 0 18px}
+.ov-links a{padding:6px 10px;border:1px solid var(--line);border-radius:4px;background:var(--card);font-size:12px;color:var(--ink-2);border-bottom-color:var(--line)}
+.ov-links a:hover{border-color:var(--accent);color:var(--accent)}
+.ov-links a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .ov-one{margin:0 0 20px;font-size:16px;line-height:1.75;color:var(--ink-2)}
 .ov-seg{padding:14px 0;border-top:1px solid var(--line-2)}
 .ov-seg h4{
@@ -618,7 +622,7 @@ body{background-image:none}
       <span>早期做过 CV 算法，后来转向海外技术型销售；现在我从工作和学习里的真实问题出发，</span>
       <span>边学边做，减少重复劳动，也保留生活里的具体热爱。</span>
     </div>
-    <p class="last-update rise d5">主页信息最近更新：2026-11-20</p>
+    <p class="last-update rise d5">主页信息最近更新：2026-11-22</p>
     <p class="tc-help rise d5">这好像是个终端，输入 <b>about</b> / <b>projects</b> / <b>life</b>，回车看看</p>
 
     <div class="term-card rise d6" id="shell" aria-label="可交互终端">
@@ -641,29 +645,27 @@ body{background-image:none}
   <main id="main" tabindex="-1">
 
   <section id="projects">
-    <div class="sec-head">
-      <h2>Vibe Coding项目</h2>
-    </div>
+    <div class="sec-head"><h2>Vibe Coding项目</h2><span class="cnt">9 / 9 已上线</span></div>
     <div class="grid featured-grid">
-      <article class="card" data-id="p1" data-name="销售辅助系统">
-        <button class="card-btn" type="button" aria-label="打开 销售辅助系统 详情">
-          <div class="media"><img src="assets/shot-sales.svg" style="object-position:center" alt="销售辅助系统的工作流结构预览，不含真实客户数据" loading="lazy" decoding="async"></div>
-          <div class="card-meta"><span class="card-no">01</span><h3 class="card-name">销售辅助系统</h3></div>
-          <div class="card-foot"><span class="dot"></span>自用中 · 每天跑<span class="open">点开 →</span></div>
+      <article class="card" data-id="p1" data-name="销售助手 · 客户管理系统">
+        <button class="card-btn" type="button" aria-label="打开 销售助手 · 客户管理系统 详情">
+          <div class="media"><img src="assets/shot-sales.svg" style="object-position:center" alt="销售助手的工作流结构预览，不含真实客户数据" loading="lazy" decoding="async"></div>
+          <div class="card-meta"><span class="card-no">01</span><h3 class="card-name">销售助手 · 客户管理系统</h3></div>
+          <div class="card-foot"><span class="dot"></span>在线 · 虚构快照<span class="open">点开 →</span></div>
         </button>
       </article>
-      <article class="card" data-id="p2" data-name="N1 备考教练">
-        <button class="card-btn" type="button" aria-label="打开 N1 备考教练 详情">
+      <article class="card" data-id="p2" data-name="日语 N1 备考教练">
+        <button class="card-btn" type="button" aria-label="打开 日语 N1 备考教练 详情">
           <div class="media"><img src="assets/shot-n1.webp" style="object-position:top center" alt="N1 备考教练 的界面截图" loading="lazy" decoding="async"></div>
-          <div class="card-meta"><span class="card-no">02</span><h3 class="card-name">N1 备考教练</h3></div>
-          <div class="card-foot"><span class="dot"></span>自用中 · 每天跑<span class="open">点开 →</span></div>
+          <div class="card-meta"><span class="card-no">02</span><h3 class="card-name">日语 N1 备考教练</h3></div>
+          <div class="card-foot"><span class="dot"></span>在线 · 静态预览<span class="open">点开 →</span></div>
         </button>
       </article>
       <article class="card" data-id="p3" data-name="记账投资助手">
         <button class="card-btn" type="button" aria-label="打开 记账投资助手 详情">
           <div class="media"><img src="assets/shot-book.webp" style="object-position:left top" alt="记账投资助手 的界面截图" loading="lazy" decoding="async"></div>
           <div class="card-meta"><span class="card-no">03</span><h3 class="card-name">记账投资助手</h3></div>
-          <div class="card-foot"><span class="dot"></span>自用中 · 每周跑<span class="open">点开 →</span></div>
+          <div class="card-foot"><span class="dot"></span>在线 · 数据全虚构<span class="open">点开 →</span></div>
         </button>
       </article>
     </div>
@@ -674,78 +676,69 @@ body{background-image:none}
             <span class="book-kicker">FIELD NOTES</span>
             <span class="book-volume">04—09</span>
             <span class="book-title">项目书</span>
-            <span class="book-subtitle">继续折腾的事，<br>和下一个真实的好奇心。</span>
+            <span class="book-subtitle">另外六个也做完了，<br>都有公开网页和源码。</span>
             <span class="book-edition">VIBE CODING / VOL. 02</span>
           </span>
           <span class="book-page book-contents">
             <span class="book-kicker">目录 · 6 个后续项目</span>
             <span class="book-toc">
               <span class="book-entry"><b>04</b><span>Personal AI</span></span>
-              <span class="book-entry"><b>05</b><span>简历工坊</span></span>
+              <span class="book-entry"><b>05</b><span>简历工坊 Pro</span></span>
               <span class="book-entry"><b>06</b><span>外卖吃啥</span></span>
-              <span class="book-entry"><b>07</b><span>模型斩杀线</span></span>
-              <span class="book-entry"><b>08</b><span>破万卷 · 规划中</span></span>
-              <span class="book-entry"><b>09</b><span>第九个待定</span></span>
+              <span class="book-entry"><b>07</b><span>AI 模型斩杀线</span></span>
+              <span class="book-entry"><b>08</b><span>破万卷</span></span>
+              <span class="book-entry"><b>09</b><span>API 商机雷达</span></span>
             </span>
             <span class="book-action"><span class="book-action-open">翻开项目书</span><span class="book-action-close">收起项目书</span><i>↗</i></span>
           </span>
         </span>
       </summary>
       <div class="grid">
-      <article class="card" data-id="p4" data-name="Personal AI 会成长的个人助手">
-        <button class="card-btn" type="button" aria-label="打开 Personal AI 会成长的个人助手 详情">
-          <div class="media"><img src="assets/shot-handbook.webp" style="object-position:left top" alt="Personal AI 会成长的个人助手 的界面截图" loading="lazy" decoding="async"></div>
-          <div class="card-meta"><span class="card-no">04</span><h3 class="card-name">Personal AI 会成长的个人助手</h3></div>
-          <div class="card-foot"><span class="dot"></span>在用 · 持续改<span class="open">点开 →</span></div>
+      <article class="card" data-id="p4" data-name="Personal AI · 会成长的个人助手">
+        <button class="card-btn" type="button" aria-label="打开 Personal AI · 会成长的个人助手 详情">
+          <div class="media"><div class="flow-poster"><span class="tag">$ growing-assistant</span><span class="chain"><span class="fs">5–8 个问题</span><b>→</b><span class="fs">一条真实工作流</span><br><span class="fs">每次纠正</span><b>→</b><span class="fs">规则 + 评测</span><b>→</b><span class="fs">下次还记得</span></span><span class="wm">04</span></div></div>
+          <div class="card-meta"><span class="card-no">04</span><h3 class="card-name">Personal AI ·<br>会成长的个人助手</h3></div>
+          <div class="card-foot"><span class="dot"></span>在线 · v0.1.0<span class="open">点开 →</span></div>
         </button>
       </article>
-      <article class="card" data-id="p5" data-name="简历工坊">
-        <button class="card-btn" type="button" aria-label="打开 简历工坊 详情">
-          <div class="media"><pre class="qa-mini"><b>resume-master QA</b>
-✓ 文本越界   全部在版心内
-✓ 页数       2 页
-✓ 末页留白   占用 86%
-✓ 禁忌词     未命中
-✓ 占位符     无残留
-✓ 联系方式   5 项
-✓ 外部链接   2 条
-<i>结论：0 阻断 / 0 提醒</i></pre><span class="corner">预览待补</span></div>
-          <div class="card-meta"><span class="card-no">05</span><h3 class="card-name">简历工坊</h3></div>
-          <div class="card-foot"><span class="dot"></span>自用 · 按需跑<span class="open">点开 →</span></div>
+      <article class="card" data-id="p5" data-name="简历工坊 Pro">
+        <button class="card-btn" type="button" aria-label="打开 简历工坊 Pro 详情">
+          <div class="media"><img src="assets/shot-resume.webp" alt="简历工坊 Pro 的界面截图" loading="lazy" decoding="async"></div>
+          <div class="card-meta"><span class="card-no">05</span><h3 class="card-name">简历工坊 Pro</h3></div>
+          <div class="card-foot"><span class="dot"></span>在线 · v0.5.0<span class="open">点开 →</span></div>
         </button>
       </article>
       <article class="card" data-id="p6" data-name="外卖吃啥">
         <button class="card-btn" type="button" aria-label="打开 外卖吃啥 详情">
-          <div class="media"><div class="flow-poster"><span class="tag">$ flow</span><span class="chain"><span class="fs">口味 / 价格 / 距离</span><b>→</b><span class="fs">今天吃这个</span><b>→</b><span class="fs">不满意换一批</span></span><span class="wm">06</span></div><span class="corner">预览待补</span></div>
+          <div class="media"><img src="assets/shot-eat.webp" alt="外卖吃啥 的界面截图" loading="lazy" decoding="async"></div>
           <div class="card-meta"><span class="card-no">06</span><h3 class="card-name">外卖吃啥</h3></div>
-          <div class="card-foot wip"><span class="dot"></span>自用 · 偶尔卡住<span class="open">点开 →</span></div>
+          <div class="card-foot"><span class="dot"></span>在线 · v0.1.0<span class="open">点开 →</span></div>
         </button>
       </article>
-      <article class="card" data-id="p7" data-name="模型斩杀线">
-        <button class="card-btn" type="button" aria-label="打开 模型斩杀线 详情">
+      <article class="card" data-id="p7" data-name="AI 模型斩杀线">
+        <button class="card-btn" type="button" aria-label="打开 AI 模型斩杀线 详情">
           <div class="media"><img src="assets/shot-cutline.webp" style="object-position:center 52%" alt="模型斩杀线 的界面截图" loading="lazy" decoding="async"></div>
-          <div class="card-meta"><span class="card-no">07</span><h3 class="card-name">模型斩杀线</h3></div>
-          <div class="card-foot"><span class="dot"></span>在线 · 持续更新<span class="open">点开 →</span></div>
+          <div class="card-meta"><span class="card-no">07</span><h3 class="card-name">AI 模型斩杀线</h3></div>
+          <div class="card-foot"><span class="dot"></span>在线 · v1.1.0<span class="open">点开 →</span></div>
         </button>
       </article>
-      <article class="card planned" data-id="p8" data-name="破万卷">
-        <button class="card-btn" type="button" aria-label="打开 破万卷 规划说明">
-          <div class="media"><div class="flow-poster"><span class="tag">$ reading</span><span class="chain"><span class="fs">破万卷</span><b>→</b><span class="fs">规划中</span></span><span class="wm">08</span></div><span class="corner">规划占位</span></div>
+      <article class="card" data-id="p8" data-name="破万卷">
+        <button class="card-btn" type="button" aria-label="打开 破万卷 详情">
+          <div class="media"><img src="assets/shot-powan.webp" alt="破万卷 的界面截图" loading="lazy" decoding="async"></div>
           <div class="card-meta"><span class="card-no">08</span><h3 class="card-name">破万卷</h3></div>
-          <div class="card-foot">规划中 · 后续补充<span class="open">说明 →</span></div>
+          <div class="card-foot"><span class="dot"></span>在线 · v0.1.0<span class="open">点开 →</span></div>
         </button>
       </article>
-      <article class="card planned" data-id="p9" data-name="第九个待定">
-        <button class="card-btn" type="button" aria-label="打开 第九个项目 规划说明">
-          <div class="media"><div class="flow-poster"><span class="tag">$ next</span><span class="chain"><span class="fs">下一个好奇心</span><b>→</b><span class="fs">待定</span></span><span class="wm">09</span></div><span class="corner">规划占位</span></div>
-          <div class="card-meta"><span class="card-no">09</span><h3 class="card-name">第九个待定</h3></div>
-          <div class="card-foot">待定 · 不急着填满<span class="open">说明 →</span></div>
+      <article class="card" data-id="p9" data-name="API 商机雷达">
+        <button class="card-btn" type="button" aria-label="打开 API 商机雷达 详情">
+          <div class="media"><img src="assets/shot-radar.webp" alt="API 商机雷达 的界面截图" loading="lazy" decoding="async"></div>
+          <div class="card-meta"><span class="card-no">09</span><h3 class="card-name">API 商机雷达</h3></div>
+          <div class="card-foot"><span class="dot"></span>在线 · MVP 0.1.0<span class="open">点开 →</span></div>
         </button>
       </article>
       </div>
     </details>
   </section>
-
   <section id="about">
   <div class="sec-head"><h2>关于我</h2></div>
   <p class="about-brief">我是周锦全，东南大学通信工程本科，做过自动驾驶算法和毫米波整流芯片。经历联洲国际海外销售轮岗后，现在在星尘智能做海外大科研销售。工作之外，我用 AI 做真正会用的工具，也认真经营亲密关系、投资能力和具体生活。</p>
@@ -811,7 +804,7 @@ body{background-image:none}
 
   </main>
 
-  <footer><span>© 2026 周锦全</span><span><a href="https://github.com/zhoujinq/zhoujinq.github.io/releases/tag/v2.1.0" target="_blank" rel="noopener">v2.1.0</a></span><span class="sp"><a class="totop" href="#top">↑ 回顶</a></span></footer>
+  <footer><span>© 2026 周锦全</span><span><a href="https://github.com/zhoujinq/zhoujinq.github.io/releases/tag/v2.2.0" target="_blank" rel="noopener">v2.2.0</a></span><span class="sp"><a class="totop" href="#top">↑ 回顶</a></span></footer>
 
 </div>
 
@@ -828,138 +821,152 @@ body{background-image:none}
   </div>
 </div>
 
-<template id="tpl-p1">
-  <div class="ov-head"><span class="ov-no">01</span><h2 class="ov-name">销售辅助系统</h2></div>
-  <p class="ov-state">自用中 · 每天跑</p>
-  <p class="ov-one">把客户资料、方案、报价、跟进节奏，收敛成一条能跑的流水线。</p>
-  <div class="ov-seg"><h4>为什么做</h4><p>客户是高校和科研院所，一个单从第一次接触到签约要跟三四个月，中间散落着论文方向、预算周期、设备清单、谁答应过什么。表格管到第 11 个客户就崩了 —— 不是信息不够，是信息之间没有关系。</p>
-        <p>我要的是：早上打开就知道今天该找谁、该说什么、上次承诺的什么还没兑现。</p></div>
+  <template id="tpl-p1">
+  <div class="ov-head"><span class="ov-no">01</span><h2 class="ov-name">销售助手 · 客户管理系统</h2></div>
+  <p class="ov-state">在线 · 公开演示 · 虚构快照 2026-11-18</p>
+  <p class="ov-one">邮件和会议进来，客户状态和下一步行动出去。</p>
+  <div class="ov-links"><a href="https://zhoujinq.github.io/customer-commitment-ledger/" target="_blank" rel="noopener">公开网站 ↗</a><a href="https://github.com/zhoujinq/customer-commitment-ledger" target="_blank" rel="noopener">代码仓库 ↗</a></div>
+  <div class="ov-seg"><h4>为什么做</h4><p>客户是高校和科研院所，一个单跟三四个月：论文方向、预算周期、设备清单、谁答应过什么，全散在邮件和会议里。表格管到第 11 个客户就崩了 —— 不是信息不够，是信息之间没有关系。</p></div>
   <div class="ov-seg"><h4>怎么做</h4><ul class="steps">
-          <li><b>数据层：</b>客户档案 / 沟通记录 / 方案版本，三层各自结构化，靠客户 ID 串起来。</li>
-          <li><b>判断层：</b>让模型读最近三次沟通，只输出「下一步动作 + 风险点」，不给分数。</li>
-          <li><b>执行层：</b>每天早上定时跑一遍，出一份简报，直接变成当天待办。</li>
+          <li><b>归集：</b>客户、行动、会议、触点四张表，靠客户身份串起来，别名和未归属都单独可见。</li>
+          <li><b>跟进：</b>每条待办保留期限、责任方和出处；今日分只决定提醒顺序，不代表客户价值。</li>
+          <li><b>边界：</b>机器只写机器字段，待裁决项必须人工确认，失败即停、重试不超过 2 次。</li>
         </ul></div>
-
-  <div class="ov-seg"><h4>栈</h4><p class="stack">LLM API · 结构化数据 · 定时任务</p></div>
+  <div class="ov-seg"><h4>效果</h4><p>快照里 6 家客户、8 条跟进（2 条逾期）、47 场会议、17 条邮件触点、3 个自动化配置；七个视图都能用 URL 深链接直接打开。</p></div>
+  <div class="ov-seg"><h4>栈</h4><p class="stack">单文件 HTML · 原生 JS · 无后端、无构建</p></div>
 </template>
 
 <template id="tpl-p2">
-  <div class="ov-head"><span class="ov-no">02</span><h2 class="ov-name">N1 备考教练</h2></div>
-  <p class="ov-state">自用中 · 每天跑</p>
-  <p class="ov-one">按考试日倒排，每天该背什么、错在哪一类，不再靠感觉。</p>
-  <div class="ov-seg"><h4>为什么做</h4><p>日语 N1 是我自己给自己的硬指标，但下班之后只剩一小时。之前的问题是：每天打开书先花二十分钟决定学什么，学完也说不清哪里真的弱。</p>
-        <p>「今天学什么」这件事，我不想再每天决策一次。</p></div>
+  <div class="ov-head"><span class="ov-no">02</span><h2 class="ov-name">日语 N1 备考教练</h2></div>
+  <p class="ov-state">在线 · 静态预览</p>
+  <p class="ov-one">每天一小时，按真实进度推进，不靠感觉决定今天学什么。</p>
+  <div class="ov-links"><a href="https://zhoujinq.github.io/n1-study-dashboard/" target="_blank" rel="noopener">公开网站 ↗</a><a href="https://github.com/zhoujinq/n1-study-dashboard" target="_blank" rel="noopener">代码仓库 ↗</a></div>
+  <div class="ov-seg"><h4>为什么做</h4><p>下班只剩一小时。真正的浪费不是没学，是打开书先花二十分钟决定学什么，学完也说不清哪里真的弱。</p></div>
   <div class="ov-seg"><h4>怎么做</h4><ul class="steps">
-          <li><b>倒排：</b>从考试日往回推，把词汇 / 语法 / 阅读 / 听力拆成每日份额。</li>
-          <li><b>错题：</b>按错误类型归因（词义混淆 / 语法接续 / 长句断句），而不是按题号记流水。</li>
-          <li><b>复盘：</b>每周问一次「这周你哪里在假装努力」，答案来自实际完成率，不来自感觉。</li>
+          <li><b>倒排：</b>从 12 月 6 日考试日往回推，把词汇、语法、阅读、听力拆成每日份额。</li>
+          <li><b>归因：</b>真题按错误类型记 —— 词义混淆、语法接续、长句断句，不按题号记流水。</li>
+          <li><b>留痕：</b>51 套真题按考期归档，逐题提交后自动保存。</li>
         </ul></div>
-  <div class="ov-seg"><h4>效果</h4><p>真题练习 · 51 套按考期归档，每题提交后自动保存</p></div>
-  <div class="ov-seg"><h4>栈</h4><p class="stack"><p class="stack">LLM API · 计划表 · 错题归因</p></p></div>
+  <div class="ov-seg"><h4>效果</h4><p>公开版保留首屏真题、当前五词、学习统计与 12 周计划；进度只存在浏览器里，PDF、MP3 和完整题库不上传。</p></div>
+  <div class="ov-seg"><h4>栈</h4><p class="stack">静态 HTML/CSS/JS · 复用原看板样式 · 无服务器</p></div>
 </template>
 
 <template id="tpl-p3">
   <div class="ov-head"><span class="ov-no">03</span><h2 class="ov-name">记账投资助手</h2></div>
-  <p class="ov-state">自用中 · 每周跑</p>
-  <p class="ov-one">把「这个月到底花在哪」从翻账单，变成一张一眼看完的面板。</p>
-  <div class="ov-seg"><h4>为什么做</h4>
-  <p>记账这件事在我这里一直散在三处：支付 App 的账单、券商 App 的持仓、还有一个手写表格。月底想回答一个最简单的问题 —— 这个月钱去哪了 —— 得先花半小时对账。</p>
-  <p>更麻烦的是结构：活期、指数基金、黄金各占多少，没有一个地方能一次看清。</p></div>
-  <div class="ov-seg"><h4>怎么做</h4>
-  <ul class="steps">
-    <li><b>归集：</b>支付账单和券商持仓各自导出，按「市场 + 账户」两层归类。</li>
-    <li><b>折算：</b>港股、美股按当日汇率折成人民币，先算净值，再算占比。</li>
-    <li><b>呈现：</b>四个指标 + 资产占比色块 + 市场拆分表，一屏看完，不用翻页。</li>
-  </ul></div>
-  <div class="ov-seg"><h4>效果</h4><p>对账从「翻三个 App」变成「看一眼」。下面这张图里金额已经换过，比例和结构是真的。</p></div>
-  <div class="ov-seg"><h4>栈</h4><p class="stack">单页 · 本地数据 · 汇率折算</p></div>
+  <p class="ov-state">在线 · v1.4.3 · 数字全虚构</p>
+  <p class="ov-one">把「这个月到底花在哪」从翻三个 App，变成一张一眼看完的资产负债表。</p>
+  <div class="ov-links"><a href="https://zhoujinq.github.io/hajimi-ledger-demo/" target="_blank" rel="noopener">公开网站 ↗</a><a href="https://github.com/zhoujinq/hajimi-ledger-demo" target="_blank" rel="noopener">代码仓库 ↗</a></div>
+  <div class="ov-seg"><h4>为什么做</h4><p>账单在支付 App、持仓在券商、还有一份手写表。月底回答「钱去哪了」要半小时；六类资产各占多少，也没有一处能一次看清。</p></div>
+  <div class="ov-seg"><h4>怎么做</h4><ul class="steps">
+          <li><b>归集：</b>六类资产按「市场 + 账户」归类，港股美股按当日汇率折成人民币。</li>
+          <li><b>单一真相：</b>股数只从交易推导，市值永远现算；手改股数会标橙并留痕。</li>
+          <li><b>校验：</b>台账对券商市值、汇率闭合、现金水位三条勾稽常驻，对不上就标红。</li>
+        </ul></div>
+  <div class="ov-seg"><h4>效果</h4><p>六类占比直接可读：美股指数基金 26.0%、黄金 13.7%、现金 36.2%。所有数字由脚本生成，与任何真实账户无关，也不构成投资建议。</p></div>
+  <div class="ov-seg"><h4>栈</h4><p class="stack">单文件 HTML + data.js · 腾讯公开行情接口（失败退快照价）</p></div>
 </template>
 
 <template id="tpl-p4">
-  <div class="ov-head"><span class="ov-no">04</span><h2 class="ov-name">Personal AI 会成长的个人助手</h2></div>
-  <p class="ov-state">在用 · 持续改</p>
-  <p class="ov-one">让模型记住我是谁，而不是每次重新自我介绍。</p>
-  <div class="ov-seg"><h4>为什么做</h4><p>每开一个新对话，我都要重讲一遍背景：在做什么、讨厌什么、上次决定了什么。重复的部分占掉一半的上下文，也占掉一半的耐心。</p>
-        <p>我想要的是一份能被我改、能被模型读的「关于我」。</p></div>
+  <div class="ov-head"><span class="ov-no">04</span><h2 class="ov-name">Personal AI · 会成长的个人助手</h2></div>
+  <p class="ov-state">在线 · v0.1.0</p>
+  <p class="ov-one">给 Agent 一套工作区、一条真实工作流和一个纠正闭环，而不是一段提示词。</p>
+  <div class="ov-links"><a href="https://zhoujinq.github.io/growing-assistant-skill/" target="_blank" rel="noopener">公开网站 ↗</a><a href="https://github.com/zhoujinq/growing-assistant-skill" target="_blank" rel="noopener">代码仓库 ↗</a></div>
+  <div class="ov-seg"><h4>为什么做</h4><p>大多数「个人 AI」就是一段 prompt 加聊天记录。换个会话，背景、规则、上次的纠正全部消失，于是每次都要重新自我介绍。</p></div>
   <div class="ov-seg"><h4>怎么做</h4><ul class="steps">
-          <li><b>分层：</b>事实层（经历 / 数据）与偏好层（口味 / 判断习惯）分开写，谁的错谁改。</li>
-          <li><b>注入：</b>按任务类型挑相关片段，不把整包塞进上下文。</li>
-          <li><b>纠错：</b>模型说错了，就把正确版本回写事实层，下次不再犯同一个错。</li>
+          <li><b>起步：</b>5–8 个问题问清目标、重复任务、验收标准与隐私边界。</li>
+          <li><b>落地：</b>生成 PROFILE / RULES / WORKFLOW / memory / docs / evals，先跑通一条端到端工作流。</li>
+          <li><b>生长：</b>每次「这不对」写成一条规则加一个评测用例；effort 分 low / medium / high。</li>
         </ul></div>
-  <div class="ov-seg"><h4>效果</h4><p>Agent 手册 · 3.1 万字，97 个章节，从第一性原理拆到六个 Agent</p></div>
-  <div class="ov-seg"><h4>栈</h4><p class="stack"><p class="stack">Memory · 上下文工程</p></p></div>
+  <div class="ov-seg"><h4>效果</h4><p>init、lint、selftest 三个脚本只用 Python 标准库；任意支持文件的 Agent 都能装，不需要平台或数据库。</p></div>
+  <div class="ov-seg"><h4>栈</h4><p class="stack">Skill · Python 标准库 · 本地文件工作区</p></div>
 </template>
 
 <template id="tpl-p5">
-  <div class="ov-head"><span class="ov-no">05</span><h2 class="ov-name">简历工坊</h2></div>
-  <p class="ov-state">自用 · 按需跑</p>
-  <p class="ov-one">事实只写一次，按岗位派生版本。</p>
-  <div class="ov-seg"><h4>为什么做</h4><p>投不同岗位要改不同简历，改到第三版就开始前后不一致：同一项经历在不同版本里写法不一，数字口径也可能对不上。</p>
-        <p>不是不认真，是没有单一事实源。</p></div>
+  <div class="ov-head"><span class="ov-no">05</span><h2 class="ov-name">简历工坊 Pro</h2></div>
+  <p class="ov-state">在线 · v0.5.0</p>
+  <p class="ov-one">一份简历只有两个问题：说什么，和怎么说；这里两个都管，交付前还有两道门禁。</p>
+  <div class="ov-links"><a href="https://zhoujinq.github.io/resume-master/" target="_blank" rel="noopener">公开网站 ↗</a><a href="https://github.com/zhoujinq/resume-master" target="_blank" rel="noopener">代码仓库 ↗</a></div>
+  <div class="ov-seg"><h4>为什么做</h4><p>改到第三版就前后不一致：同一段经历写法不同，数字口径也可能对不上。不是不认真，是没有单一事实源。</p></div>
   <div class="ov-seg"><h4>怎么做</h4><ul class="steps">
-          <li><b>事实分层：</b>数字、口径、可讲范围先单独存一份，正文只引用，不改写。</li>
-          <li><b>派生：</b>母版 + 一份岗位描述，生成对应版本，人只负责改判断。</li>
-          <li><b>门禁：</b>出片前跑九项检查：一页、字号、孤字、链接可达、数字一致。</li>
+          <li><b>路由：</b>新建、按 JD 定制、只换版式、体检 —— 四条路，能对上就不给菜单。</li>
+          <li><b>版本：</b>事实只维护在 _master，岗位版本从基线派生；改事实先回母版，否则下一版继承漂移。</li>
+          <li><b>门禁：</b>G1 事实确认、G2 定稿、G3 交付；G3 要 qa.py 全绿，再加视觉四项复核。</li>
         </ul></div>
-  <div class="ov-seg"><h4>效果</h4><p>九项门禁 · 2026-11-17 这台机器上的实际输出</p></div>
-  <div class="ov-seg"><h4>栈</h4><p class="stack"><p class="stack">YAML → HTML → PDF · 九项门禁</p></p></div>
+  <div class="ov-seg"><h4>效果</h4><p>19 个不可证伪的空话词，命中 ≥6 次直接阻断；A4 210×297mm、版心 174mm，三套版式 swiss / editorial / mono。</p></div>
+  <div class="ov-seg"><h4>栈</h4><p class="stack">Python + PyYAML + PyMuPDF · YAML → HTML → Chrome 无头打印</p></div>
 </template>
 
 <template id="tpl-p6">
   <div class="ov-head"><span class="ov-no">06</span><h2 class="ov-name">外卖吃啥</h2></div>
-  <p class="ov-state wip">自用 · 偶尔卡住</p>
-  <p class="ov-one">把「今天吃什么」从十分钟的拉扯，压成一次点击。</p>
-  <div class="ov-seg"><h4>为什么做</h4><p>每天要做的选择里，午饭最难 —— 不是没得选，是选完还后悔。刷二十分钟，最后还是点回那家。</p>
-        <p>同事先做了一个，我拿过来改：他的口味不是我的口味，我要的是「不用想，直接出」。</p></div>
+  <p class="ov-state">在线 · v0.1.0</p>
+  <p class="ov-one">今天别纠结，转一下就开饭。</p>
+  <div class="ov-links"><a href="https://zhoujinq.github.io/what-to-eat/" target="_blank" rel="noopener">公开网站 ↗</a><a href="https://github.com/zhoujinq/what-to-eat" target="_blank" rel="noopener">代码仓库 ↗</a></div>
+  <div class="ov-seg"><h4>为什么做</h4><p>午饭最难的不是没得选，是选完还后悔。刷二十分钟，最后还是点回那家。</p></div>
   <div class="ov-seg"><h4>怎么做</h4><ul class="steps">
-          <li><b>画像：</b>把常点的十几家写死，按辣度 / 价位 / 距离打标签，不爬平台。</li>
-          <li><b>收敛：</b>默认给一个，连点两次「不吃」才换，避免又滑回无限翻。</li>
-          <li><b>记录：</b>吃完顺手记一句，难吃的下一轮自动降权。</li>
+          <li><b>收窄：</b>12 道默认候选，先按预算、口味、品类筛一遍。</li>
+          <li><b>抽签：</b>Fisher–Yates 洗牌做无放回随机袋，抽完才重洗，跨轮不连续重复。</li>
+          <li><b>仪式：</b>结果先定，再算转盘落点；转盘只负责好看，不负责决定。</li>
         </ul></div>
-  <div class="ov-seg"><h4>效果</h4><p>界面还没收拾，现在是能用但不体面的样子 —— 这条留待我自己补。</p></div>
-  <div class="ov-seg"><h4>栈</h4><p class="stack"><p class="stack">单页 · 本地存储 · 手写名单</p></p></div>
+  <div class="ov-seg"><h4>效果</h4><p>16 条 Node 原生测试覆盖筛选、随机袋、跨轮防重、落点与存档；免登录、免授权，双击就能用。</p></div>
+  <div class="ov-seg"><h4>栈</h4><p class="stack">单文件 HTML · 原生 JS · localStorage</p></div>
 </template>
 
 <template id="tpl-p7">
-  <div class="ov-head"><span class="ov-no">07</span><h2 class="ov-name">模型斩杀线</h2></div>
-  <p class="ov-state">在线 · 持续更新</p>
+  <div class="ov-head"><span class="ov-no">07</span><h2 class="ov-name">AI 模型斩杀线</h2></div>
+  <p class="ov-state">在线 · v1.1.0 · 快照 2026-11-04</p>
   <p class="ov-one">把「该用哪个模型」从看完评测就下结论，变成一张能查的帕累托图。</p>
-  <div class="ov-seg"><h4>为什么做</h4><p>每家都发榜，每家都在自证第一。评测口径还不统一：推理档位、上下文长度、是否经中转 —— 比出来的往往不是能力，是配置。</p>
-        <p>所以反过来问：给定我手上的任务，哪个模型在「够聪明」的前提下最快、最便宜？</p></div>
+  <div class="ov-links"><a href="https://zhoujinq.github.io/model-cutline/" target="_blank" rel="noopener">公开网站 ↗</a><a href="https://github.com/zhoujinq/model-cutline" target="_blank" rel="noopener">代码仓库 ↗</a></div>
+  <div class="ov-seg"><h4>为什么做</h4><p>每家都发榜，每家都在自证第一。推理档位、上下文长度、是否经中转 —— 比出来的往往不是能力，是配置。</p></div>
   <div class="ov-seg"><h4>怎么做</h4><ul class="steps">
-          <li><b>采集：</b>70 条配置 / 34 个模型，六个纵轴可切 —— 首答案延迟、端到端耗时、输出速度、首字延迟、折价、任务耗时。</li>
-          <li><b>判据：</b>画帕累托前沿。线外的点都能被线上某个模型「不弱于它、且某一项更好」地替代，也就是该被淘汰的。</li>
-          <li><b>读法：</b>按体感优先级排序，从「首答案延迟」开始看，而不是从跑分开始。</li>
+          <li><b>采集：</b>85 条配置 / 39 个模型，AA 与 AIHOT 同日抓取。</li>
+          <li><b>判据：</b>六个纵轴可切（首答案延迟、端到端、输出速度、首字延迟、折价、任务耗时），画帕累托前沿。</li>
+          <li><b>读法：</b>线外的点都能被线上某个模型「不弱于它、且这一项更好」地替代，从体感优先的首答案延迟看起。</li>
         </ul></div>
-  <div class="ov-seg"><h4>效果</h4><p>70 条配置 / 34 个模型，橙色折线以外的点都能被替代</p></div>
-  <div class="ov-seg"><h4>栈</h4><p class="stack"><p class="stack">静态页面 · 帕累托前沿 · 数据快照</p></p></div>
+  <div class="ov-seg"><h4>效果</h4><p>评分 ≥56 的 5 条里，Gemini 4 Carbon 首答案延迟 6.69 秒，Claude Opus 5.5 是 641 秒 —— 聪明和等得起是两件事。</p></div>
+  <div class="ov-seg"><h4>栈</h4><p class="stack">静态页面 · 帕累托前沿 · 数据快照</p></div>
 </template>
 
 <template id="tpl-p8">
   <div class="ov-head"><span class="ov-no">08</span><h2 class="ov-name">破万卷</h2></div>
-  <p class="ov-state">规划中 · 项目位已保留</p>
-  <p class="ov-one">第八个项目确定为「破万卷」，详细内容等整理好后补充。</p>
-  <div class="ov-seg"><h4>现在的状态</h4><p>这里不是假装已经完成的项目，只是给下一步学习和实践留一个明确的位置。</p></div>
+  <p class="ov-state">在线 · v0.1.0</p>
+  <p class="ov-one">AI 读一百条，你读一篇；机器节省筛选，人保留思考。</p>
+  <div class="ov-links"><a href="https://zhoujinq.github.io/po-wan-juan/" target="_blank" rel="noopener">公开网站 ↗</a><a href="https://github.com/zhoujinq/po-wan-juan" target="_blank" rel="noopener">代码仓库 ↗</a></div>
+  <div class="ov-seg"><h4>为什么做</h4><p>收藏很容易被当成理解。摘要机把每篇都压短，却没说清哪一篇值得读厚。</p></div>
+  <div class="ov-seg"><h4>怎么做</h4><ul class="steps">
+          <li><b>原样保存：</b>主动投喂的文字、链接、图片、视频与感悟，保留来源和阅读状态；打不开就标明，不假装读过。</li>
+          <li><b>每日：</b>只留最值得知道、与你何干、留给你的问题，正文不超过 400 字。</li>
+          <li><b>每周：</b>只推一篇全文已读的文章，没有合格者宁缺毋滥；好评差评写成可回滚的评测集。</li>
+        </ul></div>
+  <div class="ov-seg"><h4>效果</h4><p>公开站只是介绍与虚构演示，不处理真实记录；原始材料留在使用者自己选的本地目录。</p></div>
+  <div class="ov-seg"><h4>栈</h4><p class="stack">Skill · Python 标准库 · 本地知识库</p></div>
 </template>
 
 <template id="tpl-p9">
-  <div class="ov-head"><span class="ov-no">09</span><h2 class="ov-name">第九个待定</h2></div>
-  <p class="ov-state">待定 · 不急着填满</p>
-  <p class="ov-one">第九个项目还没有决定，先留一个位置给下一个真实的好奇心。</p>
-  <div class="ov-seg"><h4>现在的状态</h4><p>等有真正想学、想做的东西再补上，不为了凑满 3×3 编造项目。</p></div>
+  <div class="ov-head"><span class="ov-no">09</span><h2 class="ov-name">API 商机雷达</h2></div>
+  <p class="ov-state">在线 · MVP 0.1.0</p>
+  <p class="ov-one">每周三张商机卡，外加一份「你本人这周学会了什么」。</p>
+  <div class="ov-links"><a href="https://zhoujinq.github.io/api-opportunity-radar/" target="_blank" rel="noopener">公开网站 ↗</a><a href="https://github.com/zhoujinq/api-opportunity-radar" target="_blank" rel="noopener">代码仓库 ↗</a></div>
+  <div class="ov-seg"><h4>为什么做</h4><p>公开信号很多，能落到「谁值得接触、下一步做什么」的很少。另一头，Agent 用了一周，人到底长进了什么，没有人记。</p></div>
+  <div class="ov-seg"><h4>怎么做</h4><ul class="steps">
+          <li><b>商机链：</b>公开信号 → 商业假设 → 待验证角色 → 下一动作，人工决定进入跟进还是暂缓。</li>
+          <li><b>成长链：</b>学会什么 → 项目与对话定位 → 证据与结论边界 → 商业关联 → 下一实验。</li>
+          <li><b>可自定义：</b>名称、方向、周期、卡数都能改；周报导出 Markdown，站点可离线打开。</li>
+        </ul></div>
+  <div class="ov-seg"><h4>效果</h4><p>公开演示 3 张商机卡 + 2 条成长；Node 8 项、Python 4 项测试通过；不抓全网、不自动触达、不生成成交概率。</p></div>
+  <div class="ov-seg"><h4>栈</h4><p class="stack">Skill · Python 标准库 · 单文件 HTML</p></div>
 </template>
 
 <script id="shell-engine">
 (function(root){
   "use strict";
 
-  var PROJECTS = ["销售辅助系统","N1 备考教练","记账投资助手","Personal AI 会成长的个人助手","简历工坊","外卖吃啥","模型斩杀线","破万卷（规划中）","第九个待定"];
+  var PROJECTS = ["销售助手 · 客户管理系统","日语 N1 备考教练","记账投资助手","Personal AI · 会成长的个人助手","简历工坊 Pro","外卖吃啥","AI 模型斩杀线","破万卷","API 商机雷达"];
   var FILES = {
     "/about":"周锦全，东南大学通信工程本科，曾在毫米波国家重点实验室学习，做过自动驾驶算法和毫米波整流芯片。\nAI Native 时代的实践者、成长者、学徒。后来经历联洲国际海外销售轮岗与法国大客户业务，现在在星尘智能做海外大科研销售。我相信人生的追求是幸福，也用 AI 和投资做杠杆。",
     "/life":"我喜欢王者荣耀中单打野、LPL、番茄小说里的历史题材爽文和陈奕迅，也看日本动漫，喜欢金钱橘、莫扎特和德彪西。\n凡事优先问大模型，常用 Codex 和 DeepSeek。多邻国与墨墨背单词长期坚持；不喜欢可以自动化却偏要重复，以及累到不自觉刷抖音的状态。",
     "/contact":"邮箱：2336097716@qq.com\nGitHub：https://github.com/zhoujinq"
   };
-  PROJECTS.forEach(function(name,i){ FILES["/projects/"+String(i+1).padStart(2,"0")] = name+"\n"+(i<7?"Vibe Coding 自主实践项目。":"规划占位，不假装已经完成。"); });
+  PROJECTS.forEach(function(name,i){ FILES["/projects/"+String(i+1).padStart(2,"0")] = name+"\nVibe Coding 自主实践项目，已上线公开网页与源码。"; });
   var DIRS = { "/":true, "/projects":true, "/bin":true };
   var USAGE = {
     ls:"ls [-laAhSr1] [path...]  列出虚拟文件与目录", echo:"echo [-nEe] [text...]  输出文本", cat:"cat [-net] [file...]  读取站点文本",
@@ -1284,7 +1291,7 @@ body{background-image:none}
     commands.ps=function(){return ok("PID PPID STAT ETIME ARGS\n1   0    S    "+Math.floor((Date.now()-started)/1000)+"s    virtual-shell");};
     commands.neofetch=function(args){var info="站点：zhoujinq.github.io（静态主页）\n会话：virtual-shell\n目录："+cwd+"\n文档："+Object.keys(FILES).length+" 个虚拟文本\n运行："+Math.floor((Date.now()-started)/1000)+" 秒";if(args[0]==="--stdout")return ok(info);if(args[0]==="--off")return ok(info);return ok("  ______\n /_  / /__\n  / /_/ _ \\\n /___\\___/\n\n"+info);};
     commands.about=function(){return ok(FILES["/about"]);};
-    commands.projects=function(){return ok("这里放了 9 个项目位置，前 3 个常展，后 6 个收在项目书里。销售辅助系统、N1 备考教练、记账投资助手来自真实需求；Personal AI、简历工坊、外卖吃啥和模型斩杀线记录继续折腾的过程。\n破万卷正在规划，第九个还没决定。我不把占位写成成果，也不为了凑数硬做项目；每个项目都从“这件事能不能自己做出来”开始。");};
+    commands.projects=function(){return ok("这里放了 9 个项目，前 3 个常展，后 6 个收在项目书里，现在全部有公开网页和源码。销售助手、N1 备考教练、记账投资助手来自正在发生的工作与学习；Personal AI、简历工坊、外卖吃啥、模型斩杀线、破万卷和 API 商机雷达记录继续折腾的过程。我不把占位写成成果，每个项目都从“这件事能不能自己做出来”开始。");};
     commands.life=function(){return ok(FILES["/life"]);};
     commands.links=function(){return ok(FILES["/contact"]);};
     commands.index=function(){return ok("站点目录\n/about：经历与学习路径\n/projects：9 个项目与项目书\n/life：连胜、游戏、小说和音乐\n输入 about、projects 或 life 可直接阅读对应简介。");};
