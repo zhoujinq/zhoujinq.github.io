@@ -25,7 +25,12 @@ test('首屏保留像素名字与三行 80～100 字简介，终端默认不输�
   const text = intro.replace(/<[^>]+>/g, '').replace(/\s/g, '');
   assert.ok(text.length >= 80 && text.length <= 100, `简介字数应为 80～100，当前为 ${text.length}`);
   assert.match(intro, /<span>用 AI 改造自己的工作/);
-  assert.match(html, /\.hero-intro\{[^}]*font-family:"PingFang SC","Microsoft YaHei",sans-serif/);
+  assert.match(html, /\.hero-intro\{[^}]*font-family:var\(--mono\)/, '首屏三行简介必须使用用户指定的 Maple Mono 字体');
+  assert.match(html, /\.sec-head h2\{[^}]*font-size:22px[^}]*text-transform:none;white-space:nowrap/, '章节标题应增大、不能强制全大写且不能拆开“项目”二字');
+  assert.match(html, /<h2>Vibe Coding项目<\/h2>/);
+  assert.match(html, /\.tc-prompt\{[^}]*min-height:64px/, '终端输入区应略微增高');
+  assert.match(html, /id="cmd"[^>]*autofocus/i, '终端输入框应在首次进入时自动聚焦');
+  assert.match(html, /input\.focus\(\{preventScroll:true\}\)/, '脚本应主动聚焦终端且不把页面拉回顶部');
   assert.match(html, /主页信息最近更新：2026-11-22/);
   assert.match(html, /<label class="ps" for="cmd">zjq : \/ \$<\/label>/);
   const terminal = between('<div class="tc-body" id="tcBody"', '</div>');
@@ -75,6 +80,8 @@ test('04～06 进一步缩小并微倾斜，07～09 分别夹在对应卡片下�
   assert.match(html, /\.card\.secondary\{[^}]*width:calc\(100% - 24px\)[^}]*transform:rotate\(var\(--tilt\)\) scale\(\.90\)/, '04～06 要比上一版更小并保持微倾斜');
   assert.match(html, /\.card\.folded\.in\{transform:translateY\(62px\)\}/, '07～09 要贴在 04～06 下沿');
   assert.match(html, /\.folded \.media\{display:none\}/, '折叠页不直接展示截图');
+  assert.match(html, /\.card\.folded\[data-id="p9"\]\{[^}]*width:82%[^}]*height:58px/, '09 夹页应收窄到接近 06 并略微缩短');
+  assert.match(html, /\.card\.folded\[data-id="p9"\]\.in\{transform:translateY\(62px\) rotate\(-1\.8deg\)\}/, '09 夹页应比其余夹页有更明显的倾角');
   for (const [front, back, column] of [[4, 7, 1], [5, 8, 2], [6, 9, 3]]) {
     assert.match(html, new RegExp(`\\.card\\.secondary\\[data-id="p${front}"\\],\\s*\\.card\\.folded\\[data-id="p${back}"\\]\\{grid-column:${column};grid-row:1\\}`), `p${back} 与 p${front} 必须同组`);
     assert.ok(secondary.indexOf(`data-id="p${front}"`) < secondary.indexOf(`data-id="p${back}"`), `p${back} 应位于 p${front} 下方`);
@@ -146,8 +153,12 @@ test('关于我保持指定顺序，履历与三个喜恶标题均为明显的�
   assert.equal((about.match(/class="fold-closed"/g) || []).length, 4, '四个折叠层都要明确写出已折叠与点击展开');
   assert.equal((about.match(/class="fold-open"/g) || []).length, 4, '四个折叠层展开后都要允许点击收起');
   assert.match(html, /\.journey-fold>summary::before,\.about-fold>summary::before\{[^}]*font-size:22px/, '折叠三角必须明显增大');
-  assert.match(html, /\.journey-fold:not\(\[open\]\),\.about-fold:not\(\[open\]\)\{[^}]*background:#eee7f0/, '折叠态使用可识别的藕紫底色');
+  assert.match(html, /\.journey-fold:not\(\[open\]\),\.about-fold:not\(\[open\]\)\{[^}]*background:#eadcc3/, '折叠态使用与 09 夹页同族的暖纸底色');
   assert.match(html, /\.journey-fold\[open\],\.about-fold\[open\]\{background:transparent\}/, '展开后应退掉折叠底色');
+  assert.ok(about.includes('<div class="about-compact">') && about.includes('<div class="about-daily">') && about.includes('<div class="about-notes">'), '关于我应使用日常与思考双栏结构');
+  assert.match(html, /@media\(min-width:960px\)\{[\s\S]*?\.about-compact\{display:grid;grid-template-columns:minmax\(0,\.92fr\) minmax\(0,1\.08fr\);gap:22px;margin-top:18px;align-items:start\}/, '桌面双栏应在真实媒体查询中生效');
+  assert.match(html, /@media\(min-width:960px\)\{[\s\S]*?#about \.life-visual\{height:54px;margin-bottom:8px\}/, '桌面热爱图片应明显缩小');
+  assert.match(html, /@media\(min-width:960px\)\{[\s\S]*?#about \.streak-grid\{margin:0;gap:12px\}/, '桌面打卡图片组应压缩留白');
   assert.doesNotMatch(about, /完整版 About|完整版About|详细履历与工作/);
   assert.ok(about.includes('<p class="goal-lead">我的人生目标是探索热爱和美好。</p>'));
   assert.ok(about.includes('我的信念：人生的追求不应该是牛逼，而应该是幸福。'));
@@ -199,6 +210,6 @@ test('页脚只保留版权、版本和回顶，版本与本次发布一致', ()
   assert.doesNotMatch(footer, /这个页面|@mac|纯静态|无追踪/);
   assert.doesNotMatch(html, /这个页面\s*纯静态|id="contact"|class="contact-panel"|data-copy/);
   assert.match(html, /<header[\s\S]*?2336097716@qq\.com[\s\S]*?github\.com\/zhoujinq[\s\S]*?<\/header>/);
-  assert.match(footer, /<span class="ver">v2\.8\.0<\/span>/);
+  assert.match(footer, /<span class="ver">v3\.0\.0<\/span>/);
   assert.doesNotMatch(footer, /github\.com/, '页脚不再外链代码仓库');
 });

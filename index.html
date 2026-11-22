@@ -115,7 +115,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 .nav-block a:hover i{opacity:1}
 
 /* ── 首屏简介与小终端 ───────────────────────────────────── */
-.hero-intro{margin:24px 0 0;max-width:790px;font-family:"PingFang SC","Microsoft YaHei",sans-serif;font-size:14px;line-height:1.9;letter-spacing:0;color:var(--ink-2)}
+.hero-intro{margin:24px 0 0;max-width:790px;font-family:var(--mono);font-size:14px;line-height:1.9;letter-spacing:0;color:var(--ink-2)}
 .hero-intro span{display:block}
 .last-update{margin:13px 0 0;font-size:12.5px;color:var(--muted)}
 .term-card{
@@ -149,7 +149,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 .tc-line a{color:#175cd3;border-bottom-color:rgba(23,92,211,.3)}
 .ps{color:#111;user-select:none;font-weight:500}
 .tc-prompt{
-  display:flex;align-items:center;padding:9px 17px 12px;border:0;background:#fff;
+  display:flex;align-items:center;min-height:64px;padding:12px 17px 15px;border:0;background:#fff;
   font-family:var(--term);color:#1d1d1f;
 }
 .tc-prompt label{font-size:13.5px;color:#111;white-space:nowrap;user-select:none}
@@ -171,14 +171,14 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 
 /* ── 章节 ───────────────────────────────────────────────── */
 section{padding:52px 0 0}
-.sec-head{position:relative;display:flex;align-items:baseline;gap:14px;margin:0 0 22px;padding-bottom:9px}
+.sec-head{position:relative;display:flex;flex-wrap:wrap;align-items:baseline;gap:14px;margin:0 0 22px;padding-bottom:9px}
 .sec-head::after{
   content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--ink);
   transform:scaleX(0);transform-origin:left;
   transition:transform .62s cubic-bezier(.22,.9,.2,1);
 }
 .sec-head.in::after{transform:scaleX(1)}
-.sec-head h2{margin:0;font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase}
+.sec-head h2{margin:0;font-size:22px;font-weight:700;line-height:1.5;letter-spacing:.08em;text-transform:none;white-space:nowrap}
 .sec-head .cnt{margin-left:auto;font-size:12px;color:var(--muted);letter-spacing:.06em}
 
 /* ── 卡片墙 ─────────────────────────────────────────────── */
@@ -332,6 +332,9 @@ summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-
   transform:translateY(78px);
 }
 .card.folded.in{transform:translateY(62px)}
+.card.folded[data-id="p9"]{width:82%;height:58px;justify-self:center;margin-left:0;transform:translateY(78px) rotate(-1.8deg)}
+.card.folded[data-id="p9"].in{transform:translateY(62px) rotate(-1.8deg)}
+.card.folded[data-id="p9"] .card-btn{height:58px}
 .card.folded:hover{border-color:transparent;box-shadow:none}
 .card.folded::before,.card.folded::after{
   content:"";position:absolute;left:0;right:0;top:-64px;bottom:0;pointer-events:none;
@@ -588,7 +591,7 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
   .streak-mark{position:absolute;z-index:2;left:5%;top:35%;width:7%;height:auto}
   .streak-week{position:absolute;z-index:2;left:5%;bottom:9%;width:47%;height:15%;display:flex;align-items:center;justify-content:space-around;border-radius:999px;background:#ef4343;color:#fff;box-shadow:0 3px 8px rgba(135,30,57,.12)}
   .streak-week i{font-style:normal;font-size:4.2cqw;font-weight:700;line-height:1}
-  .streak-caption{display:flex;align-items:center;margin:9px 3px 0;font-size:12.5px;color:var(--muted)}
+  .streak-caption{display:block;margin:9px 3px 0;font-size:12.5px;line-height:1.65;color:var(--muted)}
   .streak-caption b{color:var(--ink-2);font-weight:700}
 
   /* ── Life：三项具体热爱 ── */
@@ -632,17 +635,17 @@ body{background-image:none}
 
 /* About：简介、打卡与热爱常展；履历和三个喜恶清单均为明显的默认折叠层。 */
 .about-brief{max-width:62em;margin:0;color:var(--ink-2);font-size:15px;line-height:2}
-.journey-fold,.about-fold{margin-top:28px;border:1px solid var(--accent-line);border-radius:8px;box-shadow:0 10px 24px -24px rgba(43,36,24,.8);transition:background .18s var(--ease),border-color .18s var(--ease)}
-.journey-fold:not([open]),.about-fold:not([open]){background:#eee7f0}
+.journey-fold,.about-fold{margin-top:28px;border:1px solid #d6c6a9;border-radius:8px;box-shadow:0 10px 24px -24px rgba(43,36,24,.8);transition:background .18s var(--ease),border-color .18s var(--ease)}
+.journey-fold:not([open]),.about-fold:not([open]){background:#eadcc3}
 .journey-fold[open],.about-fold[open]{background:transparent}
 .journey-fold[open],.about-fold[open]{border-color:var(--line)}
 .journey-fold>summary,.about-fold>summary{display:flex;align-items:center;gap:12px;min-height:60px;padding:15px 18px;cursor:pointer;list-style:none;color:var(--ink);font-weight:700;border-radius:8px}
 .journey-fold>summary::-webkit-details-marker,.about-fold>summary::-webkit-details-marker{display:none}
-.journey-fold>summary::before,.about-fold>summary::before{content:'▸';color:var(--accent);font-size:22px;line-height:1;flex:none;transition:transform .18s var(--ease)}
+.journey-fold>summary::before,.about-fold>summary::before{content:'▸';color:#806845;font-size:22px;line-height:1;flex:none;transition:transform .18s var(--ease)}
 .journey-fold[open]>summary::before,.about-fold[open]>summary::before{transform:rotate(90deg)}
-.journey-fold:not([open])>summary:hover,.about-fold:not([open])>summary:hover{background:rgba(115,92,120,.06)}
+.journey-fold:not([open])>summary:hover,.about-fold:not([open])>summary:hover{background:rgba(128,104,69,.07)}
 .journey-fold[open]>summary,.about-fold[open]>summary{border-bottom:1px solid var(--line-2);border-radius:8px 8px 0 0}
-.journey-fold>summary .tip,.about-fold>summary .tip{margin-left:auto;color:var(--accent-2);font-size:12px;font-weight:700;white-space:nowrap}
+.journey-fold>summary .tip,.about-fold>summary .tip{margin-left:auto;color:#6f5b3d;font-size:12px;font-weight:700;white-space:nowrap}
 .about-fold>summary h2{margin:0;font-size:16px;line-height:1.5}
 .fold-open{display:none}
 .journey-fold[open] .fold-closed,.about-fold[open] .fold-closed{display:none}
@@ -678,7 +681,7 @@ body{background-image:none}
 .dislike-list p{margin:0;color:var(--ink-2);font-size:13px;line-height:1.9}
 @media(max-width:860px){.streak-grid{grid-template-columns:1fr 1fr;gap:14px}}
 @media(max-width:680px){
-  .streak-caption{justify-content:center;flex-wrap:wrap;gap:2px 4px;text-align:center}
+  .streak-caption{text-align:left}
   .dislike-list{grid-template-columns:1fr;gap:0}
   .dislike-list li+li{margin-top:14px}
   .chapter{grid-template-columns:1fr;gap:7px;padding:16px 0}
@@ -688,6 +691,48 @@ body{background-image:none}
   .journey-fold .timeline{padding:2px 14px 14px}
   .life-visual{height:100px}
   .streak-caption{font-size:10px}
+}
+
+/* V3：桌面关于我双栏紧凑布局；内容不删除，只重排与缩小图片。 */
+.about-compact,.about-daily,.about-notes{min-width:0}
+@media(min-width:960px){
+  #about{padding-top:38px}
+  #about>.sec-head{margin-bottom:16px}
+  #about .about-brief{max-width:78em;font-size:14px;line-height:1.75}
+  .about-compact{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);gap:22px;margin-top:18px;align-items:start}
+  #about .streak-grid{margin:0;gap:12px}
+  #about .streak-widget{border-radius:12px;box-shadow:0 12px 24px -20px rgba(79,39,66,.55)}
+  #about .streak-caption{display:block;margin-top:6px;font-size:10px;line-height:1.5;white-space:normal}
+  #about .life-grid{margin-top:14px}
+  #about .life{padding:11px 10px 12px}
+  #about .life-visual{height:54px;margin-bottom:8px}
+  #about .life-visual img{width:52px;height:52px;border-radius:10px}
+  #about .life[data-life="eason"] .life-visual img{width:62px;border-radius:7px}
+  #about .life h3{margin-bottom:4px;font-size:14px}
+  #about .life p{font-size:11.5px;line-height:1.65}
+  #about .journey-fold,#about .about-fold{margin-top:10px;border-radius:7px}
+  #about .journey-fold{margin-top:0}
+  #about .journey-fold>summary,#about .about-fold>summary{min-height:46px;padding:10px 12px;gap:9px}
+  #about .journey-fold>summary{font-size:14px}
+  #about .about-fold>summary h2{font-size:14px}
+  #about .journey-fold>summary .tip,#about .about-fold>summary .tip{font-size:10.5px}
+  #about .about-goal{margin:14px 0 4px}
+  #about .life-goal p{margin-bottom:8px}
+  #about .life-goal .goal-lead{font-size:18px;line-height:1.5}
+  #about .life-goal .goal-belief{font-size:14px;line-height:1.6}
+  #about .life-goal .goal-aside{font-size:11.5px;line-height:1.65}
+}
+@media(max-width:680px){
+  #about .about-compact{display:block}
+  #about .streak-grid{margin-top:20px;margin-bottom:20px;gap:10px}
+  #about .life-grid{margin-bottom:4px}
+  #about .life{display:grid;grid-template-columns:56px minmax(0,1fr);column-gap:12px;align-items:center;padding:10px 4px}
+  #about .life-visual{grid-column:1;grid-row:1/3;height:56px;margin:0}
+  #about .life-visual img{width:54px;height:54px;border-radius:10px}
+  #about .life[data-life="eason"] .life-visual img{width:56px;border-radius:7px}
+  #about .life h3{grid-column:2;margin:0 0 3px;font-size:15px}
+  #about .life p{grid-column:2;font-size:12.5px;line-height:1.7}
+  #about .about-goal{margin-top:24px}
 }
 
 </style>
@@ -739,7 +784,7 @@ body{background-image:none}
         <span class="tc-field">
           <span id="ghost" aria-hidden="true"></span>
           <input id="cmd" name="cmd" type="text" aria-label="在此输入命令，回车执行"
-                 autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="go">
+                 autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="go" autofocus>
           <span class="caret" aria-hidden="true"></span>
         </span>
       </form>
@@ -822,6 +867,8 @@ body{background-image:none}
   <div class="sec-head"><h2>关于我</h2></div>
   <p class="about-brief">我是周锦全，2021入学东南大学通信工程本科，做过自动驾驶算法、医美整容预测cv算法和毫米波芯片。在联洲国际tplink做过国际业务管培生卖路由器（大客户方向），现在在星尘智能Astribot做海外大科研销售卖机器人。工作之外，我会用 AI 来Vibe Coding一些满足我好奇心的小玩意。努力追求身心健康、努力跟上AI Native</p>
 
+  <div class="about-compact">
+    <div class="about-daily">
   <div class="streak-grid" aria-label="语言学习连胜">
     <figure class="streak" data-streak="duolingo"><div class="streak-widget"><img class="streak-mascot" src="assets/duolingo-widget-clean.webp" alt="" aria-hidden="true" loading="lazy" decoding="async"><svg class="streak-flame" viewBox="0 0 64 80" aria-hidden="true"><path fill="#ff6b35" d="M34 2c3 18-12 21-8 35 3-5 8-8 12-9-2 10 12 14 9 27 7-3 10-8 11-14 7 23-5 37-26 37S2 65 5 49C9 27 28 22 34 2z"/><path fill="#ffb347" d="M32 40c8 9 14 15 12 24-1 8-7 12-13 12-9 0-15-6-14-14 1-9 8-14 15-22z"/><path fill="#fff" d="M31 54c5 6 7 9 6 13-1 4-3 6-6 6-4 0-7-3-6-7 0-4 3-8 6-12z"/></svg><div class="streak-copy"><div class="streak-number" aria-label="多邻国连胜天数"><span class="num" data-days>1920</span><span class="unit">天</span></div><span class="streak-text">期待重逢！</span></div><div class="streak-week" aria-label="本周打卡记录"><i>✓</i><i>✓</i><i>✓</i><i>✓</i><i>✓</i></div></div><figcaption class="streak-caption"><b>多邻国</b>&nbsp;· 自高中起自选日语，CEFR B1水平</figcaption></figure>
     <figure class="streak" data-streak="momo"><div class="streak-widget"><img class="streak-mascot" src="assets/momo-widget-clean.webp" alt="" aria-hidden="true" loading="lazy" decoding="async"><svg class="streak-mark" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#34313e" stroke="#fff" stroke-width="3"/><ellipse cx="23" cy="29" rx="12" ry="15" fill="#fff"/><ellipse cx="41" cy="29" rx="12" ry="15" fill="#fff"/><circle cx="25" cy="28" r="4" fill="#34313e"/><circle cx="39" cy="28" r="4" fill="#34313e"/><path d="M29 39l3 3 4-4" fill="none" stroke="#34313e" stroke-width="3" stroke-linecap="round"/></svg><div class="streak-copy"><div class="streak-number" aria-label="墨墨背单词连胜天数"><span class="num" data-days>1493</span><span class="unit">天</span></div></div></div><figcaption class="streak-caption"><b>墨墨背单词</b>&nbsp;· 长期主义也藏在小事里</figcaption></figure>
@@ -832,6 +879,8 @@ body{background-image:none}
     <div class="life" data-life="fanqie"><figure class="life-visual"><img src="assets/life-fanqie.webp" alt="番茄小说 App 图标" width="104" height="104" loading="lazy" decoding="async"></figure><h3>番茄小说</h3><p>喜欢看历史题材爽文，是我很具体的放松方式。</p></div>
     <div class="life" data-life="eason"><figure class="life-visual"><img src="assets/life-eason.webp" alt="陈奕迅在巡演现场演唱，摄影 My Kan" width="128" height="104" loading="lazy" decoding="async"></figure><h3>陈奕迅</h3><p>有些歌不是用来提升品味，只是刚好陪过自己，强推《富士山下》。</p></div>
   </div>
+    </div>
+    <div class="about-notes">
 
   <details class="journey-fold" id="journey">
     <summary><span>履历与工作</span><span class="tip"><span class="fold-closed">已折叠 · 点击展开</span><span class="fold-open">已展开 · 点击收起</span></span></summary>
@@ -884,11 +933,13 @@ body{background-image:none}
       <ul class="dislike-list"><li><strong>明明可以用自动化，却偏要人反复做。</strong><p>规则清楚、机器能做，我就不愿意把重复动作当作勤奋。工具应该还人自由，而不是让人伺候工具。</p></li><li><strong>高度压力、疲惫状态下的情绪代偿失败。</strong><p>说简单点，就是累到只会不自觉地刷抖音。不是讨厌短视频本身，而是不喜欢自己已经疲惫失控，却还在用它麻醉自己。</p></li></ul>
     </div>
   </details>
+    </div>
+  </div>
 </section>
 
   </main>
 
-  <footer><span>© 2026 周锦全</span><span class="ver">v2.8.0</span><span class="sp"><a class="totop" href="#top">↑ 回顶</a></span></footer>
+  <footer><span>© 2026 周锦全</span><span class="ver">v3.0.0</span><span class="sp"><a class="totop" href="#top">↑ 回顶</a></span></footer>
 
 </div>
 
@@ -1599,7 +1650,7 @@ body{background-image:none}
   setTimeout(checkReveal, 260);   /* 字体加载后布局会变，补一次 */
 
   sync();
-  form.classList.add("unfocused");
+  input.focus({preventScroll:true});
   window.addEventListener("resize", sync);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(sync);
 })();
