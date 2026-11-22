@@ -304,13 +304,19 @@ summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-
 .card-foot .open{margin-left:auto;color:var(--faint)}
 
 
-/* ── 第二行：04–06 小图卡，07–09 分别夹在后面 ───────────── */
+/* ── 第二行：07–09 文件夹页在上，04–06 微倾斜小图卡在下 ────── */
 .tablet-br{display:none}
 .featured-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
 .secondary-grid{
-  margin-top:24px;grid-template-columns:repeat(3,minmax(0,1fr));padding-bottom:62px;
+  margin-top:30px;grid-template-columns:repeat(3,minmax(0,1fr));row-gap:34px;
 }
-.card.secondary{position:relative;z-index:2;width:calc(100% - 8px);align-self:start}
+.card.secondary{
+  --tilt:0deg;position:relative;z-index:2;width:calc(100% - 18px);align-self:start;justify-self:center;
+  margin-top:54px;transform:rotate(var(--tilt)) scale(.96);transform-origin:50% 18px;
+}
+.card.secondary[data-id="p4"]{--tilt:-.55deg}
+.card.secondary[data-id="p5"]{--tilt:.45deg}
+.card.secondary[data-id="p6"]{--tilt:-.35deg}
 .card.secondary .media{aspect-ratio:16/8}
 .card.secondary .card-meta{padding:11px 14px 5px}
 .card.secondary .card-name{font-size:15px;min-height:0;-webkit-line-clamp:1}
@@ -321,23 +327,23 @@ summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-
 .card.secondary[data-id="p6"],.card.folded[data-id="p9"]{grid-column:3;grid-row:1}
 .folded .media{display:none}
 .card.folded{
-  position:relative;z-index:1;align-self:end;width:calc(100% - 8px);height:62px;margin-left:8px;
+  position:relative;z-index:1;align-self:start;width:calc(100% - 8px);height:62px;margin-left:8px;
   border:0;border-radius:0;background:transparent;overflow:visible;box-shadow:none;
-  transform:translateY(78px);
+  transform:translateY(16px);
 }
-.card.folded.in{transform:translateY(62px)}
+.card.folded.in{transform:none}
 .card.folded:hover{border-color:transparent;box-shadow:none}
 .card.folded::before,.card.folded::after{
-  content:"";position:absolute;left:0;right:0;top:-64px;bottom:0;pointer-events:none;
-  border:1px solid #d9cbb6;border-radius:8px;background:#f2e8d6;
-  box-shadow:0 12px 24px -20px rgba(43,36,24,.85);
+  content:"";position:absolute;left:0;right:0;top:0;bottom:-10px;pointer-events:none;
+  border:1px solid #d9cbb6;border-radius:8px 8px 3px 3px;background:#f2e8d6;
+  box-shadow:0 -10px 24px -22px rgba(43,36,24,.85);
   transform:rotate(.35deg);transition:transform .25s var(--ease),background .2s var(--ease),border-color .2s var(--ease);
 }
 .card.folded::before{z-index:-1}
-.card.folded::after{z-index:-2;left:5px;right:-3px;top:-59px;bottom:-4px;background:#e7dbc5;transform:rotate(-.65deg)}
+.card.folded::after{z-index:-2;left:5px;right:-3px;top:5px;bottom:-8px;background:#e7dbc5;transform:rotate(-.65deg)}
 .card.folded .card-btn{
-  position:relative;display:flex;flex-direction:column;justify-content:center;width:100%;height:62px;
-  padding:6px 14px 8px;text-align:left;border:0;background:transparent;border-radius:0 0 8px 8px;
+  position:relative;display:flex;flex-direction:column;justify-content:center;width:100%;height:54px;
+  padding:6px 14px 4px;text-align:left;border:0;background:transparent;border-radius:8px 8px 0 0;
   transition:transform .25s var(--ease);
 }
 .card.folded .f-line{display:flex;align-items:center;gap:8px;width:100%;min-width:0}
@@ -348,9 +354,9 @@ summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-
 }
 .card.folded .f-open{font-size:12px;color:var(--faint);flex:none}
 .card.folded .f-sub{display:block;margin-top:3px;font-size:11px;line-height:1.6;color:var(--muted)}
-.card.folded:hover::before,.card.folded:focus-within::before{transform:rotate(.7deg) translateY(3px);background:#f8efdf;border-color:var(--accent-line)}
-.card.folded:hover::after,.card.folded:focus-within::after{transform:rotate(-.9deg) translateY(3px)}
-.card.folded:hover .card-btn,.card.folded:focus-within .card-btn{transform:translateY(3px)}
+.card.folded:hover::before,.card.folded:focus-within::before{transform:rotate(.7deg) translateY(-2px);background:#f8efdf;border-color:var(--accent-line)}
+.card.folded:hover::after,.card.folded:focus-within::after{transform:rotate(-.9deg) translateY(-2px)}
+.card.folded:hover .card-btn,.card.folded:focus-within .card-btn{transform:translateY(-2px)}
 .card.folded .card-btn:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 @media (min-width:721px) and (max-width:900px){
   .featured-grid,.secondary-grid{gap:18px}
@@ -365,7 +371,7 @@ summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-
 }
 @media (max-width:720px){
   .featured-grid{grid-template-columns:1fr;gap:16px}
-  .secondary-grid{grid-template-columns:1fr;row-gap:84px}
+  .secondary-grid{grid-template-columns:1fr;row-gap:34px}
   .card.secondary[data-id="p5"],.card.folded[data-id="p8"]{grid-column:1;grid-row:2}
   .card.secondary[data-id="p6"],.card.folded[data-id="p9"]{grid-column:1;grid-row:3}
   .card.secondary .media img{object-position:left 15% !important}
@@ -515,6 +521,19 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
   .ov-body{max-height:60vh;padding:20px 18px 28px}
   .ov-name{font-size:21px}
 }
+@media (max-width:560px){
+  .ov-panel{display:flex;flex-direction:column}
+  .ov-media{flex:none;height:23vh;min-height:150px;padding:10px}
+  .ov-body{flex:1;min-height:0;max-height:none;overflow:visible;padding:14px 16px 18px}
+  .ov-head{margin-bottom:4px;padding-right:34px}
+  .ov-name{font-size:19px}
+  .ov-links{margin-bottom:12px}
+  .ov-links a{font-size:11px}
+  .ov-one{margin-bottom:12px;font-size:14px;line-height:1.65}
+  .ov-seg{padding:10px 0}
+  .ov-seg h4{margin-bottom:4px}
+  .ov-seg p,.steps li{font-size:13px;line-height:1.65}
+}
 
 @media (max-width:720px){
   :root{--pad:18px;--lh:28px}
@@ -611,39 +630,39 @@ body{background-image:none}
 .featured-grid{margin-top:4px}
 .media img[alt^="销售辅助系统"]{object-fit:cover}
 
-/* About：约百字常展，履历与完整版各自折叠。 */
+/* About：简介、打卡与热爱常展；履历默认折叠，信念只留单列标题。 */
 .about-brief{max-width:62em;margin:0;color:var(--ink-2);font-size:15px;line-height:2}
-.about-full.fold{margin-top:24px;padding-top:0;border-top:1px solid var(--line)}
-.about-full.fold .about{max-width:none;padding-top:20px}
-.journey-fold{border:1px solid var(--line);border-radius:7px;background:rgba(255,253,248,.78)}
-.journey-fold>summary{display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer;list-style:none;color:var(--ink);font-weight:700}
+.journey-fold{margin-top:28px;border:1px solid var(--line);border-radius:7px;background:rgba(255,253,248,.86);box-shadow:0 10px 24px -24px rgba(43,36,24,.8)}
+.journey-fold>summary{display:flex;align-items:center;gap:12px;padding:15px 16px;cursor:pointer;list-style:none;color:var(--ink);font-weight:700}
 .journey-fold>summary::-webkit-details-marker{display:none}
 .journey-fold>summary::before{content:'▸';color:var(--accent);transition:transform .18s var(--ease)}
 .journey-fold[open]>summary::before{transform:rotate(90deg)}
+.journey-fold>summary:hover{background:rgba(115,92,120,.045)}
 .journey-fold>summary .tip{margin-left:auto;color:var(--muted);font-size:12px;font-weight:400}
 .journey-fold .timeline{padding:4px 20px 20px}
 .chapter{display:grid;grid-template-columns:128px 1fr;gap:22px;padding:20px 0;border-top:1px solid var(--line-2)}
 .chapter-time{padding-top:3px;color:var(--muted);font-size:12px}
 .chapter-body h3{margin:0 0 8px;font-size:16px}
 .chapter-body p{margin:0 0 12px;color:var(--ink-2);font-size:14px;line-height:1.95}
-#beliefs,#likes,#dislikes{padding:36px 0 0}
+#beliefs,#likes,#dislikes{padding:42px 0 0}
 .life-goal{max-width:64em;color:var(--ink-2)}
+.about-goal{margin:32px 0 0}
 .life-goal p{margin:0 0 15px}
-.life-goal .goal-lead{font-size:20px;line-height:1.8;color:var(--ink);font-weight:700}
-.flywheel{margin:22px 0 28px;padding:16px 18px 16px 36px;border-left:2px solid var(--accent);background:var(--accent-soft);color:var(--ink-2)}
-.flywheel li{margin:5px 0}
-.belief-list{display:grid;grid-template-columns:1fr 1fr;gap:0 28px;margin:0;padding:0;list-style:none;counter-reset:beliefs}
-.belief{position:relative;padding:18px 0 18px 32px;border-top:1px solid var(--line);counter-increment:beliefs}
-.belief::before{content:counter(beliefs,decimal-leading-zero);position:absolute;left:0;top:20px;color:var(--muted);font-size:11px}
-.belief strong{display:block;margin-bottom:7px;line-height:1.75}
-.belief p{margin:0;color:var(--ink-2);font-size:13px;line-height:1.9}
+.life-goal p:last-child{margin-bottom:0}
+.life-goal .goal-lead{font-size:21px;line-height:1.8;color:var(--ink);font-weight:700}
+.life-goal .goal-belief{font-size:17px;line-height:1.9;color:var(--ink);font-weight:700}
+.life-goal .goal-aside{max-width:62em;color:var(--muted);font-size:13px;line-height:1.9}
+.belief-list{display:grid;grid-template-columns:1fr;gap:0;margin:0;padding:0;list-style:none;counter-reset:beliefs}
+.belief-list li{position:relative;padding:14px 0 14px 34px;border-top:1px solid var(--line);counter-increment:beliefs;color:var(--ink-2);font-size:15px;line-height:1.8}
+.belief-list li::before{content:counter(beliefs) ".";position:absolute;left:0;top:15px;color:var(--muted);font-size:12px}
+.preference-list{max-width:68em;margin:0;padding:0;list-style:none}
+.preference-list li{padding:12px 0;border-top:1px solid var(--line-2);color:var(--ink-2);line-height:1.9}
 
-/* Life：连胜紧接标题且始终同排；三项热爱带真实图标与图片。 */
-#life .streak-grid{margin-top:4px}
+/* 关于我：连胜紧接简介，三项热爱带真实图标与图片。 */
+#about .streak-grid{margin-top:28px;margin-bottom:28px}
 .life-visual{height:116px;margin:0 0 16px;display:flex;align-items:center;justify-content:flex-start;overflow:hidden}
 .life-visual img{display:block;width:104px;height:104px;object-fit:contain;border-radius:18px}
 .life[data-life="eason"] .life-visual img{width:128px;object-fit:cover;object-position:center 24%;border-radius:9px}
-.likes-intro{max-width:65em;color:var(--ink-2);font-size:14px;line-height:1.95}
 .dislike-list{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:24px}
 .dislike-list li{padding:18px 20px;border:1px solid var(--line);border-radius:8px;background:rgba(255,253,248,.72)}
 .dislike-list strong{display:block;margin-bottom:7px}
@@ -651,7 +670,7 @@ body{background-image:none}
 @media(max-width:860px){.streak-grid{grid-template-columns:1fr 1fr;gap:14px}}
 @media(max-width:680px){
   .streak-caption{justify-content:center;flex-wrap:wrap;gap:2px 4px;text-align:center}
-  .belief-list,.dislike-list{grid-template-columns:1fr;gap:0}
+  .dislike-list{grid-template-columns:1fr;gap:0}
   .dislike-list li+li{margin-top:14px}
   .chapter{grid-template-columns:1fr;gap:7px;padding:16px 0}
   .journey-fold .timeline{padding:2px 14px 14px}
@@ -687,8 +706,7 @@ body{background-image:none}
 
     <nav class="nav-block rise d6" aria-label="页面导航">
       <a href="#projects"><i></i>项目</a>
-      <a href="#about"><i></i>关于</a>
-      <a href="#life"><i></i>生活</a>
+      <a href="#about"><i></i>关于我</a>
     </nav>
 
     <div class="hero-intro rise d4">
@@ -744,32 +762,18 @@ body{background-image:none}
       </article>
     </div>
     <div class="grid secondary-grid">
-      <article class="card secondary" data-id="p4" data-name="API 商机雷达">
-        <button class="card-btn" type="button" aria-label="打开 API 商机雷达 详情">
-          <div class="media"><img src="assets/shot-radar.webp" style="object-position:center 30%" alt="API 商机雷达界面预览" loading="lazy" decoding="async"></div>
-          <div class="card-meta"><span class="card-no">04</span><h3 class="card-name">API 商机雷达</h3></div>
-          <div class="card-foot">3 张商机卡 + 2 条成长<span class="open">点开 →</span></div>
-        </button>
-      </article>
-      <article class="card secondary" data-id="p5" data-name="个人理财投资助手">
-        <button class="card-btn" type="button" aria-label="打开 个人理财投资助手 详情">
-          <div class="media"><img src="assets/shot-book.webp" style="object-position:center 30%" alt="个人理财投资助手界面预览" loading="lazy" decoding="async"></div>
-          <div class="card-meta"><span class="card-no">05</span><h3 class="card-name">个人理财投资助手</h3></div>
-          <div class="card-foot">六类资产 · 一张表看完<span class="open">点开 →</span></div>
-        </button>
-      </article>
-      <article class="card secondary" data-id="p6" data-name="日语 N1 备考教练">
-        <button class="card-btn" type="button" aria-label="打开 日语 N1 备考教练 详情">
-          <div class="media"><img src="assets/shot-n1.webp" style="object-position:center 30%" alt="日语 N1 备考教练界面预览" loading="lazy" decoding="async"></div>
-          <div class="card-meta"><span class="card-no">06</span><h3 class="card-name">日语 N1 备考教练</h3></div>
-          <div class="card-foot">51 套真题 · 每天一小时<span class="open">点开 →</span></div>
-        </button>
-      </article>
       <article class="card folded" data-id="p7" data-name="破万卷">
         <button class="card-btn" type="button" aria-label="打开 破万卷 详情">
           <div class="media"><img src="assets/shot-powan.webp" alt="破万卷界面预览" loading="lazy" decoding="async"></div>
           <span class="f-line"><span class="f-no">07</span><span class="card-name">破万卷</span><span class="f-open">↗</span></span>
           <span class="f-sub">AI 读一百条，你读一篇</span>
+        </button>
+      </article>
+      <article class="card secondary" data-id="p4" data-name="API 商机雷达">
+        <button class="card-btn" type="button" aria-label="打开 API 商机雷达 详情">
+          <div class="media"><img src="assets/shot-radar.webp" style="object-position:center 30%" alt="API 商机雷达界面预览" loading="lazy" decoding="async"></div>
+          <div class="card-meta"><span class="card-no">04</span><h3 class="card-name">API 商机雷达</h3></div>
+          <div class="card-foot">3 张商机卡 + 2 条成长<span class="open">点开 →</span></div>
         </button>
       </article>
       <article class="card folded" data-id="p8" data-name="外卖吃啥">
@@ -779,6 +783,13 @@ body{background-image:none}
           <span class="f-sub">今天别纠结，转一下就开饭</span>
         </button>
       </article>
+      <article class="card secondary" data-id="p5" data-name="个人理财投资助手">
+        <button class="card-btn" type="button" aria-label="打开 个人理财投资助手 详情">
+          <div class="media"><img src="assets/shot-book.webp" style="object-position:center 30%" alt="个人理财投资助手界面预览" loading="lazy" decoding="async"></div>
+          <div class="card-meta"><span class="card-no">05</span><h3 class="card-name">个人理财投资助手</h3></div>
+          <div class="card-foot">六类资产 · 一张表看完<span class="open">点开 →</span></div>
+        </button>
+      </article>
       <article class="card folded" data-id="p9" data-name="简历工坊 Pro">
         <button class="card-btn" type="button" aria-label="打开 简历工坊 Pro 详情">
           <div class="media"><img src="assets/shot-resume.webp" alt="简历工坊 Pro界面预览" loading="lazy" decoding="async"></div>
@@ -786,74 +797,80 @@ body{background-image:none}
           <span class="f-sub">先统一事实，再谈版式</span>
         </button>
       </article>
+      <article class="card secondary" data-id="p6" data-name="日语 N1 备考教练">
+        <button class="card-btn" type="button" aria-label="打开 日语 N1 备考教练 详情">
+          <div class="media"><img src="assets/shot-n1.webp" style="object-position:center 30%" alt="日语 N1 备考教练界面预览" loading="lazy" decoding="async"></div>
+          <div class="card-meta"><span class="card-no">06</span><h3 class="card-name">日语 N1 备考教练</h3></div>
+          <div class="card-foot">51 套真题 · 每天一小时<span class="open">点开 →</span></div>
+        </button>
+      </article>
     </div>
   </section>
   <section id="about">
   <div class="sec-head"><h2>关于我</h2></div>
-  <p class="about-brief">我是周锦全，东南大学通信工程本科，做过自动驾驶算法和毫米波整流芯片。经历联洲国际海外销售轮岗后，现在在星尘智能做海外大科研销售。工作之外，我用 AI 做真正会用的工具，也认真经营亲密关系、投资能力和具体生活。</p>
-  <details class="fold about-full">
-    <summary><span class="chev">▸</span><span class="lab">完整版 About</span></summary>
-    <div class="about">
-      <details class="journey-fold" id="journey">
-        <summary><span>履历与工作</span></summary>
-        <div class="timeline">
-          <article class="chapter"><div class="chapter-time">东南大学</div><div class="chapter-body"><h3>通信工程本科 · 毫米波国家重点实验室</h3><p>接受电子信息与计算机方向的科班训练，学过计算机系统、计算机组成原理、计算机网络等课程，也做软硬件实践和流片。</p><p>软件方面，我写过自动驾驶算法；硬件方面，毕设研究毫米波整流芯片，尝试把环境中微弱的信号收集并转化成可利用的能源。本科期间，也曾在新东方和新加坡电信实习。毕业后，我选择更早进入社会，在真实业务里继续成长。</p></div></article>
-          <article class="chapter"><div class="chapter-time">2025.07 起</div><div class="chapter-body"><h3>联洲国际 TP-Link · 国际业务</h3><p>从国际业务管培生做起，经历渠道销售、技术型销售和大客户销售轮岗，后来在法国负责亚马逊大客户业务。</p><p>接触过企业级网络、安全产品，以及消费级网络和消费电子产品。标书、技术方案与客户沟通都要做，这段经历让我学会在技术可行性和商业目标之间来回翻译。</p></div></article>
-          <article class="chapter"><div class="chapter-time">现在</div><div class="chapter-body"><h3>星尘智能 Astribot · 海外大科研销售</h3><p>面向海外高校与科研客户，工作涉及具身智能轮式人形机器人本体、软件服务 SaaS 和模型服务 MaaS。</p><p>我既理解客户的科研问题，也要判断硬件、电控、SDK 和现有能力的边界，把研究目标翻译成能够交付的范围。通信工程的训练，让我进入这个新领域时没有那么害怕。</p></div></article>
-        </div>
-      </details>
+  <p class="about-brief">我是周锦全，2021入学东南大学通信工程本科，做过自动驾驶算法、医美整容预测cv算法和毫米波芯片。在联洲国际tplink做过国际业务管培生卖路由器（大客户方向），现在在星尘智能Astribot做海外大科研销售卖机器人。工作之外，我会用 AI 来Vibe Coding一些满足我好奇心的小玩意。努力追求身心健康、努力跟上AI Native</p>
 
-      <section id="beliefs">
-        <div class="sec-head"><h2>我相信的</h2></div>
-        <div class="life-goal">
-          <p class="goal-lead">人生的追求不应该是牛逼，而应该是幸福。</p>
-          <p>我希望自己幸福快乐、身心健康，这就是我的人生目标，不是胸无大志。如果能借助一些杠杆更好地实现它，那就更好了。AI 是一个杠杆，理财投资也是。</p>
-          <p>能力不太够，就努力让自己和家人幸福；能力够，就尽可能多地让一些人幸福。穷则独善其身，达则兼济天下。</p>
-          <p>十年后，我希望自己任职于一家好公司，做一个好人；或者自己创业，做一些对自己、也对世界有益的事。和彼此认可的客户、朋友以及愿意交流合作的国际友人，一起做双赢的事情。至于具体还要解决哪类问题，我暂时没有假装清晰的答案。</p>
-          <p>如果只能留下一个代表作，我希望不是某个软件，而是我在心理学或者哲学方面的认知判断。</p>
-          <p><strong>亲密关系、职业能力和投资能力，是我的人生飞轮。</strong></p>
-          <ul class="flywheel" aria-label="我的人生飞轮"><li><strong>亲密关系：</strong>幸福不是成功之后的奖品，而是生活本身。</li><li><strong>职业能力：</strong>持续学习，做酷而难的事，让能力配得上想解决的问题。</li><li><strong>投资能力：</strong>理解风险、长期积累和边际变化，让投资成为人生的杠杆。</li></ul>
-        </div>
-        <ol class="belief-list">
-          <li class="belief"><strong>弱小和无知不是生存的障碍，傲慢才是。</strong><p>知道自己不知道，才有机会继续学习。承认边界，比装作无所不知更有力量。</p></li>
-          <li class="belief"><strong>相信二八定律，也尊重边际递减效应。</strong><p>集中力量办大事，但别把最后一点完美主义当成永远值得的追求。时间和资源都有机会成本。</p></li>
-          <li class="belief"><strong>人生得意须尽欢，莫使金樽空对月。</strong><p>生活不是只有延迟满足。喜欢本身可以值回时间，不必把每一分钟都拿去兑换成长。</p></li>
-          <li class="belief"><strong>知行合一。</strong><p>让主观意念和实际行动尽量匹配。即使结果不完美，内心也会更安定。</p></li>
-          <li class="belief"><strong>多做酷而难的事情，少做平庸而容易的事情。</strong><p>难不是为了吃苦，难是因为有些问题值得。酷也不是表演，而是做完以后自己真心认可。</p></li>
-          <li class="belief"><strong>认知行为疗法是必要的。我们要改的可能不是行为，而是认知本身。</strong><p>在 AI 焦虑的时代，我更愿意正视客观事实，检查自己的解释方式，而不是被“必须越来越强”的念头一直赶着走。</p></li>
-        </ol>
-      </section>
-    </div>
-  </details>
-</section>
-
-  <section id="life">
-  <div class="sec-head"><h2>生活</h2></div>
   <div class="streak-grid" aria-label="语言学习连胜">
     <figure class="streak" data-streak="duolingo"><div class="streak-widget"><img class="streak-mascot" src="assets/duolingo-widget-clean.webp" alt="" aria-hidden="true" loading="lazy" decoding="async"><svg class="streak-flame" viewBox="0 0 64 80" aria-hidden="true"><path fill="#ff6b35" d="M34 2c3 18-12 21-8 35 3-5 8-8 12-9-2 10 12 14 9 27 7-3 10-8 11-14 7 23-5 37-26 37S2 65 5 49C9 27 28 22 34 2z"/><path fill="#ffb347" d="M32 40c8 9 14 15 12 24-1 8-7 12-13 12-9 0-15-6-14-14 1-9 8-14 15-22z"/><path fill="#fff" d="M31 54c5 6 7 9 6 13-1 4-3 6-6 6-4 0-7-3-6-7 0-4 3-8 6-12z"/></svg><div class="streak-copy"><div class="streak-number" aria-label="多邻国连胜天数"><span class="num" data-days>1920</span><span class="unit">天</span></div><span class="streak-text">期待重逢！</span></div><div class="streak-week" aria-label="本周打卡记录"><i>✓</i><i>✓</i><i>✓</i><i>✓</i><i>✓</i></div></div><figcaption class="streak-caption"><b>多邻国</b>&nbsp;· 自高中起自选日语，CEFR B1水平</figcaption></figure>
     <figure class="streak" data-streak="momo"><div class="streak-widget"><img class="streak-mascot" src="assets/momo-widget-clean.webp" alt="" aria-hidden="true" loading="lazy" decoding="async"><svg class="streak-mark" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#34313e" stroke="#fff" stroke-width="3"/><ellipse cx="23" cy="29" rx="12" ry="15" fill="#fff"/><ellipse cx="41" cy="29" rx="12" ry="15" fill="#fff"/><circle cx="25" cy="28" r="4" fill="#34313e"/><circle cx="39" cy="28" r="4" fill="#34313e"/><path d="M29 39l3 3 4-4" fill="none" stroke="#34313e" stroke-width="3" stroke-linecap="round"/></svg><div class="streak-copy"><div class="streak-number" aria-label="墨墨背单词连胜天数"><span class="num" data-days>1493</span><span class="unit">天</span></div></div></div><figcaption class="streak-caption"><b>墨墨背单词</b>&nbsp;· 长期主义也藏在小事里</figcaption></figure>
   </div>
 
+  <div class="life-grid">
+    <div class="life" data-life="honor"><figure class="life-visual"><img src="assets/life-honor-app.jpg" alt="王者荣耀 App 的亚瑟图标" width="104" height="104" loading="lazy" decoding="async"></figure><h3>王者荣耀</h3><p>喜欢打王者荣耀，11年老玩家，擅长中单打野。</p></div>
+    <div class="life" data-life="fanqie"><figure class="life-visual"><img src="assets/life-fanqie.webp" alt="番茄小说 App 图标" width="104" height="104" loading="lazy" decoding="async"></figure><h3>番茄小说</h3><p>喜欢看历史题材爽文，是我很具体的放松方式。</p></div>
+    <div class="life" data-life="eason"><figure class="life-visual"><img src="assets/life-eason.webp" alt="陈奕迅在巡演现场演唱，摄影 My Kan" width="128" height="104" loading="lazy" decoding="async"></figure><h3>陈奕迅</h3><p>有些歌不是用来提升品味，只是刚好陪过自己，强推《富士山下》。</p></div>
+  </div>
+
+  <details class="journey-fold" id="journey">
+    <summary><span>履历与工作</span><span class="tip">点击展开</span></summary>
+    <div class="timeline">
+      <article class="chapter"><div class="chapter-time">东南大学</div><div class="chapter-body"><h3>通信工程本科 · 毫米波国家重点实验室</h3><p>接受电子信息与计算机方向的科班训练，学过计算机系统、计算机组成原理、计算机网络等课程，也做软硬件实践和流片。</p><p>软件方面，我写过自动驾驶算法；硬件方面，毕设研究毫米波整流芯片，尝试把环境中微弱的信号收集并转化成可利用的能源。本科期间，也曾在新东方和新加坡电信实习。毕业后，我选择更早进入社会，在真实业务里继续成长。</p></div></article>
+      <article class="chapter"><div class="chapter-time">2025.07 起</div><div class="chapter-body"><h3>联洲国际 TP-Link · 国际业务</h3><p>从国际业务管培生做起，经历渠道销售、技术型销售和大客户销售轮岗，后来在法国负责亚马逊大客户业务。</p><p>接触过企业级网络、安全产品，以及消费级网络和消费电子产品。标书、技术方案与客户沟通都要做，这段经历让我学会在技术可行性和商业目标之间来回翻译。</p></div></article>
+      <article class="chapter"><div class="chapter-time">现在</div><div class="chapter-body"><h3>星尘智能 Astribot · 海外大科研销售</h3><p>面向海外高校与科研客户，工作涉及具身智能轮式人形机器人本体、软件服务 SaaS 和模型服务 MaaS。</p><p>我既理解客户的科研问题，也要判断硬件、电控、SDK 和现有能力的边界，把研究目标翻译成能够交付的范围。通信工程的训练，让我进入这个新领域时没有那么害怕。</p></div></article>
+    </div>
+  </details>
+
+  <div class="life-goal about-goal">
+    <p class="goal-lead">我的人生目标是探索热爱和美好。</p>
+    <p class="goal-belief">我的信念：人生的追求不应该是牛逼，而应该是幸福。</p>
+    <p class="goal-aside">虽然AI能证出黎曼猜想，但是AI享受不了吃喝玩乐也体验不到欢喜悲愁，AI击碎了人类的优越感，但人类拥有的东西仍然有很多。</p>
+    <p class="goal-aside">在 AI 焦虑的时代，认知行为疗法是必要的。我们要改的可能不是行为，而是认知本身。</p>
+  </div>
+
+  <section id="beliefs">
+    <div class="sec-head"><h2>我相信的一些东西</h2></div>
+    <ol class="belief-list">
+      <li>弱小和无知不是生存的障碍，傲慢才是。</li>
+      <li>相信二八定律，尊重边际递减效应。</li>
+      <li>人生得意须尽欢，莫使金樽空对月。</li>
+      <li>想做了就去做，知而不行，只是未知。</li>
+      <li>多做酷而难的事情，少做平庸而容易的事情。</li>
+      <li>我是积极的AI降临派，少焦虑，少因AI焦虑。</li>
+    </ol>
+  </section>
+
   <section id="likes">
     <div class="sec-head"><h2>我喜欢的一些东西</h2></div>
-    <p class="likes-intro">喜欢学日语；常看量子位，也喜欢半佛仙人、赛博禅心、数字生命卡兹克；关注英雄联盟 LPL，看日本动漫和番茄小说里的历史题材爽文。喜欢橘子，尤其是金钱橘。凡事优先问大模型，常用 Codex 和 DeepSeek；喜欢的作家有马伯庸、当年明月，也听莫扎特和德彪西。</p>
-    <div class="life-grid">
-      <div class="life" data-life="honor"><figure class="life-visual"><img src="assets/life-honor-app.jpg" alt="王者荣耀 App 的亚瑟图标" width="104" height="104" loading="lazy" decoding="async"></figure><h3>王者荣耀</h3><p>中单打野。快乐本身就成立，不必硬总结成团队协作。</p></div>
-      <div class="life" data-life="fanqie"><figure class="life-visual"><img src="assets/life-fanqie.webp" alt="番茄小说 App 图标" width="104" height="104" loading="lazy" decoding="async"></figure><h3>番茄小说</h3><p>历史题材爽文，是我很具体的放松方式。</p></div>
-      <div class="life" data-life="eason"><figure class="life-visual"><img src="assets/life-eason.webp" alt="陈奕迅在巡演现场演唱，摄影 My Kan" width="128" height="104" loading="lazy" decoding="async"></figure><h3>陈奕迅</h3><p>有些歌不是用来提升品位的，只是刚好陪过自己。</p></div>
-    </div>
-    <details class="more-life"><summary>再补充一点具体偏好</summary><div class="more-body"><p>玩王者荣耀，也关注 LPL；喜欢《巫师13》和日本动漫。工具上喜欢 Codex、DeepSeek，凡事优先问大模型。音乐除了陈奕迅，也听莫扎特和德彪西。</p></div></details>
+    <ul class="preference-list">
+      <li>喜欢学日语；</li>
+      <li>喜欢看公众号，喜欢量子位，也喜欢半佛仙人、赛博禅心、数字生命卡兹克；</li>
+      <li>爱打游戏， S16英雄联盟世界冠军BLG牛逼！</li>
+      <li>喜欢看日本少年漫；</li>
+      <li>喜欢看番茄小说的爽文。喜欢吃橘子，尤其是金钱橘。</li>
+      <li>喜欢凡事优先问大模型，大爱ChatGPT和DeepSeek（讨厌Anthropic）；</li>
+      <li>喜欢的作家有马伯庸、当年明月，也听莫扎特和德彪西。</li>
+    </ul>
   </section>
 
   <section id="dislikes">
-    <div class="sec-head"><h2>我不喜欢的东西</h2></div>
+    <div class="sec-head"><h2>我讨厌的一些东西</h2></div>
     <ul class="dislike-list"><li><strong>明明可以用自动化，却偏要人反复做。</strong><p>规则清楚、机器能做，我就不愿意把重复动作当作勤奋。工具应该还人自由，而不是让人伺候工具。</p></li><li><strong>高度压力、疲惫状态下的情绪代偿失败。</strong><p>说简单点，就是累到只会不自觉地刷抖音。不是讨厌短视频本身，而是不喜欢自己已经疲惫失控，却还在用它麻醉自己。</p></li></ul>
   </section>
 </section>
 
   </main>
 
-  <footer><span>© 2026 周锦全</span><span class="ver">v2.6.0</span><span class="sp"><a class="totop" href="#top">↑ 回顶</a></span></footer>
+  <footer><span>© 2026 周锦全</span><span class="ver">v2.7.0</span><span class="sp"><a class="totop" href="#top">↑ 回顶</a></span></footer>
 
 </div>
 
@@ -984,8 +1001,8 @@ body{background-image:none}
 
   var PROJECTS = ["销售助手 · 客户管理系统","AI 模型斩杀线","Personal AI · 会成长的个人助手","API 商机雷达","个人理财投资助手","日语 N1 备考教练","破万卷","外卖吃啥","简历工坊 Pro"];
   var FILES = {
-    "/about":"周锦全，东南大学通信工程本科，曾在毫米波国家重点实验室学习，做过自动驾驶算法和毫米波整流芯片。\nAI Native 时代的实践者、成长者、学徒。后来经历联洲国际海外销售轮岗与法国大客户业务，现在在星尘智能做海外大科研销售。我相信人生的追求是幸福，也用 AI 和投资做杠杆。",
-    "/life":"我喜欢王者荣耀中单打野、LPL、番茄小说里的历史题材爽文和陈奕迅，也看日本动漫，喜欢金钱橘、莫扎特和德彪西。\n凡事优先问大模型，常用 Codex 和 DeepSeek。多邻国与墨墨背单词长期坚持；不喜欢可以自动化却偏要重复，以及累到不自觉刷抖音的状态。",
+    "/about":"我是周锦全，2021入学东南大学通信工程本科，做过自动驾驶算法、医美整容预测cv算法和毫米波芯片。在联洲国际tplink做过国际业务管培生卖路由器（大客户方向），现在在星尘智能Astribot做海外大科研销售卖机器人。\n工作之外，我会用 AI 来Vibe Coding一些满足我好奇心的小玩意。努力追求身心健康、努力跟上AI Native",
+    "/life":"喜欢打王者荣耀，11年老玩家，擅长中单打野；喜欢看历史题材爽文，是我很具体的放松方式；有些歌不是用来提升品味，只是刚好陪过自己，强推《富士山下》。\n喜欢学日语；喜欢看公众号，喜欢量子位，也喜欢半佛仙人、赛博禅心、数字生命卡兹克；喜欢的作家有马伯庸、当年明月，也听莫扎特和德彪西。",
     "/contact":"邮箱：2336097716@qq.com\nGitHub：https://github.com/zhoujinq"
   };
   PROJECTS.forEach(function(name,i){ FILES["/projects/"+String(i+1).padStart(2,"0")] = name+"\nVibe Coding 自主实践项目，已上线公开网页与源码。"; });
@@ -1001,7 +1018,7 @@ body{background-image:none}
     realpath:"realpath [-em] path...  规范化虚拟路径", stat:"stat [-c format] path...  查看虚拟文档信息", du:"du [-bhs] [path...]  统计虚拟文档大小",
     history:"history [N] | history -c | history -d N  命令历史", tree:"tree [path]  打印虚拟目录树", more:"more [file...]  一次性打印文本", less:"less [file...]  一次性打印文本",
     cd:"cd [dir]  切换虚拟目录", pwd:"pwd  显示当前虚拟目录", ps:"ps [-ef]  查看本页虚拟 shell", neofetch:"neofetch [--off|--stdout]  查看静态站点会话",
-    about:"about  在终端阅读关于我", projects:"projects  在终端阅读项目简介", life:"life  在终端阅读性格与生活", links:"links  在终端查看联系方式", index:"index  在终端查看站点目录", clear:"clear  清空终端", exit:"exit  显示退出说明，不离开页面"
+    about:"about  在终端阅读关于我", projects:"projects  在终端阅读项目简介", life:"life  在终端阅读具体热爱", links:"links  在终端查看联系方式", index:"index  在终端查看站点目录", clear:"clear  清空终端", exit:"exit  显示退出说明，不离开页面"
   };
 
   function create(){
