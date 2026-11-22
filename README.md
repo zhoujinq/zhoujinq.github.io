@@ -2,16 +2,22 @@
 
 个人主页：一个 `index.html` + 本地素材，没有构建步骤，没有外部请求，断网也能打开。
 
-线上：<https://zhoujinq.github.io/> ｜ 版本 v2.2.0（2026-11-22）
+线上：<https://zhoujinq.github.io/> ｜ 版本 v2.3.0（2026-11-22）
 
-## 结构
+## 页面结构
+
+四大块：**首屏**（像素名字、三行简介、终端）→ **项目**（只放 3 个）→ **关于我**（默认折叠）→ **生活**。
+
+项目区只展示 3 个能点开的东西，每个只给一个公开网站链接；代码仓库不上首页。
 
 ```
 index.html                  结构、样式、终端与覆盖层脚本，全在这里
 assets/maple-*.woff2        Maple Mono CN 子集（正文 / 粗体）
-assets/shot-*.webp|svg      9 个项目卡的界面截图
+assets/shot-sales.svg       01 销售助手工作流示意
+assets/shot-n1.webp         02 N1 备考看板截图
+assets/shot-book.webp       03 记账投资助手截图
 assets/life-*.webp|jpg      生活区素材
-assets/particles.js         首屏粒子背景
+assets/particles.js         首屏粒子（vendored particles.js）
 assets/og.png               社交分享卡 1200×630
 tests/page.test.js          页面结构、文案口径、外链
 tests/shell.test.js         终端命令
@@ -33,19 +39,18 @@ python -m http.server 8080
 
 | 想改什么 | 改哪里 |
 |---|---|
-| 项目卡（前 3 个常展） | `<section id="projects">` 里的 `<article class="card" data-id="pN">` |
-| 项目书里的后 6 个 | 同一个 section 内 `<details class="project-book">` 下的卡片 |
-| 项目详情覆盖层 | 文末 `<template id="tpl-pN">`，含“公开网站 / 代码仓库”两条外链 |
+| 项目卡 | `<section id="projects">` 里的 3 个 `<article class="card" data-id="pN">` |
+| 项目详情 | 文末 `<template id="tpl-pN">`，只保留一条 `打开网站 ↗` 外链 |
 | 终端里的文件与命令 | `<script id="shell-engine">` 里的 `PROJECTS`、`FILES`、`commands` |
 | 最近更新日期 | `.last-update` 一行 |
 | 配色 | `:root`；另有一处候选覆盖，改色前先读 `progress.md` §3 |
-| 分享卡 | 用无头 Chrome 在 1200×630 重新截 `_build/og-src.html` |
+| 粒子手感 | 文末 `particlesJS` 配置：`interactivity.detect_on` 必须是 `"window"`，否则文字区不响应鼠标 |
 
-卡片和图层的 `data-id`、`data-name`、`tpl-pN` 必须一一对应；新增项目时同时补测试。
+卡片和图层 `data-id`、`data-name`、`tpl-pN` 必须一一对应，数量改动要同步测试。
 
 ## 字体
 
-正文 Maple Mono CN（OFL），**只保留页面实际用到的约 1000 个字符**（整包中文版 18MB）。
+正文 Maple Mono CN（OFL），**只保留页面实际用到的约 900 个字符**（整包中文版 18MB）。
 改了文案出现新字，就要重新子集化，否则新字回退系统字体：
 
 ```python
@@ -60,7 +65,7 @@ chars = set(open("index.html", encoding="utf-8").read()) | {chr(c) for c in rang
 node --test tests/page.test.js tests/shell.test.js tests/streak.test.js   # 31 项
 ```
 
-仓库名必须是 `zhoujinq.github.io`，Pages 才伺服在根域名。推 `main` 自动构建；页脚版本号链到 `releases/tag/v2.2.0`，发版时记得同步打 tag。
+仓库名必须是 `zhoujinq.github.io`，Pages 才伺服在根域名。推 `main` 自动构建；页脚版本号是静态文本，不再外链 Release。
 
 ## 已知待办
 
