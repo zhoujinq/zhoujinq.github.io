@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>~zhoujinq: index</title>
+<title>周锦全的主页</title>
 <meta name="description" content="周锦全（Zhou Jinquan）— AI Native 时代的实践者、成长者、学徒。保持好奇，边学边做，也认真生活。">
 <meta name="theme-color" content="#fffefa">
 <meta name="author" content="周锦全">
@@ -302,6 +302,54 @@ summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-
 .card-foot .dot{width:6px;height:6px;border-radius:50%;background:var(--ok);flex:none}
 .card-foot.wip .dot{background:var(--wip)}
 .card-foot .open{margin-left:auto;color:var(--faint)}
+
+
+/* ── 折起来的另外 6 个：三个文件夹，每夹两页 ───────────────── */
+.shelf{margin-top:30px}
+.shelf-head{display:flex;align-items:baseline;gap:12px;margin-bottom:14px;font-size:12px;letter-spacing:.06em;color:var(--muted)}
+.shelf-title{color:var(--ink-3)}
+.shelf-hint{margin-left:auto;font-size:11.5px;color:var(--faint)}
+.folder-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.folder{position:relative;padding-top:26px}
+.folded .media{display:none}
+.card.folded{border-radius:6px;overflow:visible}
+.card.folded .card-btn{
+  display:flex;align-items:center;width:100%;border:1px solid var(--line);border-radius:6px;
+  background:#fbf6ec;padding:13px 14px;box-shadow:0 8px 18px -16px rgba(43,36,24,.8);
+  transition:transform .25s var(--ease),background .2s var(--ease),border-color .2s var(--ease);
+}
+.card.folded .f-line{display:flex;align-items:baseline;gap:8px;width:100%;min-width:0}
+.card.folded .f-no{font-size:11px;color:var(--faint);letter-spacing:.06em;flex:none}
+.card.folded .card-name{
+  flex:1;min-width:0;margin:0;font-size:12.5px;font-weight:400;line-height:1.4;letter-spacing:0;
+  min-height:0;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink-2);
+}
+.card.folded .f-open{font-size:12px;color:var(--faint);flex:none}
+.card.folded.back{position:absolute;left:10px;right:10px;top:0;bottom:0;z-index:1;transform:rotate(-1.8deg)}
+.card.folded.back .card-btn{
+  align-items:flex-start;height:100%;padding:0;background:#f0e7d6;border-color:#e0d4bf;box-shadow:none;
+}
+.card.folded.back .f-line{display:flex;align-items:center;gap:7px;height:22px;padding:0 12px}
+.card.folded.back .f-no,.card.folded.back .card-name{font-size:11px;line-height:22px;height:22px;min-height:0}
+.card.folded.back .card-name{color:var(--muted)}
+.card.folded.back .f-open{display:none}
+.card.folded.front{position:relative;z-index:2}
+.folder:hover .card.folded.back,.folder:focus-within .card.folded.back{transform:rotate(-3.4deg) translateY(-5px)}
+.folder:hover .card.folded.front .card-btn,.folder:focus-within .card.folded.front .card-btn{
+  transform:translateY(-2px);background:#fffdf8;border-color:var(--accent-line);
+}
+.card.folded.back{transition:transform .25s var(--ease)}
+.card.folded .card-btn:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+@media (max-width:720px){
+  .folder-grid{grid-template-columns:1fr;gap:16px}
+  .shelf-head{flex-wrap:wrap;row-gap:4px}
+  .shelf-hint{margin-left:0}
+}
+@media (prefers-reduced-motion:reduce){
+  .card.folded,.card.folded .card-btn{transition:none}
+  .folder:hover .card.folded.back,.folder:focus-within .card.folded.back{transform:rotate(-1.8deg)}
+  .folder:hover .card.folded.front .card-btn{transform:none}
+}
 
 /* ── 关于（折叠） ───────────────────────────────────────── */
 .fold{margin:52px 0 0;border-top:2px solid var(--ink);padding-top:16px}
@@ -645,7 +693,7 @@ body{background-image:none}
   <main id="main" tabindex="-1">
 
   <section id="projects">
-    <div class="sec-head"><h2>Vibe Coding项目</h2><span class="cnt">3 个项目 · 都能点开</span></div>
+    <div class="sec-head"><h2>Vibe Coding项目</h2><span class="cnt">3 个主推 · 6 个折起来</span></div>
     <div class="grid featured-grid">
       <article class="card" data-id="p1" data-name="销售助手 · 客户管理系统">
         <button class="card-btn" type="button" aria-label="打开 销售助手 · 客户管理系统 详情">
@@ -668,6 +716,53 @@ body{background-image:none}
           <div class="card-foot"><span class="dot"></span>在线 · v0.1.0<span class="open">点开 →</span></div>
         </button>
       </article>
+    </div>
+    <div class="shelf">
+      <div class="shelf-head"><span class="shelf-title">另外 6 个 · 折起来放着</span><span class="shelf-hint">点开一样有截图和网站</span></div>
+      <div class="folder-grid">
+        <div class="folder">
+          <article class="card folded back" data-id="p5" data-name="日语 N1 备考教练">
+            <button class="card-btn" type="button" aria-label="打开 日语 N1 备考教练 详情">
+              <div class="media"><img src="assets/shot-n1.webp" alt="日语 N1 备考教练界面预览" loading="lazy" decoding="async"></div>
+              <span class="f-line"><span class="f-no">05</span><span class="card-name">日语 N1 备考教练</span><span class="f-open">↗</span></span>
+            </button>
+          </article>
+          <article class="card folded front" data-id="p4" data-name="简历工坊 Pro">
+            <button class="card-btn" type="button" aria-label="打开 简历工坊 Pro 详情">
+              <div class="media"><img src="assets/shot-resume.webp" alt="简历工坊 Pro界面预览" loading="lazy" decoding="async"></div>
+              <span class="f-line"><span class="f-no">04</span><span class="card-name">简历工坊 Pro</span><span class="f-open">↗</span></span>
+            </button>
+          </article>
+        </div>
+        <div class="folder">
+          <article class="card folded back" data-id="p7" data-name="外卖吃啥">
+            <button class="card-btn" type="button" aria-label="打开 外卖吃啥 详情">
+              <div class="media"><img src="assets/shot-eat.webp" alt="外卖吃啥界面预览" loading="lazy" decoding="async"></div>
+              <span class="f-line"><span class="f-no">07</span><span class="card-name">外卖吃啥</span><span class="f-open">↗</span></span>
+            </button>
+          </article>
+          <article class="card folded front" data-id="p6" data-name="记账投资助手">
+            <button class="card-btn" type="button" aria-label="打开 记账投资助手 详情">
+              <div class="media"><img src="assets/shot-book.webp" alt="记账投资助手界面预览" loading="lazy" decoding="async"></div>
+              <span class="f-line"><span class="f-no">06</span><span class="card-name">记账投资助手</span><span class="f-open">↗</span></span>
+            </button>
+          </article>
+        </div>
+        <div class="folder">
+          <article class="card folded back" data-id="p9" data-name="API 商机雷达">
+            <button class="card-btn" type="button" aria-label="打开 API 商机雷达 详情">
+              <div class="media"><img src="assets/shot-radar.webp" alt="API 商机雷达界面预览" loading="lazy" decoding="async"></div>
+              <span class="f-line"><span class="f-no">09</span><span class="card-name">API 商机雷达</span><span class="f-open">↗</span></span>
+            </button>
+          </article>
+          <article class="card folded front" data-id="p8" data-name="破万卷">
+            <button class="card-btn" type="button" aria-label="打开 破万卷 详情">
+              <div class="media"><img src="assets/shot-powan.webp" alt="破万卷界面预览" loading="lazy" decoding="async"></div>
+              <span class="f-line"><span class="f-no">08</span><span class="card-name">破万卷</span><span class="f-open">↗</span></span>
+            </button>
+          </article>
+        </div>
+      </div>
     </div>
   </section>
   <section id="about">
@@ -712,13 +807,13 @@ body{background-image:none}
   <section id="life">
   <div class="sec-head"><h2>生活</h2></div>
   <div class="streak-grid" aria-label="语言学习连胜">
-    <figure class="streak" data-streak="duolingo"><div class="streak-widget"><img class="streak-mascot" src="assets/duolingo-widget-clean.webp" alt="" aria-hidden="true" loading="lazy" decoding="async"><svg class="streak-flame" viewBox="0 0 64 80" aria-hidden="true"><path fill="#ff6b35" d="M34 2c3 18-12 21-8 35 3-5 8-8 12-9-2 10 12 14 9 27 7-3 10-8 11-14 7 23-5 37-26 37S2 65 5 49C9 27 28 22 34 2z"/><path fill="#ffb347" d="M32 40c8 9 14 15 12 24-1 8-7 12-13 12-9 0-15-6-14-14 1-9 8-14 15-22z"/><path fill="#fff" d="M31 54c5 6 7 9 6 13-1 4-3 6-6 6-4 0-7-3-6-7 0-4 3-8 6-12z"/></svg><div class="streak-copy"><div class="streak-number" aria-label="多邻国连胜天数"><span class="num" data-days>1920</span><span class="unit">天</span></div><span class="streak-text">期待重逢！</span></div><div class="streak-week" aria-label="本周打卡记录"><i>✓</i><i>✓</i><i>✓</i><i>✓</i><i>✓</i></div></div><figcaption class="streak-caption"><b>多邻国</b>&nbsp;· 长期主义也藏在小事里</figcaption></figure>
-    <figure class="streak" data-streak="momo"><div class="streak-widget"><img class="streak-mascot" src="assets/momo-widget-clean.webp" alt="" aria-hidden="true" loading="lazy" decoding="async"><svg class="streak-mark" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#34313e" stroke="#fff" stroke-width="3"/><ellipse cx="23" cy="29" rx="12" ry="15" fill="#fff"/><ellipse cx="41" cy="29" rx="12" ry="15" fill="#fff"/><circle cx="25" cy="28" r="4" fill="#34313e"/><circle cx="39" cy="28" r="4" fill="#34313e"/><path d="M29 39l3 3 4-4" fill="none" stroke="#34313e" stroke-width="3" stroke-linecap="round"/></svg><div class="streak-copy"><div class="streak-number" aria-label="墨墨背单词连胜天数"><span class="num" data-days>1493</span><span class="unit">天</span></div></div></div><figcaption class="streak-caption"><b>墨墨背单词</b>&nbsp;· 不打卡给别人看</figcaption></figure>
+    <figure class="streak" data-streak="duolingo"><div class="streak-widget"><img class="streak-mascot" src="assets/duolingo-widget-clean.webp" alt="" aria-hidden="true" loading="lazy" decoding="async"><svg class="streak-flame" viewBox="0 0 64 80" aria-hidden="true"><path fill="#ff6b35" d="M34 2c3 18-12 21-8 35 3-5 8-8 12-9-2 10 12 14 9 27 7-3 10-8 11-14 7 23-5 37-26 37S2 65 5 49C9 27 28 22 34 2z"/><path fill="#ffb347" d="M32 40c8 9 14 15 12 24-1 8-7 12-13 12-9 0-15-6-14-14 1-9 8-14 15-22z"/><path fill="#fff" d="M31 54c5 6 7 9 6 13-1 4-3 6-6 6-4 0-7-3-6-7 0-4 3-8 6-12z"/></svg><div class="streak-copy"><div class="streak-number" aria-label="多邻国连胜天数"><span class="num" data-days>1920</span><span class="unit">天</span></div><span class="streak-text">期待重逢！</span></div><div class="streak-week" aria-label="本周打卡记录"><i>✓</i><i>✓</i><i>✓</i><i>✓</i><i>✓</i></div></div><figcaption class="streak-caption"><b>多邻国</b>&nbsp;· 自高中起自选日语，CEFR B1水平</figcaption></figure>
+    <figure class="streak" data-streak="momo"><div class="streak-widget"><img class="streak-mascot" src="assets/momo-widget-clean.webp" alt="" aria-hidden="true" loading="lazy" decoding="async"><svg class="streak-mark" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#34313e" stroke="#fff" stroke-width="3"/><ellipse cx="23" cy="29" rx="12" ry="15" fill="#fff"/><ellipse cx="41" cy="29" rx="12" ry="15" fill="#fff"/><circle cx="25" cy="28" r="4" fill="#34313e"/><circle cx="39" cy="28" r="4" fill="#34313e"/><path d="M29 39l3 3 4-4" fill="none" stroke="#34313e" stroke-width="3" stroke-linecap="round"/></svg><div class="streak-copy"><div class="streak-number" aria-label="墨墨背单词连胜天数"><span class="num" data-days>1493</span><span class="unit">天</span></div></div></div><figcaption class="streak-caption"><b>墨墨背单词</b>&nbsp;· 长期主义也藏在小事里</figcaption></figure>
   </div>
 
   <section id="likes">
     <div class="sec-head"><h2>我喜欢的一些东西</h2></div>
-    <p class="likes-intro">常看量子位，也喜欢半佛仙人、赛博禅心、数字生命卡兹克；关注英雄联盟 LPL，看日本动漫和番茄小说里的历史题材爽文。喜欢橘子，尤其是金钱橘。凡事优先问大模型，常用 Codex 和 DeepSeek；喜欢的作家有马伯庸、当年明月，也听莫扎特和德彪西。</p>
+    <p class="likes-intro">喜欢学日语；常看量子位，也喜欢半佛仙人、赛博禅心、数字生命卡兹克；关注英雄联盟 LPL，看日本动漫和番茄小说里的历史题材爽文。喜欢橘子，尤其是金钱橘。凡事优先问大模型，常用 Codex 和 DeepSeek；喜欢的作家有马伯庸、当年明月，也听莫扎特和德彪西。</p>
     <div class="life-grid">
       <div class="life" data-life="honor"><figure class="life-visual"><img src="assets/life-honor-app.jpg" alt="王者荣耀 App 的亚瑟图标" width="104" height="104" loading="lazy" decoding="async"></figure><h3>王者荣耀</h3><p>中单打野。快乐本身就成立，不必硬总结成团队协作。</p></div>
       <div class="life" data-life="fanqie"><figure class="life-visual"><img src="assets/life-fanqie.webp" alt="番茄小说 App 图标" width="104" height="104" loading="lazy" decoding="async"></figure><h3>番茄小说</h3><p>历史题材爽文，是我很具体的放松方式。</p></div>
@@ -735,7 +830,7 @@ body{background-image:none}
 
   </main>
 
-  <footer><span>© 2026 周锦全</span><span class="ver">v2.3.1</span><span class="sp"><a class="totop" href="#top">↑ 回顶</a></span></footer>
+  <footer><span>© 2026 周锦全</span><span class="ver">v2.4.0</span><span class="sp"><a class="totop" href="#top">↑ 回顶</a></span></footer>
 
 </div>
 
@@ -791,11 +886,89 @@ body{background-image:none}
   <div class="ov-seg"><h4>栈</h4><p class="stack">Skill · Python 标准库 · 本地文件工作区</p></div>
 </template>
 
+<template id="tpl-p4">
+  <div class="ov-head"><span class="ov-no">04</span><h2 class="ov-name">简历工坊 Pro</h2></div>
+  <p class="ov-state">在线 · v0.5.0</p>
+  <p class="ov-one">改简历先统一事实，再谈版式。</p>
+  <div class="ov-links"><a href="https://zhoujinq.github.io/resume-master/" target="_blank" rel="noopener">打开网站 ↗</a></div>
+  <div class="ov-seg"><h4>一眼看到的数</h4><p>19 个不可证伪的空话词，命中 ≥6 次直接阻断；三套版式 swiss / editorial / mono。</p></div>
+  <div class="ov-seg"><h4>我解决了什么</h4><ul class="steps">
+          <li>事实只维护在 _master，岗位版本从基线派生，改事实先回母版。</li>
+          <li>G1 事实确认、G2 定稿、G3 交付三道门禁，交付前还要视觉复核。</li>
+        </ul></div>
+  <div class="ov-seg"><h4>栈</h4><p class="stack">Python + PyYAML + PyMuPDF · YAML → HTML → 无头打印</p></div>
+</template>
+
+<template id="tpl-p5">
+  <div class="ov-head"><span class="ov-no">05</span><h2 class="ov-name">日语 N1 备考教练</h2></div>
+  <p class="ov-state">在线 · 静态预览</p>
+  <p class="ov-one">每天一小时，按真实进度推进，不靠感觉决定今天学什么。</p>
+  <div class="ov-links"><a href="https://zhoujinq.github.io/n1-study-dashboard/" target="_blank" rel="noopener">打开网站 ↗</a></div>
+  <div class="ov-seg"><h4>一眼看到的数</h4><p>51 套真题按考期归档；从 12 月 6 日考试日倒排词汇、语法、阅读、听力的每日份额。</p></div>
+  <div class="ov-seg"><h4>我解决了什么</h4><ul class="steps">
+          <li>错题按词义混淆、语法接续、长句断句归因，不按题号记流水账。</li>
+          <li>进度只存在浏览器里，PDF、MP3 和完整题库不上传。</li>
+        </ul></div>
+  <div class="ov-seg"><h4>栈</h4><p class="stack">静态 HTML/CSS/JS · 无服务器</p></div>
+</template>
+
+<template id="tpl-p6">
+  <div class="ov-head"><span class="ov-no">06</span><h2 class="ov-name">记账投资助手</h2></div>
+  <p class="ov-state">在线 · v1.4.3 · 数字全虚构</p>
+  <p class="ov-one">六类资产各占多少，一张表看完。</p>
+  <div class="ov-links"><a href="https://zhoujinq.github.io/hajimi-ledger-demo/" target="_blank" rel="noopener">打开网站 ↗</a></div>
+  <div class="ov-seg"><h4>一眼看到的数</h4><p>美股指数基金 26.0%、黄金 13.7%、现金 36.2%；港股美股按当日汇率折成人民币。</p></div>
+  <div class="ov-seg"><h4>我解决了什么</h4><ul class="steps">
+          <li>股数只从交易推导，市值永远现算，手改股数会标橙并留痕。</li>
+          <li>台账对券商市值、汇率闭合、现金水位三条勾稽常驻，对不上就标红。</li>
+        </ul></div>
+  <div class="ov-seg"><h4>栈</h4><p class="stack">单文件 HTML + data.js · 公开行情接口（失败退快照价）</p></div>
+</template>
+
+<template id="tpl-p7">
+  <div class="ov-head"><span class="ov-no">07</span><h2 class="ov-name">外卖吃啥</h2></div>
+  <p class="ov-state">在线 · v0.1.0</p>
+  <p class="ov-one">今天别纠结，转一下就开饭。</p>
+  <div class="ov-links"><a href="https://zhoujinq.github.io/what-to-eat/" target="_blank" rel="noopener">打开网站 ↗</a></div>
+  <div class="ov-seg"><h4>一眼看到的数</h4><p>12 道默认候选，先按预算、口味、品类筛一遍；16 条 Node 原生测试覆盖随机与存档。</p></div>
+  <div class="ov-seg"><h4>我解决了什么</h4><ul class="steps">
+          <li>Fisher–Yates 无放回随机袋，抽完才重洗，跨轮不连续重复。</li>
+          <li>结果先定，再算转盘落点——转盘只负责好看，不负责决定。</li>
+        </ul></div>
+  <div class="ov-seg"><h4>栈</h4><p class="stack">单文件 HTML · 原生 JS · localStorage</p></div>
+</template>
+
+<template id="tpl-p8">
+  <div class="ov-head"><span class="ov-no">08</span><h2 class="ov-name">破万卷</h2></div>
+  <p class="ov-state">在线 · v0.1.0</p>
+  <p class="ov-one">AI 读一百条，你读一篇；机器节省筛选，人保留思考。</p>
+  <div class="ov-links"><a href="https://zhoujinq.github.io/po-wan-juan/" target="_blank" rel="noopener">打开网站 ↗</a></div>
+  <div class="ov-seg"><h4>一眼看到的数</h4><p>每日正文不超过 400 字；每周只推一篇全文已读的文章，没有合格者宁缺毋滥。</p></div>
+  <div class="ov-seg"><h4>我解决了什么</h4><ul class="steps">
+          <li>原样保存来源与阅读状态，打不开就标明，不假装读过。</li>
+          <li>好评差评写成可回滚的评测集；公开站是介绍与虚构演示。</li>
+        </ul></div>
+  <div class="ov-seg"><h4>栈</h4><p class="stack">Skill · Python 标准库 · 本地知识库</p></div>
+</template>
+
+<template id="tpl-p9">
+  <div class="ov-head"><span class="ov-no">09</span><h2 class="ov-name">API 商机雷达</h2></div>
+  <p class="ov-state">在线 · MVP 0.1.0</p>
+  <p class="ov-one">每周三张商机卡，外加一份「你本人这周学会了什么」。</p>
+  <div class="ov-links"><a href="https://zhoujinq.github.io/api-opportunity-radar/" target="_blank" rel="noopener">打开网站 ↗</a></div>
+  <div class="ov-seg"><h4>一眼看到的数</h4><p>公开演示 3 张商机卡 + 2 条成长；Node 8 项、Python 4 项测试通过。</p></div>
+  <div class="ov-seg"><h4>我解决了什么</h4><ul class="steps">
+          <li>公开信号 → 商业假设 → 待验证角色 → 下一动作，人工决定跟进还是暂缓。</li>
+          <li>不抓全网、不自动触达、不生成成交概率；周报可导出 Markdown。</li>
+        </ul></div>
+  <div class="ov-seg"><h4>栈</h4><p class="stack">Skill · Python 标准库 · 单文件 HTML</p></div>
+</template>
+
 <script id="shell-engine">
 (function(root){
   "use strict";
 
-  var PROJECTS = ["销售助手 · 客户管理系统","AI 模型斩杀线","Personal AI · 会成长的个人助手"];
+  var PROJECTS = ["销售助手 · 客户管理系统","AI 模型斩杀线","Personal AI · 会成长的个人助手","简历工坊 Pro","日语 N1 备考教练","记账投资助手","外卖吃啥","破万卷","API 商机雷达"];
   var FILES = {
     "/about":"周锦全，东南大学通信工程本科，曾在毫米波国家重点实验室学习，做过自动驾驶算法和毫米波整流芯片。\nAI Native 时代的实践者、成长者、学徒。后来经历联洲国际海外销售轮岗与法国大客户业务，现在在星尘智能做海外大科研销售。我相信人生的追求是幸福，也用 AI 和投资做杠杆。",
     "/life":"我喜欢王者荣耀中单打野、LPL、番茄小说里的历史题材爽文和陈奕迅，也看日本动漫，喜欢金钱橘、莫扎特和德彪西。\n凡事优先问大模型，常用 Codex 和 DeepSeek。多邻国与墨墨背单词长期坚持；不喜欢可以自动化却偏要重复，以及累到不自觉刷抖音的状态。",
@@ -1126,7 +1299,7 @@ body{background-image:none}
     commands.ps=function(){return ok("PID PPID STAT ETIME ARGS\n1   0    S    "+Math.floor((Date.now()-started)/1000)+"s    virtual-shell");};
     commands.neofetch=function(args){var info="站点：zhoujinq.github.io（静态主页）\n会话：virtual-shell\n目录："+cwd+"\n文档："+Object.keys(FILES).length+" 个虚拟文本\n运行："+Math.floor((Date.now()-started)/1000)+" 秒";if(args[0]==="--stdout")return ok(info);if(args[0]==="--off")return ok(info);return ok("  ______\n /_  / /__\n  / /_/ _ \\\n /___\\___/\n\n"+info);};
     commands.about=function(){return ok(FILES["/about"]);};
-    commands.projects=function(){return ok("主页只放三个项目，各证明一件事：销售助手证明客户、方案和下一步能被组织成流水线；模型斩杀线证明我会看延迟、成本和配置差异，不只信榜单；Personal AI 证明我把每次纠正变成规则和评测，让 Agent 换会话还记得。三个都有公开网页，点开就能用。其余项目留在简历里，不占首页。");};
+    commands.projects=function(){return ok("主页主推三个：销售助手证明客户、方案和下一步能被组织成流水线；模型斩杀线证明我会看延迟、成本和配置差异；Personal AI 证明我把纠正变成规则和评测。另外六个折在项目区下方：简历工坊、日语 N1、记账投资、外卖吃啥、破万卷、API 商机雷达，点开都能看网站。");};
     commands.life=function(){return ok(FILES["/life"]);};
     commands.links=function(){return ok(FILES["/contact"]);};
     commands.index=function(){return ok("站点目录\n/about：经历与学习路径\n/projects：3 个项目\n/life：连胜、游戏、小说和音乐\n输入 about、projects 或 life 可直接阅读对应简介。");};

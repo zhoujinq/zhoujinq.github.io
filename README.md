@@ -2,13 +2,13 @@
 
 个人主页：一个 `index.html` + 本地素材，没有构建步骤，没有外部请求，断网也能打开。
 
-线上：<https://zhoujinq.github.io/> ｜ 版本 v2.3.1（2026-11-22）
+线上：<https://zhoujinq.github.io/> ｜ 版本 v2.4.0（2026-11-22）
 
 ## 页面结构
 
-四大块：**首屏**（像素名字、三行简介、终端）→ **项目**（只放 3 个）→ **关于我**（默认折叠）→ **生活**。
+四大块：**首屏**（像素名字、三行简介、终端）→ **项目**（3 张主卡 + 6 页折起来的项目）→ **关于我**（默认折叠）→ **生活**。
 
-项目区只展示 3 个能点开的东西，每个只给一个公开网站链接；代码仓库不上首页。
+项目区主推 3 个，另外 6 个折成三个文件夹放在下面，只露项目名，点开一样有截图和短详情；每个项目只给一个公开网站链接，代码仓库不上首页。
 
 ```
 index.html                  结构、样式、终端与覆盖层脚本，全在这里
@@ -16,6 +16,7 @@ assets/maple-*.woff2        Maple Mono CN 子集（正文 / 粗体）
 assets/shot-sales.svg       01 销售助手工作流示意
 assets/shot-cutline.svg     02 模型斩杀线示意
 assets/shot-growing.svg     03 Personal AI 示意
+assets/shot-*.webp          04–09 折叠页截图（只在覆盖层里展示）
 assets/life-*.webp|jpg      生活区素材
 assets/particles.js         首屏粒子（vendored particles.js）
 assets/og.png               社交分享卡 1200×630
@@ -39,7 +40,7 @@ python -m http.server 8080
 
 | 想改什么 | 改哪里 |
 |---|---|
-| 项目卡 | `<section id="projects">` 里的 3 个 `<article class="card" data-id="pN">` |
+| 项目卡 | 主卡 3 个 `<article class="card">`，折叠页 6 个 `<article class="card folded back|front">` |
 | 项目详情 | 文末 `<template id="tpl-pN">`，只保留一条 `打开网站 ↗` 外链 |
 | 终端里的文件与命令 | `<script id="shell-engine">` 里的 `PROJECTS`、`FILES`、`commands` |
 | 最近更新日期 | `.last-update` 一行 |
