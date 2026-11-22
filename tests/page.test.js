@@ -40,78 +40,81 @@ test('首屏保留像素名字与三行 80～100 字简介，终端默认不输�
   assert.ok(positions.every((position, index) => index === 0 || position > positions[index - 1]), '四大块顺序不能改变');
 });
 
-test('项目区是 3 张主卡加 6 页折起来的项目，不再有项目书', () => {
+test('项目区是三行：3 张主卡、3 张带图次卡、3 页折叠文字', () => {
   assert.equal((html.match(/<article class="card" data-id="p\d"/g) || []).length, 3);
-  assert.equal((html.match(/<article class="card folded (back|front)" data-id="p\d"/g) || []).length, 6);
-  assert.equal((html.match(/<div class="folder">/g) || []).length, 3, '六个项目折成三个文件夹');
+  assert.equal((html.match(/<article class="card secondary" data-id="p\d"/g) || []).length, 3);
+  assert.equal((html.match(/<article class="card folded" data-id="p\d"/g) || []).length, 3);
   assert.doesNotMatch(html, /<details class="project-book"/, '项目书应已删除');
-  for (const name of ['销售助手', '模型斩杀线', 'Personal AI']) {
-    assert.match(html, new RegExp(`data-name="[^"]*${name}`), `主推项目缺少：${name}`);
-  }
-  for (const name of ['日语 N1 备考教练', '记账投资助手', '简历工坊 Pro', '外卖吃啥', '破万卷', 'API 商机雷达']) {
-    const hits = html.match(new RegExp(`class="card folded [^"]*" data-id="p\\d" data-name="${name}"`));
-    assert.ok(hits, `折叠页缺少：${name}`);
-  }
-  assert.match(html, /3 个主推 · 6 个折起来/);
-  assert.match(html, /另外 6 个 · 折起来放着/);
-  assert.equal((html.match(/<span class="dot"><\/span>在线/g) || []).length, 3, '三张主卡都应标注在线');
+  const order = ['销售助手 · 客户管理系统', 'AI 模型斩杀线', 'Personal AI · 会成长的个人助手',
+    'API 商机雷达', '个人理财投资助手', '日语 N1 备考教练', '破万卷', '外卖吃啥', '简历工坊 Pro'];
+  order.forEach((name, i) => {
+    assert.ok(html.includes(`data-id="p${i + 1}" data-name="${name}"`), `第 ${i + 1} 个项目应为 ${name}`);
+  });
+  assert.match(html, /9 个项目 · 都能点开/);
+  assert.match(html, /还有 3 个 · 折起来放着/);
+  assert.doesNotMatch(html, /<span class="dot"><\/span>在线/, '卡片不再标在线状态');
+  assert.doesNotMatch(html, /虚构快照|数字全虚构/, '不再出现虚构快照类状态文字');
 });
 
-test('折叠页只露名字，截图收在卡片里，点开仍能看详情', () => {
-  assert.match(html, /\.folded \.media\{display:none\}/, '折叠页不应直接展示截图');
+test('次卡带图不写副标题，折叠页只露标题和一行小字', () => {
+  const secondary = between('<div class="grid secondary-grid">', '<div class="shelf">');
+  const subCards = secondary.match(/<article class="card secondary[\s\S]*?<\/article>/g) || [];
+  assert.equal(subCards.length, 3);
+  for (const card of subCards) {
+    assert.match(card, /<div class="media"><img src="assets\/shot-[a-z0-9]+\.webp"/, '次卡必须有图');
+    assert.doesNotMatch(card, /f-sub/, '次卡不再加副标题');
+  }
+  assert.match(html, /\.card\.secondary \.media\{aspect-ratio:16\/9\}/, '次卡应比主卡矮');
+  assert.match(html, /\.folded \.media\{display:none\}/, '折叠页不直接展示截图');
   const shelf = between('<div class="shelf">', '<section id="about">');
-  const foldedCards = shelf.match(/<article class="card folded[\s\S]*?<\/article>/g) || [];
-  assert.equal(foldedCards.length, 6);
-  for (const card of foldedCards) {
-    assert.match(card, /<div class="media"><img src="assets\/shot-[a-z0-9]+\.webp"/, '每张折叠卡都要带自己的截图');
-    assert.match(card, /aria-label="打开 /);
-    assert.match(card, /class="f-no">0[4-9]</);
+  const slips = shelf.match(/<article class="card folded[\s\S]*?<\/article>/g) || [];
+  assert.equal(slips.length, 3);
+  for (const slip of slips) {
+    assert.match(slip, /<div class="media"><img src="assets\/shot-[a-z0-9]+\.webp"/, '折叠页仍要自带截图供详情使用');
+    assert.match(slip, /<span class="f-sub">[^<]{6,}<\/span>/, '折叠页必须有一行小字副标题');
+    assert.match(slip, /aria-label="打开 /);
   }
-  assert.match(html, /\.card\.folded\.back\{position:absolute/);
-  assert.match(html, /@media \(prefers-reduced-motion:reduce\)/);
 });
 
-test('九个项目都只给一个可看的网站链接，不暴露代码仓库', () => {
+test('九个项目只贴一条原始网址，不放按钮也不放仓库', () => {
   const sites = [
     'https://zhoujinq.github.io/customer-commitment-ledger/',
     'https://zhoujinq.github.io/model-cutline/',
     'https://zhoujinq.github.io/growing-assistant-skill/',
-    'https://zhoujinq.github.io/resume-master/',
+    'https://zhoujinq.github.io/api-opportunity-radar/',
+    'https://zhoujinq.github.io/personal-finance-assistant/',
     'https://zhoujinq.github.io/n1-study-dashboard/',
-    'https://zhoujinq.github.io/hajimi-ledger-demo/',
-    'https://zhoujinq.github.io/what-to-eat/',
     'https://zhoujinq.github.io/po-wan-juan/',
-    'https://zhoujinq.github.io/api-opportunity-radar/'
+    'https://zhoujinq.github.io/what-to-eat/',
+    'https://zhoujinq.github.io/resume-master/'
   ];
-  for (const site of sites) assert.ok(html.includes(site), `缺少公开网站：${site}`);
+  assert.equal((html.match(/class="ov-links"/g) || []).length, 9);
   for (let i = 1; i <= 9; i += 1) {
     const tpl = between(`<template id="tpl-p${i}">`, '</template>');
-    assert.match(tpl, /class="ov-links"/, `tpl-p${i} 缺少链接区`);
+    const site = sites[i - 1];
+    assert.ok(tpl.includes(`<a href="${site}" target="_blank" rel="noopener">${site}</a>`), `tpl-p${i} 应直接贴出原始网址`);
     assert.equal((tpl.match(/target="_blank" rel="noopener">/g) || []).length, 1, `tpl-p${i} 只应有一个外链`);
-    assert.doesNotMatch(tpl, /github\.com/, `tpl-p${i} 不应出现仓库地址`);
+    assert.doesNotMatch(tpl, /github\.com|打开网站|公开网站|代码仓库/, `tpl-p${i} 不应再放按钮或仓库`);
+    assert.doesNotMatch(tpl, /ov-state|在线 ·|静态预览|虚构/, `tpl-p${i} 不应再有状态行`);
   }
-  assert.equal((html.match(/class="ov-links"/g) || []).length, 9);
-  assert.doesNotMatch(html, /href="https:\/\/zhoujinq\.github\.io\/"\s/, '不要退回个人主页地址');
+  assert.doesNotMatch(html, /hajimi-ledger-demo/, '理财项目一律使用新仓库与新网址');
+  assert.doesNotMatch(html, /记账投资助手/, '旧项目名应全部改为个人理财投资助手');
 });
 
 test('项目文案保持短、准，不写成长篇报告', () => {
   const overlays = between('<template id="tpl-p1">', '<script id="shell-engine">');
-  for (const text of [
-    '85 条配置 / 39 个模型',
-    '6 家客户',
-    '6.69 秒',
-    'v0.1.0',
-    '虚构快照'
-  ]) assert.ok(overlays.includes(text), `覆盖层缺少最新口径：${text}`);
-  for (const stale of ['70 条配置', '34 个模型', '九项门禁', '详细内容等整理好后补充', '项目位已保留', '为什么做']) {
+  for (const text of ['85 条配置 / 39 个模型', '6 家客户', '6.69 秒', '51 套真题', '19 个不可证伪的空话词']) {
+    assert.ok(overlays.includes(text), `覆盖层缺少口径：${text}`);
+  }
+  for (const stale of ['70 条配置', '34 个模型', '九项门禁', '为什么做', '打开网站']) {
     assert.ok(!overlays.includes(stale), `仍在沿用旧内容：${stale}`);
   }
   const plain = overlays.replace(/<[^>]+>/g, '').replace(/\s/g, '');
-  assert.ok(plain.length < 1800, `九份详情合计 ${plain.length} 字，仍然太长`);
+  assert.ok(plain.length < 2400, `九份详情合计 ${plain.length} 字，仍然太长`);
   for (let i = 4; i <= 9; i += 1) {
     const tpl = between(`<template id="tpl-p${i}">`, '</template>');
     const len = tpl.replace(/<[^>]+>/g, '').replace(/\s/g, '').length;
-    assert.ok(len < 240, `折叠项目 tpl-p${i} 详情 ${len} 字，应当比主卡更短`);
+    assert.ok(len < 300, `tpl-p${i} 详情 ${len} 字，应当比主卡更短`);
   }
 });
 
@@ -159,6 +162,6 @@ test('页脚只保留版权、版本和回顶，版本与本次发布一致', ()
   assert.doesNotMatch(footer, /这个页面|@mac|纯静态|无追踪/);
   assert.doesNotMatch(html, /这个页面\s*纯静态|id="contact"|class="contact-panel"|data-copy/);
   assert.match(html, /<header[\s\S]*?2336097716@qq\.com[\s\S]*?github\.com\/zhoujinq[\s\S]*?<\/header>/);
-  assert.match(footer, /<span class="ver">v2\.4\.0<\/span>/);
+  assert.match(footer, /<span class="ver">v2\.5\.0<\/span>/);
   assert.doesNotMatch(footer, /github\.com/, '页脚不再外链代码仓库');
 });
