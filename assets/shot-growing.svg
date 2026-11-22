@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" width="640" height="400" role="img" aria-label="Personal AI 示意：它会记住你纠正过什么">
+  <rect width="640" height="400" fill="#fffefa"/>
+  <text x="40" y="46" font-family="'Maple Mono',monospace" font-size="12" letter-spacing="2" fill="#8a7f6d">GROWING ASSISTANT / 03</text>
+  <text x="40" y="92" font-family="'Maple Mono',monospace" font-size="30" font-weight="700" fill="#221d17">它会记住你纠正过什么。</text>
+  <text x="40" y="122" font-family="'Maple Mono',monospace" font-size="13" fill="#6f6558">5–8 个问题的起步访谈，然后它开始干活</text>
+
+  <g font-family="'Maple Mono',monospace">
+    <rect x="40" y="150" width="128" height="34" rx="4" fill="#f4eee2" stroke="#e2d7c4"/>
+    <text x="104" y="172" text-anchor="middle" font-size="11.5" fill="#4a4137">PROFILE</text>
+    <rect x="182" y="150" width="112" height="34" rx="4" fill="#f4eee2" stroke="#e2d7c4"/>
+    <text x="238" y="172" text-anchor="middle" font-size="11.5" fill="#4a4137">RULES</text>
+    <rect x="308" y="150" width="138" height="34" rx="4" fill="#f4eee2" stroke="#e2d7c4"/>
+    <text x="377" y="172" text-anchor="middle" font-size="11.5" fill="#4a4137">WORKFLOW</text>
+    <rect x="460" y="150" width="100" height="34" rx="4" fill="#f4eee2" stroke="#e2d7c4"/>
+    <text x="510" y="172" text-anchor="middle" font-size="11.5" fill="#4a4137">evals</text>
+  </g>
+
+  <g font-family="'Maple Mono',monospace" font-size="12.5" fill="#6f6558">
+    <text x="40" y="228">「这不对」</text>
+    <text x="40" y="264" font-size="15" fill="#c0603a">→ 一条规则</text>
+    <text x="40" y="298" font-size="15" fill="#c0603a">→ 一个评测用例</text>
+    <text x="40" y="340">换会话，它还记得。</text>
+  </g>
+
+  <g stroke="#e2d7c4">
+    <line x1="210" y1="222" x2="600" y2="222"/>
+    <line x1="210" y1="304" x2="600" y2="304"/>
+  </g>
+  <g font-family="'Maple Mono',monospace" font-size="11" fill="#8a7f6d">
+    <text x="210" y="216">low / medium / high 一档到底</text>
+    <text x="210" y="298">不是一段提示词，是工作区里的文件</text>
+  </g>
+  <text x="600" y="368" text-anchor="end" font-family="'Maple Mono',monospace" font-size="11" fill="#8a7f6d">v0.1.0 · 已上线</text>
+</svg>

@@ -42,10 +42,10 @@ test('首屏保留像素名字与三行 80～100 字简介，终端默认不输�
 test('项目只展示 3 个，全部在线，不再有项目书和长列表', () => {
   assert.equal((html.match(/<article class="card" data-id="p\d"/g) || []).length, 3);
   assert.doesNotMatch(html, /<details class="project-book"/, '项目书应已删除，避免一次堆九个项目');
-  for (const name of ['销售助手', 'N1 备考教练', '记账投资助手']) {
+  for (const name of ['销售助手', '模型斩杀线', 'Personal AI']) {
     assert.match(html, new RegExp(`data-name="[^"]*${name}`), `项目列表缺少：${name}`);
   }
-  for (const gone of ['Personal AI', '简历工坊 Pro', '外卖吃啥', '模型斩杀线', '破万卷', 'API 商机雷达']) {
+  for (const gone of ['日语 N1', '记账投资助手', '简历工坊 Pro', '外卖吃啥', '破万卷', 'API 商机雷达']) {
     assert.doesNotMatch(html, new RegExp(`data-name="[^"]*${gone}`), `首页不该再列：${gone}`);
   }
   assert.match(html, /3 个项目 · 都能点开/);
@@ -55,11 +55,11 @@ test('项目只展示 3 个，全部在线，不再有项目书和长列表', ()
 test('每个项目只给一个可看的网站链接，不暴露代码仓库', () => {
   const sites = [
     'https://zhoujinq.github.io/customer-commitment-ledger/',
-    'https://zhoujinq.github.io/n1-study-dashboard/',
-    'https://zhoujinq.github.io/hajimi-ledger-demo/'
+    'https://zhoujinq.github.io/model-cutline/',
+    'https://zhoujinq.github.io/growing-assistant-skill/'
   ];
   for (const site of sites) assert.ok(html.includes(site), `缺少公开网站：${site}`);
-  assert.doesNotMatch(html, /https:\/\/github\.com\/zhoujinq\/(customer-commitment-ledger|n1-study-dashboard|hajimi-ledger-demo)/, '项目区不应再放代码仓库');
+  assert.doesNotMatch(html, /https:\/\/github\.com\/zhoujinq\/(customer-commitment-ledger|model-cutline|growing-assistant-skill)/, '项目区不应再放代码仓库');
   for (let i = 1; i <= 3; i += 1) {
     const tpl = between(`<template id="tpl-p${i}">`, '</template>');
     assert.match(tpl, /class="ov-links"/, `tpl-p${i} 缺少链接区`);
@@ -73,10 +73,10 @@ test('每个项目只给一个可看的网站链接，不暴露代码仓库', ()
 test('项目文案保持短、准，不写成长篇报告', () => {
   const overlays = between('<template id="tpl-p1">', '<script id="shell-engine">');
   for (const text of [
-    '51 套真题',
+    '85 条配置 / 39 个模型',
     '6 家客户',
-    '26.0%',
-    'v1.4.3',
+    '6.69 秒',
+    'v0.1.0',
     '虚构快照'
   ]) assert.ok(overlays.includes(text), `覆盖层缺少最新口径：${text}`);
   for (const stale of ['70 条配置', '34 个模型', '九项门禁', '详细内容等整理好后补充', '项目位已保留', '为什么做']) {
@@ -126,6 +126,6 @@ test('页脚只保留版权、版本和回顶，版本与本次发布一致', ()
   assert.doesNotMatch(footer, /这个页面|@mac|纯静态|无追踪/);
   assert.doesNotMatch(html, /这个页面\s*纯静态|id="contact"|class="contact-panel"|data-copy/);
   assert.match(html, /<header[\s\S]*?2336097716@qq\.com[\s\S]*?github\.com\/zhoujinq[\s\S]*?<\/header>/);
-  assert.match(footer, /<span class="ver">v2\.3\.0<\/span>/);
+  assert.match(footer, /<span class="ver">v2\.3\.1<\/span>/);
   assert.doesNotMatch(footer, /github\.com/, '页脚不再外链代码仓库');
 });

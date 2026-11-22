@@ -2,7 +2,7 @@
 
 个人主页：一个 `index.html` + 本地素材，没有构建步骤，没有外部请求，断网也能打开。
 
-线上：<https://zhoujinq.github.io/> ｜ 版本 v2.3.0（2026-11-22）
+线上：<https://zhoujinq.github.io/> ｜ 版本 v2.3.1（2026-11-22）
 
 ## 页面结构
 
@@ -14,8 +14,8 @@
 index.html                  结构、样式、终端与覆盖层脚本，全在这里
 assets/maple-*.woff2        Maple Mono CN 子集（正文 / 粗体）
 assets/shot-sales.svg       01 销售助手工作流示意
-assets/shot-n1.webp         02 N1 备考看板截图
-assets/shot-book.webp       03 记账投资助手截图
+assets/shot-cutline.svg     02 模型斩杀线示意
+assets/shot-growing.svg     03 Personal AI 示意
 assets/life-*.webp|jpg      生活区素材
 assets/particles.js         首屏粒子（vendored particles.js）
 assets/og.png               社交分享卡 1200×630
