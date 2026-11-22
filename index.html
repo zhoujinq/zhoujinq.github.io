@@ -304,46 +304,46 @@ summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-
 .card-foot .open{margin-left:auto;color:var(--faint)}
 
 
-/* ── 第二行：07–09 文件夹页在上，04–06 微倾斜小图卡在下 ────── */
+/* ── 第二行：04–06 微倾斜小图卡在上，07–09 文件夹页在下 ────── */
 .tablet-br{display:none}
 .featured-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
 .secondary-grid{
-  margin-top:30px;grid-template-columns:repeat(3,minmax(0,1fr));row-gap:34px;
+  margin-top:30px;grid-template-columns:repeat(3,minmax(0,1fr));row-gap:88px;padding-bottom:70px;
 }
 .card.secondary{
-  --tilt:0deg;position:relative;z-index:2;width:calc(100% - 18px);align-self:start;justify-self:center;
-  margin-top:54px;transform:rotate(var(--tilt)) scale(.96);transform-origin:50% 18px;
+  --tilt:0deg;position:relative;z-index:2;width:calc(100% - 24px);align-self:start;justify-self:center;
+  transform:rotate(var(--tilt)) scale(.90);transform-origin:50% 100%;
 }
 .card.secondary[data-id="p4"]{--tilt:-.55deg}
 .card.secondary[data-id="p5"]{--tilt:.45deg}
 .card.secondary[data-id="p6"]{--tilt:-.35deg}
-.card.secondary .media{aspect-ratio:16/8}
-.card.secondary .card-meta{padding:11px 14px 5px}
-.card.secondary .card-name{font-size:15px;min-height:0;-webkit-line-clamp:1}
-.card.secondary .card-foot{padding:0 14px 11px;font-size:11.5px}
+.card.secondary .media{aspect-ratio:16/7}
+.card.secondary .card-meta{padding:10px 13px 4px}
+.card.secondary .card-name{font-size:14.5px;min-height:0;-webkit-line-clamp:1}
+.card.secondary .card-foot{padding:0 13px 10px;font-size:11px}
 
 .card.secondary[data-id="p4"],.card.folded[data-id="p7"]{grid-column:1;grid-row:1}
 .card.secondary[data-id="p5"],.card.folded[data-id="p8"]{grid-column:2;grid-row:1}
 .card.secondary[data-id="p6"],.card.folded[data-id="p9"]{grid-column:3;grid-row:1}
 .folded .media{display:none}
 .card.folded{
-  position:relative;z-index:1;align-self:start;width:calc(100% - 8px);height:62px;margin-left:8px;
+  position:relative;z-index:1;align-self:end;width:calc(100% - 8px);height:62px;margin-left:8px;
   border:0;border-radius:0;background:transparent;overflow:visible;box-shadow:none;
-  transform:translateY(16px);
+  transform:translateY(78px);
 }
-.card.folded.in{transform:none}
+.card.folded.in{transform:translateY(62px)}
 .card.folded:hover{border-color:transparent;box-shadow:none}
 .card.folded::before,.card.folded::after{
-  content:"";position:absolute;left:0;right:0;top:0;bottom:-10px;pointer-events:none;
-  border:1px solid #d9cbb6;border-radius:8px 8px 3px 3px;background:#f2e8d6;
-  box-shadow:0 -10px 24px -22px rgba(43,36,24,.85);
+  content:"";position:absolute;left:0;right:0;top:-64px;bottom:0;pointer-events:none;
+  border:1px solid #d9cbb6;border-radius:8px;background:#f2e8d6;
+  box-shadow:0 12px 24px -20px rgba(43,36,24,.85);
   transform:rotate(.35deg);transition:transform .25s var(--ease),background .2s var(--ease),border-color .2s var(--ease);
 }
 .card.folded::before{z-index:-1}
-.card.folded::after{z-index:-2;left:5px;right:-3px;top:5px;bottom:-8px;background:#e7dbc5;transform:rotate(-.65deg)}
+.card.folded::after{z-index:-2;left:5px;right:-3px;top:-59px;bottom:-4px;background:#e7dbc5;transform:rotate(-.65deg)}
 .card.folded .card-btn{
-  position:relative;display:flex;flex-direction:column;justify-content:center;width:100%;height:54px;
-  padding:6px 14px 4px;text-align:left;border:0;background:transparent;border-radius:8px 8px 0 0;
+  position:relative;display:flex;flex-direction:column;justify-content:center;width:100%;height:62px;
+  padding:6px 14px 8px;text-align:left;border:0;background:transparent;border-radius:0 0 8px 8px;
   transition:transform .25s var(--ease);
 }
 .card.folded .f-line{display:flex;align-items:center;gap:8px;width:100%;min-width:0}
@@ -354,9 +354,9 @@ summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-
 }
 .card.folded .f-open{font-size:12px;color:var(--faint);flex:none}
 .card.folded .f-sub{display:block;margin-top:3px;font-size:11px;line-height:1.6;color:var(--muted)}
-.card.folded:hover::before,.card.folded:focus-within::before{transform:rotate(.7deg) translateY(-2px);background:#f8efdf;border-color:var(--accent-line)}
-.card.folded:hover::after,.card.folded:focus-within::after{transform:rotate(-.9deg) translateY(-2px)}
-.card.folded:hover .card-btn,.card.folded:focus-within .card-btn{transform:translateY(-2px)}
+.card.folded:hover::before,.card.folded:focus-within::before{transform:rotate(.7deg) translateY(3px);background:#f8efdf;border-color:var(--accent-line)}
+.card.folded:hover::after,.card.folded:focus-within::after{transform:rotate(-.9deg) translateY(3px)}
+.card.folded:hover .card-btn,.card.folded:focus-within .card-btn{transform:translateY(3px)}
 .card.folded .card-btn:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 @media (min-width:721px) and (max-width:900px){
   .featured-grid,.secondary-grid{gap:18px}
@@ -364,14 +364,14 @@ summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-
   .featured-grid .card-meta{padding:12px 12px 6px;gap:7px}
   .featured-grid .card-name{font-size:15px;line-height:1.4;min-height:2.8em}
   .featured-grid .card-foot{padding-left:12px;padding-right:12px}
-  .card.secondary .card-name{font-size:14px}
+  .card.secondary .card-name{font-size:13px}
   .card .card-foot .open{display:none}
   .card-foot{white-space:nowrap;font-size:11px}
-  .card.secondary .card-foot{font-size:10.5px}
+  .card.secondary .card-foot{font-size:10px}
 }
 @media (max-width:720px){
   .featured-grid{grid-template-columns:1fr;gap:16px}
-  .secondary-grid{grid-template-columns:1fr;row-gap:34px}
+  .secondary-grid{grid-template-columns:1fr;row-gap:88px}
   .card.secondary[data-id="p5"],.card.folded[data-id="p8"]{grid-column:1;grid-row:2}
   .card.secondary[data-id="p6"],.card.folded[data-id="p9"]{grid-column:1;grid-row:3}
   .card.secondary .media img{object-position:left 15% !important}
@@ -630,21 +630,30 @@ body{background-image:none}
 .featured-grid{margin-top:4px}
 .media img[alt^="销售辅助系统"]{object-fit:cover}
 
-/* About：简介、打卡与热爱常展；履历默认折叠，信念只留单列标题。 */
+/* About：简介、打卡与热爱常展；履历和三个喜恶清单均为明显的默认折叠层。 */
 .about-brief{max-width:62em;margin:0;color:var(--ink-2);font-size:15px;line-height:2}
-.journey-fold{margin-top:28px;border:1px solid var(--line);border-radius:7px;background:rgba(255,253,248,.86);box-shadow:0 10px 24px -24px rgba(43,36,24,.8)}
-.journey-fold>summary{display:flex;align-items:center;gap:12px;padding:15px 16px;cursor:pointer;list-style:none;color:var(--ink);font-weight:700}
-.journey-fold>summary::-webkit-details-marker{display:none}
-.journey-fold>summary::before{content:'▸';color:var(--accent);transition:transform .18s var(--ease)}
-.journey-fold[open]>summary::before{transform:rotate(90deg)}
-.journey-fold>summary:hover{background:rgba(115,92,120,.045)}
-.journey-fold>summary .tip{margin-left:auto;color:var(--muted);font-size:12px;font-weight:400}
+.journey-fold,.about-fold{margin-top:28px;border:1px solid var(--accent-line);border-radius:8px;box-shadow:0 10px 24px -24px rgba(43,36,24,.8);transition:background .18s var(--ease),border-color .18s var(--ease)}
+.journey-fold:not([open]),.about-fold:not([open]){background:#eee7f0}
+.journey-fold[open],.about-fold[open]{background:transparent}
+.journey-fold[open],.about-fold[open]{border-color:var(--line)}
+.journey-fold>summary,.about-fold>summary{display:flex;align-items:center;gap:12px;min-height:60px;padding:15px 18px;cursor:pointer;list-style:none;color:var(--ink);font-weight:700;border-radius:8px}
+.journey-fold>summary::-webkit-details-marker,.about-fold>summary::-webkit-details-marker{display:none}
+.journey-fold>summary::before,.about-fold>summary::before{content:'▸';color:var(--accent);font-size:22px;line-height:1;flex:none;transition:transform .18s var(--ease)}
+.journey-fold[open]>summary::before,.about-fold[open]>summary::before{transform:rotate(90deg)}
+.journey-fold:not([open])>summary:hover,.about-fold:not([open])>summary:hover{background:rgba(115,92,120,.06)}
+.journey-fold[open]>summary,.about-fold[open]>summary{border-bottom:1px solid var(--line-2);border-radius:8px 8px 0 0}
+.journey-fold>summary .tip,.about-fold>summary .tip{margin-left:auto;color:var(--accent-2);font-size:12px;font-weight:700;white-space:nowrap}
+.about-fold>summary h2{margin:0;font-size:16px;line-height:1.5}
+.fold-open{display:none}
+.journey-fold[open] .fold-closed,.about-fold[open] .fold-closed{display:none}
+.journey-fold[open] .fold-open,.about-fold[open] .fold-open{display:inline}
+.about-fold-body{padding:8px 20px 20px}
 .journey-fold .timeline{padding:4px 20px 20px}
 .chapter{display:grid;grid-template-columns:128px 1fr;gap:22px;padding:20px 0;border-top:1px solid var(--line-2)}
 .chapter-time{padding-top:3px;color:var(--muted);font-size:12px}
 .chapter-body h3{margin:0 0 8px;font-size:16px}
 .chapter-body p{margin:0 0 12px;color:var(--ink-2);font-size:14px;line-height:1.95}
-#beliefs,#likes,#dislikes{padding:42px 0 0}
+#beliefs,#likes,#dislikes{padding:0}
 .life-goal{max-width:64em;color:var(--ink-2)}
 .about-goal{margin:32px 0 0}
 .life-goal p{margin:0 0 15px}
@@ -673,6 +682,9 @@ body{background-image:none}
   .dislike-list{grid-template-columns:1fr;gap:0}
   .dislike-list li+li{margin-top:14px}
   .chapter{grid-template-columns:1fr;gap:7px;padding:16px 0}
+  .journey-fold>summary,.about-fold>summary{gap:9px;padding:14px;min-height:58px}
+  .journey-fold>summary .tip,.about-fold>summary .tip{font-size:11px}
+  .about-fold-body{padding:6px 14px 16px}
   .journey-fold .timeline{padding:2px 14px 14px}
   .life-visual{height:100px}
   .streak-caption{font-size:10px}
@@ -762,13 +774,6 @@ body{background-image:none}
       </article>
     </div>
     <div class="grid secondary-grid">
-      <article class="card folded" data-id="p7" data-name="破万卷">
-        <button class="card-btn" type="button" aria-label="打开 破万卷 详情">
-          <div class="media"><img src="assets/shot-powan.webp" alt="破万卷界面预览" loading="lazy" decoding="async"></div>
-          <span class="f-line"><span class="f-no">07</span><span class="card-name">破万卷</span><span class="f-open">↗</span></span>
-          <span class="f-sub">AI 读一百条，你读一篇</span>
-        </button>
-      </article>
       <article class="card secondary" data-id="p4" data-name="API 商机雷达">
         <button class="card-btn" type="button" aria-label="打开 API 商机雷达 详情">
           <div class="media"><img src="assets/shot-radar.webp" style="object-position:center 30%" alt="API 商机雷达界面预览" loading="lazy" decoding="async"></div>
@@ -776,11 +781,11 @@ body{background-image:none}
           <div class="card-foot">3 张商机卡 + 2 条成长<span class="open">点开 →</span></div>
         </button>
       </article>
-      <article class="card folded" data-id="p8" data-name="外卖吃啥">
-        <button class="card-btn" type="button" aria-label="打开 外卖吃啥 详情">
-          <div class="media"><img src="assets/shot-eat.webp" alt="外卖吃啥界面预览" loading="lazy" decoding="async"></div>
-          <span class="f-line"><span class="f-no">08</span><span class="card-name">外卖吃啥</span><span class="f-open">↗</span></span>
-          <span class="f-sub">今天别纠结，转一下就开饭</span>
+      <article class="card folded" data-id="p7" data-name="破万卷">
+        <button class="card-btn" type="button" aria-label="打开 破万卷 详情">
+          <div class="media"><img src="assets/shot-powan.webp" alt="破万卷界面预览" loading="lazy" decoding="async"></div>
+          <span class="f-line"><span class="f-no">07</span><span class="card-name">破万卷</span><span class="f-open">↗</span></span>
+          <span class="f-sub">AI 读一百条，你读一篇</span>
         </button>
       </article>
       <article class="card secondary" data-id="p5" data-name="个人理财投资助手">
@@ -790,11 +795,11 @@ body{background-image:none}
           <div class="card-foot">六类资产 · 一张表看完<span class="open">点开 →</span></div>
         </button>
       </article>
-      <article class="card folded" data-id="p9" data-name="简历工坊 Pro">
-        <button class="card-btn" type="button" aria-label="打开 简历工坊 Pro 详情">
-          <div class="media"><img src="assets/shot-resume.webp" alt="简历工坊 Pro界面预览" loading="lazy" decoding="async"></div>
-          <span class="f-line"><span class="f-no">09</span><span class="card-name">简历工坊 Pro</span><span class="f-open">↗</span></span>
-          <span class="f-sub">先统一事实，再谈版式</span>
+      <article class="card folded" data-id="p8" data-name="外卖吃啥">
+        <button class="card-btn" type="button" aria-label="打开 外卖吃啥 详情">
+          <div class="media"><img src="assets/shot-eat.webp" alt="外卖吃啥界面预览" loading="lazy" decoding="async"></div>
+          <span class="f-line"><span class="f-no">08</span><span class="card-name">外卖吃啥</span><span class="f-open">↗</span></span>
+          <span class="f-sub">今天别纠结，转一下就开饭</span>
         </button>
       </article>
       <article class="card secondary" data-id="p6" data-name="日语 N1 备考教练">
@@ -802,6 +807,13 @@ body{background-image:none}
           <div class="media"><img src="assets/shot-n1.webp" style="object-position:center 30%" alt="日语 N1 备考教练界面预览" loading="lazy" decoding="async"></div>
           <div class="card-meta"><span class="card-no">06</span><h3 class="card-name">日语 N1 备考教练</h3></div>
           <div class="card-foot">51 套真题 · 每天一小时<span class="open">点开 →</span></div>
+        </button>
+      </article>
+      <article class="card folded" data-id="p9" data-name="简历工坊 Pro">
+        <button class="card-btn" type="button" aria-label="打开 简历工坊 Pro 详情">
+          <div class="media"><img src="assets/shot-resume.webp" alt="简历工坊 Pro界面预览" loading="lazy" decoding="async"></div>
+          <span class="f-line"><span class="f-no">09</span><span class="card-name">简历工坊 Pro</span><span class="f-open">↗</span></span>
+          <span class="f-sub">先统一事实，再谈版式</span>
         </button>
       </article>
     </div>
@@ -822,7 +834,7 @@ body{background-image:none}
   </div>
 
   <details class="journey-fold" id="journey">
-    <summary><span>履历与工作</span><span class="tip">点击展开</span></summary>
+    <summary><span>履历与工作</span><span class="tip"><span class="fold-closed">已折叠 · 点击展开</span><span class="fold-open">已展开 · 点击收起</span></span></summary>
     <div class="timeline">
       <article class="chapter"><div class="chapter-time">东南大学</div><div class="chapter-body"><h3>通信工程本科 · 毫米波国家重点实验室</h3><p>接受电子信息与计算机方向的科班训练，学过计算机系统、计算机组成原理、计算机网络等课程，也做软硬件实践和流片。</p><p>软件方面，我写过自动驾驶算法；硬件方面，毕设研究毫米波整流芯片，尝试把环境中微弱的信号收集并转化成可利用的能源。本科期间，也曾在新东方和新加坡电信实习。毕业后，我选择更早进入社会，在真实业务里继续成长。</p></div></article>
       <article class="chapter"><div class="chapter-time">2025.07 起</div><div class="chapter-body"><h3>联洲国际 TP-Link · 国际业务</h3><p>从国际业务管培生做起，经历渠道销售、技术型销售和大客户销售轮岗，后来在法国负责亚马逊大客户业务。</p><p>接触过企业级网络、安全产品，以及消费级网络和消费电子产品。标书、技术方案与客户沟通都要做，这段经历让我学会在技术可行性和商业目标之间来回翻译。</p></div></article>
@@ -833,44 +845,50 @@ body{background-image:none}
   <div class="life-goal about-goal">
     <p class="goal-lead">我的人生目标是探索热爱和美好。</p>
     <p class="goal-belief">我的信念：人生的追求不应该是牛逼，而应该是幸福。</p>
-    <p class="goal-aside">虽然AI能证出黎曼猜想，但是AI享受不了吃喝玩乐也体验不到欢喜悲愁，AI击碎了人类的优越感，但人类拥有的东西仍然有很多。</p>
+    <p class="goal-aside">写于2026-11-22周六，AI对黎曼猜想的证明通过Lean形式化验证：<br>虽然AI能证出黎曼猜想，但是AI享受不了吃喝玩乐也体验不到欢喜悲愁，AI击碎了人类的优越感，但人类拥有的东西仍然有很多。</p>
     <p class="goal-aside">在 AI 焦虑的时代，认知行为疗法是必要的。我们要改的可能不是行为，而是认知本身。</p>
   </div>
 
-  <section id="beliefs">
-    <div class="sec-head"><h2>我相信的一些东西</h2></div>
-    <ol class="belief-list">
-      <li>弱小和无知不是生存的障碍，傲慢才是。</li>
-      <li>相信二八定律，尊重边际递减效应。</li>
-      <li>人生得意须尽欢，莫使金樽空对月。</li>
-      <li>想做了就去做，知而不行，只是未知。</li>
-      <li>多做酷而难的事情，少做平庸而容易的事情。</li>
-      <li>我是积极的AI降临派，少焦虑，少因AI焦虑。</li>
-    </ol>
-  </section>
+  <details class="about-fold" id="beliefs">
+    <summary><h2>我相信的一些东西</h2><span class="tip"><span class="fold-closed">已折叠 · 点击展开</span><span class="fold-open">已展开 · 点击收起</span></span></summary>
+    <div class="about-fold-body">
+      <ol class="belief-list">
+        <li>弱小和无知不是生存的障碍，傲慢才是。</li>
+        <li>相信二八定律，尊重边际递减效应。</li>
+        <li>人生得意须尽欢，莫使金樽空对月。</li>
+        <li>想做了就去做，知而不行，只是未知。</li>
+        <li>多做酷而难的事情，少做平庸而容易的事情。</li>
+        <li>我是积极的AI降临派，少焦虑，少因AI焦虑。</li>
+      </ol>
+    </div>
+  </details>
 
-  <section id="likes">
-    <div class="sec-head"><h2>我喜欢的一些东西</h2></div>
-    <ul class="preference-list">
-      <li>喜欢学日语；</li>
-      <li>喜欢看公众号，喜欢量子位，也喜欢半佛仙人、赛博禅心、数字生命卡兹克；</li>
-      <li>爱打游戏， S16英雄联盟世界冠军BLG牛逼！</li>
-      <li>喜欢看日本少年漫；</li>
-      <li>喜欢看番茄小说的爽文。喜欢吃橘子，尤其是金钱橘。</li>
-      <li>喜欢凡事优先问大模型，大爱ChatGPT和DeepSeek（讨厌Anthropic）；</li>
-      <li>喜欢的作家有马伯庸、当年明月，也听莫扎特和德彪西。</li>
-    </ul>
-  </section>
+  <details class="about-fold" id="likes">
+    <summary><h2>我喜欢的一些东西</h2><span class="tip"><span class="fold-closed">已折叠 · 点击展开</span><span class="fold-open">已展开 · 点击收起</span></span></summary>
+    <div class="about-fold-body">
+      <ul class="preference-list">
+        <li>喜欢学日语；</li>
+        <li>喜欢看公众号，喜欢量子位，也喜欢半佛仙人、赛博禅心、数字生命卡兹克；</li>
+        <li>爱打游戏， S16英雄联盟世界冠军BLG牛逼！</li>
+        <li>喜欢看日本少年漫；</li>
+        <li>喜欢看番茄小说的爽文。喜欢吃橘子，尤其是金钱橘。</li>
+        <li>喜欢凡事优先问大模型，大爱ChatGPT和DeepSeek（讨厌Anthropic）；</li>
+        <li>喜欢的作家有马伯庸、当年明月，也听莫扎特和德彪西。</li>
+      </ul>
+    </div>
+  </details>
 
-  <section id="dislikes">
-    <div class="sec-head"><h2>我讨厌的一些东西</h2></div>
-    <ul class="dislike-list"><li><strong>明明可以用自动化，却偏要人反复做。</strong><p>规则清楚、机器能做，我就不愿意把重复动作当作勤奋。工具应该还人自由，而不是让人伺候工具。</p></li><li><strong>高度压力、疲惫状态下的情绪代偿失败。</strong><p>说简单点，就是累到只会不自觉地刷抖音。不是讨厌短视频本身，而是不喜欢自己已经疲惫失控，却还在用它麻醉自己。</p></li></ul>
-  </section>
+  <details class="about-fold" id="dislikes">
+    <summary><h2>我讨厌的一些东西</h2><span class="tip"><span class="fold-closed">已折叠 · 点击展开</span><span class="fold-open">已展开 · 点击收起</span></span></summary>
+    <div class="about-fold-body">
+      <ul class="dislike-list"><li><strong>明明可以用自动化，却偏要人反复做。</strong><p>规则清楚、机器能做，我就不愿意把重复动作当作勤奋。工具应该还人自由，而不是让人伺候工具。</p></li><li><strong>高度压力、疲惫状态下的情绪代偿失败。</strong><p>说简单点，就是累到只会不自觉地刷抖音。不是讨厌短视频本身，而是不喜欢自己已经疲惫失控，却还在用它麻醉自己。</p></li></ul>
+    </div>
+  </details>
 </section>
 
   </main>
 
-  <footer><span>© 2026 周锦全</span><span class="ver">v2.7.0</span><span class="sp"><a class="totop" href="#top">↑ 回顶</a></span></footer>
+  <footer><span>© 2026 周锦全</span><span class="ver">v2.8.0</span><span class="sp"><a class="totop" href="#top">↑ 回顶</a></span></footer>
 
 </div>
 

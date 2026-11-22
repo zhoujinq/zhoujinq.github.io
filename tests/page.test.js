@@ -45,7 +45,7 @@ test('首屏保留像素名字与三行 80～100 字简介，终端默认不输�
   assert.doesNotMatch(nav, />生活<\/a>/);
 });
 
-test('项目区只有两行：3 张主卡，第二行三组上夹页下小卡', () => {
+test('项目区只有两行：3 张主卡，第二行三组上小卡下夹页', () => {
   assert.equal((html.match(/<article class="card" data-id="p\d"/g) || []).length, 3);
   assert.equal((html.match(/<article class="card secondary" data-id="p\d"/g) || []).length, 3);
   assert.equal((html.match(/<article class="card folded" data-id="p\d"/g) || []).length, 3);
@@ -61,7 +61,7 @@ test('项目区只有两行：3 张主卡，第二行三组上夹页下小卡', 
   assert.doesNotMatch(html, /虚构快照|数字全虚构/, '不再出现虚构快照类状态文字');
 });
 
-test('04～06 微倾斜缩小，07～09 分别夹在对应卡片上方', () => {
+test('04～06 进一步缩小并微倾斜，07～09 分别夹在对应卡片下方', () => {
   const secondary = between('<div class="grid secondary-grid">', '  </section>\n  <section id="about">');
   const subCards = secondary.match(/<article class="card secondary[\s\S]*?<\/article>/g) || [];
   const slips = secondary.match(/<article class="card folded[\s\S]*?<\/article>/g) || [];
@@ -71,12 +71,13 @@ test('04～06 微倾斜缩小，07～09 分别夹在对应卡片上方', () => {
     assert.match(card, /<div class="media"><img src="assets\/shot-[a-z0-9]+\.webp"/, '次卡必须有图');
     assert.doesNotMatch(card, /f-sub/, '次卡不再加副标题');
   }
-  assert.match(html, /\.card\.secondary \.media\{aspect-ratio:16\/8\}/, '次卡图片应明显小于主卡');
-  assert.match(html, /\.card\.secondary\{[^}]*margin-top:54px[^}]*transform:rotate\(var\(--tilt\)\) scale\(\.96\)/, '04～06 要缩小并微倾斜');
+  assert.match(html, /\.card\.secondary \.media\{aspect-ratio:16\/7\}/, '次卡图片应进一步压低并明显小于主卡');
+  assert.match(html, /\.card\.secondary\{[^}]*width:calc\(100% - 24px\)[^}]*transform:rotate\(var\(--tilt\)\) scale\(\.90\)/, '04～06 要比上一版更小并保持微倾斜');
+  assert.match(html, /\.card\.folded\.in\{transform:translateY\(62px\)\}/, '07～09 要贴在 04～06 下沿');
   assert.match(html, /\.folded \.media\{display:none\}/, '折叠页不直接展示截图');
   for (const [front, back, column] of [[4, 7, 1], [5, 8, 2], [6, 9, 3]]) {
     assert.match(html, new RegExp(`\\.card\\.secondary\\[data-id="p${front}"\\],\\s*\\.card\\.folded\\[data-id="p${back}"\\]\\{grid-column:${column};grid-row:1\\}`), `p${back} 与 p${front} 必须同组`);
-    assert.ok(secondary.indexOf(`data-id="p${back}"`) < secondary.indexOf(`data-id="p${front}"`), `p${back} 应位于 p${front} 上方`);
+    assert.ok(secondary.indexOf(`data-id="p${front}"`) < secondary.indexOf(`data-id="p${back}"`), `p${back} 应位于 p${front} 下方`);
   }
   for (const slip of slips) {
     assert.match(slip, /<div class="media"><img src="assets\/shot-[a-z0-9]+\.webp"/, '折叠页仍要自带截图供详情使用');
@@ -127,7 +128,7 @@ test('项目文案保持短、准，不写成长篇报告', () => {
   }
 });
 
-test('关于我按指定顺序合并生活，履历默认折叠且不再堆放私密长文', () => {
+test('关于我保持指定顺序，履历与三个喜恶标题均为明显的默认折叠层', () => {
   const about = between('<section id="about">', '  </main>');
   const intro = '我是周锦全，2021入学东南大学通信工程本科，做过自动驾驶算法、医美整容预测cv算法和毫米波芯片。在联洲国际tplink做过国际业务管培生卖路由器（大客户方向），现在在星尘智能Astribot做海外大科研销售卖机器人。工作之外，我会用 AI 来Vibe Coding一些满足我好奇心的小玩意。努力追求身心健康、努力跟上AI Native';
   assert.ok(about.includes(`<p class="about-brief">${intro}</p>`), '自我介绍必须使用用户指定原文');
@@ -138,10 +139,21 @@ test('关于我按指定顺序合并生活，履历默认折叠且不再堆放�
   assert.match(about, /<details class="journey-fold" id="journey">/, '履历与工作必须默认折叠');
   assert.doesNotMatch(about, /<details class="journey-fold" id="journey" open>/);
   assert.ok(about.includes('<span>履历与工作</span>'));
+  for (const id of ['beliefs', 'likes', 'dislikes']) {
+    assert.match(about, new RegExp(`<details class="about-fold" id="${id}">`), `${id} 必须默认折叠`);
+    assert.doesNotMatch(about, new RegExp(`<details class="about-fold" id="${id}" open>`));
+  }
+  assert.equal((about.match(/class="fold-closed"/g) || []).length, 4, '四个折叠层都要明确写出已折叠与点击展开');
+  assert.equal((about.match(/class="fold-open"/g) || []).length, 4, '四个折叠层展开后都要允许点击收起');
+  assert.match(html, /\.journey-fold>summary::before,\.about-fold>summary::before\{[^}]*font-size:22px/, '折叠三角必须明显增大');
+  assert.match(html, /\.journey-fold:not\(\[open\]\),\.about-fold:not\(\[open\]\)\{[^}]*background:#eee7f0/, '折叠态使用可识别的藕紫底色');
+  assert.match(html, /\.journey-fold\[open\],\.about-fold\[open\]\{background:transparent\}/, '展开后应退掉折叠底色');
   assert.doesNotMatch(about, /完整版 About|完整版About|详细履历与工作/);
   assert.ok(about.includes('<p class="goal-lead">我的人生目标是探索热爱和美好。</p>'));
   assert.ok(about.includes('我的信念：人生的追求不应该是牛逼，而应该是幸福。'));
-  assert.equal((about.match(/class="goal-aside"/g) || []).length, 2, '两段补充说明要用小字区分');
+  assert.equal((about.match(/class="goal-aside"/g) || []).length, 2, '日期引文与两段补充说明都要保持小字');
+  assert.ok(about.includes('<p class="goal-aside">写于2026-11-22周六，AI对黎曼猜想的证明通过Lean形式化验证：<br>虽然AI能证出黎曼猜想，但是AI享受不了吃喝玩乐也体验不到欢喜悲愁，AI击碎了人类的优越感，但人类拥有的东西仍然有很多。</p>'), '新增日期引文必须使用用户指定原文');
+  assert.ok(about.includes('<p class="goal-aside">在 AI 焦虑的时代，认知行为疗法是必要的。我们要改的可能不是行为，而是认知本身。</p>'));
   assert.doesNotMatch(about, /亲密关系、职业能力和投资能力|十年后，我希望|如果只能留下一个代表作|穷则独善其身|知道自己不知道|集中力量办大事|生活不是只有延迟满足/);
 });
 
@@ -187,6 +199,6 @@ test('页脚只保留版权、版本和回顶，版本与本次发布一致', ()
   assert.doesNotMatch(footer, /这个页面|@mac|纯静态|无追踪/);
   assert.doesNotMatch(html, /这个页面\s*纯静态|id="contact"|class="contact-panel"|data-copy/);
   assert.match(html, /<header[\s\S]*?2336097716@qq\.com[\s\S]*?github\.com\/zhoujinq[\s\S]*?<\/header>/);
-  assert.match(footer, /<span class="ver">v2\.7\.0<\/span>/);
+  assert.match(footer, /<span class="ver">v2\.8\.0<\/span>/);
   assert.doesNotMatch(footer, /github\.com/, '页脚不再外链代码仓库');
 });
