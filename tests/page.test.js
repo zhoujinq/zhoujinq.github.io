@@ -31,7 +31,7 @@ test('首屏保留像素名字与三行 80～100 字简介，终端默认不输�
   assert.match(html, /\.tc-prompt\{[^}]*min-height:64px/, '终端输入区应略微增高');
   assert.match(html, /id="cmd"[^>]*autofocus/i, '终端输入框应在首次进入时自动聚焦');
   assert.match(html, /input\.focus\(\{preventScroll:true\}\)/, '脚本应主动聚焦终端且不把页面拉回顶部');
-  assert.match(html, /主页信息最近更新：2026-11-22/);
+  assert.match(html, /主页信息最近更新：2026-11-23/);
   assert.match(html, /<label class="ps" for="cmd">zjq : \/ \$<\/label>/);
   const terminal = between('<div class="tc-body" id="tcBody"', '</div>');
   assert.equal((terminal.match(/class="tc-line/g) || []).length, 0);
@@ -112,7 +112,7 @@ test('九个项目只贴一条原始网址，不放按钮也不放仓库', () =>
     assert.ok(tpl.includes(`<a href="${site}" target="_blank" rel="noopener">${site}</a>`), `tpl-p${i} 应直接贴出原始网址`);
     assert.equal((tpl.match(/target="_blank" rel="noopener">/g) || []).length, 1, `tpl-p${i} 只应有一个外链`);
     assert.doesNotMatch(tpl, /github\.com|打开网站|公开网站|代码仓库/, `tpl-p${i} 不应再放按钮或仓库`);
-    assert.doesNotMatch(tpl, /ov-state|在线 ·|静态预览|虚构/, `tpl-p${i} 不应再有状态行`);
+    assert.doesNotMatch(tpl, /ov-state|在线 ·|静态预览/, `tpl-p${i} 不应再有状态行`);
   }
   assert.doesNotMatch(html, /hajimi-ledger-demo/, '理财项目一律使用新仓库与新网址');
   assert.doesNotMatch(html, /记账投资助手/, '旧项目名应全部改为个人理财投资助手');
@@ -120,7 +120,7 @@ test('九个项目只贴一条原始网址，不放按钮也不放仓库', () =>
 
 test('项目文案保持短、准，不写成长篇报告', () => {
   const overlays = between('<template id="tpl-p1">', '<script id="shell-engine">');
-  for (const text of ['85 条配置 / 39 个模型', '6 家客户', '6.69 秒', '51 套真题', '19 个不可证伪的空话词']) {
+  for (const text of ['85 条配置 / 39 个模型', '辅助触达 80 家客户', '约 130 条跟进', '均为虚构演示数据', '6 家客户', '6.69 秒', '51 套真题', '19 个不可证伪的空话词']) {
     assert.ok(overlays.includes(text), `覆盖层缺少口径：${text}`);
   }
   for (const stale of ['70 条配置', '34 个模型', '九项门禁', '为什么做', '打开网站']) {
@@ -186,7 +186,7 @@ test('打卡、三项热爱、六条信念与喜恶全部使用指定原文', ()
   assert.doesNotMatch(beliefs, /<p>|<strong>/, '六条信念只保留主标题，不附解释');
   for (const text of ['弱小和无知不是生存的障碍，傲慢才是。', '相信二八定律，尊重边际递减效应。', '人生得意须尽欢，莫使金樽空对月。', '想做了就去做，知而不行，只是未知。', '多做酷而难的事情，少做平庸而容易的事情。', '我是积极的AI降临派，少焦虑，少因AI焦虑。']) assert.ok(beliefs.includes(`<li>${text}</li>`), `信念原文被改动：${text}`);
   assert.match(html, /\.belief-list\{display:grid;grid-template-columns:1fr;/, '六条信念必须单列');
-  for (const text of ['喜欢学日语；', '喜欢看公众号，喜欢量子位，也喜欢半佛仙人、赛博禅心、数字生命卡兹克；', '爱打游戏， S16英雄联盟世界冠军BLG牛逼！', '喜欢看日本少年漫；', '喜欢看番茄小说的爽文。喜欢吃橘子，尤其是金钱橘。', '喜欢凡事优先问大模型，大爱ChatGPT和DeepSeek（讨厌Anthropic）；', '喜欢的作家有马伯庸、当年明月，也听莫扎特和德彪西。']) assert.ok(about.includes(`<li>${text}</li>`), `喜欢清单原文被改动：${text}`);
+  for (const text of ['喜欢学日语；', '喜欢看公众号，喜欢量子位，也喜欢半佛仙人、赛博禅心、数字生命卡兹克；', '爱打游戏， S16英雄联盟世界冠军BLG牛逼！', '喜欢看日本少年漫；', '喜欢看番茄小说的爽文。喜欢吃橘子，尤其是金钱橘。', '喜欢凡事优先问大模型，喜欢大肥鱼DeepSeek；', '喜欢的作家有马伯庸、当年明月，也听莫扎特和德彪西。']) assert.ok(about.includes(`<li>${text}</li>`), `喜欢清单原文被改动：${text}`);
   assert.ok(about.includes('<h2>我相信的一些东西</h2>'));
   assert.ok(about.includes('<h2>我喜欢的一些东西</h2>'));
   assert.ok(about.includes('<h2>我讨厌的一些东西</h2>'));
@@ -210,6 +210,6 @@ test('页脚只保留版权、版本和回顶，版本与本次发布一致', ()
   assert.doesNotMatch(footer, /这个页面|@mac|纯静态|无追踪/);
   assert.doesNotMatch(html, /这个页面\s*纯静态|id="contact"|class="contact-panel"|data-copy/);
   assert.match(html, /<header[\s\S]*?2336097716@qq\.com[\s\S]*?github\.com\/zhoujinq[\s\S]*?<\/header>/);
-  assert.match(footer, /<span class="ver">v3\.0\.0<\/span>/);
+  assert.match(footer, /<span class="ver">v3\.0\.1<\/span>/);
   assert.doesNotMatch(footer, /github\.com/, '页脚不再外链代码仓库');
 });

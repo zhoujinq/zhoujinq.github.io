@@ -2,7 +2,7 @@
 
 个人主页：一个 `index.html` + 本地素材，没有构建步骤，没有外部请求，断网也能打开。
 
-线上：<https://zhoujinq.github.io/> ｜ 版本 v3.0.0（2026-11-22）
+线上：<https://zhoujinq.github.io/> ｜ 版本 v3.0.1（2026-11-23）
 
 ## 页面结构
 
