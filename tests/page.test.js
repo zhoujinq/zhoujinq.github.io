@@ -214,16 +214,16 @@ test('页脚只保留版权、版本和回顶，版本与本次发布一致', ()
   assert.doesNotMatch(footer, /github\.com/, '页脚不再外链代码仓库');
 });
 
-test('首屏三张项目图立即请求，卡片不依赖滚动脚本才能显示', () => {
-  for (const asset of ['shot-sales.svg', 'shot-cutline.svg', 'shot-growing.svg']) {
-    assert.match(html, new RegExp(`<link rel="preload" href="assets/${asset}" as="image" fetchpriority="high">`), `${asset} 应在头部预加载`);
-  }
+test('首屏三张项目图内联且立即解码，卡片不依赖滚动脚本才能显示', () => {
   const featured = between('<div class="grid featured-grid">', '<div class="grid secondary-grid">');
-  for (const id of ['p1', 'p2', 'p3']) {
+  assert.doesNotMatch(featured, /src="assets\/shot-/, '首屏主图不应再等待独立网络请求');
+  for (const [id, asset] of [['p1', 'shot-sales.svg'], ['p2', 'shot-cutline.svg'], ['p3', 'shot-growing.svg']]) {
     const card = between(`<article class="card" data-id="${id}"`, '</article>');
+    const embedded = card.match(/<img src="data:image\/svg\+xml;base64,([A-Za-z0-9+/=]+)"/);
+    assert.ok(embedded, `${id} 应内嵌对应 SVG`);
+    assert.ok(Buffer.from(embedded[1], 'base64').equals(fs.readFileSync(path.join(__dirname, '..', 'assets', asset))), `${id} 内联图必须与源 SVG 完全一致`);
     assert.match(card, /loading="eager"/, `${id} 不应懒加载`);
     assert.match(card, /decoding="sync"/, `${id} 不应异步推迟解码`);
-    assert.match(card, /fetchpriority="high"/, `${id} 应提高请求优先级`);
   }
   assert.match(html, /\.card\{[^}]*opacity:1;transform:translateY\(16px\)/, '卡片默认必须可见，滚动入场只保留位移');
 });
