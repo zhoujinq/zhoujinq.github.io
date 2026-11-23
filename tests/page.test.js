@@ -13,7 +13,7 @@ function between(start, end) {
   return html.slice(from, to);
 }
 
-const SLUGS = ['customer-commitment-ledger', 'model-cutline', 'growing-assistant-skill'];
+const SLUGS = ['customer-commitment-ledger', 'model-cutline', 'n1-study-dashboard'];
 
 
 test('首屏保留像素名字与三行 80～100 字简介，终端默认不输出内容', () => {
@@ -31,7 +31,7 @@ test('首屏保留像素名字与三行 80～100 字简介，终端默认不输�
   assert.match(html, /\.tc-prompt\{[^}]*min-height:64px/, '终端输入区应略微增高');
   assert.match(html, /id="cmd"[^>]*autofocus/i, '终端输入框应在首次进入时自动聚焦');
   assert.match(html, /input\.focus\(\{preventScroll:true\}\)/, '脚本应主动聚焦终端且不把页面拉回顶部');
-  assert.match(html, /主页信息最近更新：2026-11-23/);
+  assert.match(html, /主页信息最近更新：2026-11-24/);
   assert.match(html, /<label class="ps" for="cmd">zjq : \/ \$<\/label>/);
   const terminal = between('<div class="tc-body" id="tcBody"', '</div>');
   assert.equal((terminal.match(/class="tc-line/g) || []).length, 0);
@@ -56,8 +56,8 @@ test('项目区只有两行：3 张主卡，第二行三组上小卡下夹页', 
   assert.equal((html.match(/<article class="card folded" data-id="p\d"/g) || []).length, 3);
   assert.doesNotMatch(html, /<details class="project-book"/, '项目书应已删除');
   assert.doesNotMatch(html, /class="shelf"|class="folder-grid"|还有 3 个 · 折起来放着/, '不能另起第三行');
-  const order = ['销售助手 · 客户管理系统', 'AI 模型斩杀线', 'Personal AI · 会成长的个人助手',
-    'API 商机雷达', '个人理财投资助手', '日语 N1 备考教练', '破万卷', '外卖吃啥', '简历工坊 Pro'];
+  const order = ['销售助手 · 客户管理系统', 'AI 模型斩杀线', '日语 N1 备考教练',
+    'Personal AI · 会成长的个人助手', '个人理财投资助手', '外卖吃啥', '破万卷', 'API 商机雷达', '简历工坊 Pro'];
   order.forEach((name, i) => {
     assert.ok(html.includes(`data-id="p${i + 1}" data-name="${name}"`), `第 ${i + 1} 个项目应为 ${name}`);
   });
@@ -73,7 +73,9 @@ test('04～06 进一步缩小并微倾斜，07～09 分别夹在对应卡片下�
   assert.equal(subCards.length, 3);
   assert.equal(slips.length, 3, '三张夹页必须和次卡处于同一网格，不能另起一行');
   for (const card of subCards) {
-    assert.match(card, /<div class="media"><img src="assets\/shot-[a-z0-9]+\.webp"/, '次卡必须有图');
+    const id = card.match(/data-id="p(\d)"/)[1];
+    if (id === '4') assert.match(card, /<div class="media"><img src="assets\/shot-growing\.svg"/, 'Personal AI 次卡沿用原 SVG 并改为懒加载');
+    else assert.match(card, /<div class="media"><img src="assets\/shot-[a-z0-9]+\.webp"/, '其余次卡必须有 WebP 截图');
     assert.doesNotMatch(card, /f-sub/, '次卡不再加副标题');
   }
   assert.match(html, /\.card\.secondary \.media\{aspect-ratio:16\/7\}/, '次卡图片应进一步压低并明显小于主卡');
@@ -97,12 +99,12 @@ test('九个项目只贴一条原始网址，不放按钮也不放仓库', () =>
   const sites = [
     'https://zhoujinq.github.io/customer-commitment-ledger/',
     'https://zhoujinq.github.io/model-cutline/',
-    'https://zhoujinq.github.io/growing-assistant-skill/',
-    'https://zhoujinq.github.io/api-opportunity-radar/',
-    'https://zhoujinq.github.io/personal-finance-assistant/',
     'https://zhoujinq.github.io/n1-study-dashboard/',
-    'https://zhoujinq.github.io/po-wan-juan/',
+    'https://zhoujinq.github.io/growing-assistant-skill/',
+    'https://zhoujinq.github.io/personal-finance-assistant/',
     'https://zhoujinq.github.io/what-to-eat/',
+    'https://zhoujinq.github.io/po-wan-juan/',
+    'https://zhoujinq.github.io/api-opportunity-radar/',
     'https://zhoujinq.github.io/resume-master/'
   ];
   assert.equal((html.match(/class="ov-links"/g) || []).length, 9);
@@ -118,16 +120,20 @@ test('九个项目只贴一条原始网址，不放按钮也不放仓库', () =>
   assert.doesNotMatch(html, /记账投资助手/, '旧项目名应全部改为个人理财投资助手');
 });
 
-test('项目文案保持短、准，不写成长篇报告', () => {
+test('前三项按简历终稿详介，后六项保持短、准', () => {
   const overlays = between('<template id="tpl-p1">', '<script id="shell-engine">');
-  for (const text of ['85 条配置 / 39 个模型', '辅助触达 80 家客户', '约 130 条跟进', '均为虚构演示数据', '6 家客户', '6.69 秒', '51 套真题', '19 个不可证伪的空话词']) {
+  for (const text of ['85 条配置、39 个模型', '累计辅助首次建联 80 家新客户', '200 多封邮件', '每周至少节省 5 小时', '均为虚构演示数据', '6 家客户', '6.69 秒', '58.3 vs 59.1', '1992—2026 年 50 余套真题', '累计背词 8000 余个', '完成 13 套真题练习', '19 个不可证伪的空话词']) {
     assert.ok(overlays.includes(text), `覆盖层缺少口径：${text}`);
   }
-  for (const stale of ['70 条配置', '34 个模型', '九项门禁', '为什么做', '打开网站']) {
+  for (let i = 1; i <= 3; i += 1) {
+    const tpl = between(`<template id="tpl-p${i}">`, '</template>');
+    for (const label of ['痛点', '思路', '结果']) assert.ok(tpl.includes(`<h4>${label}</h4>`), `tpl-p${i} 缺少简历终稿的${label}段`);
+  }
+  for (const stale of ['70 条配置', '34 个模型', '约 130 条跟进', '51 套真题', '九项门禁', '为什么做', '打开网站']) {
     assert.ok(!overlays.includes(stale), `仍在沿用旧内容：${stale}`);
   }
   const plain = overlays.replace(/<[^>]+>/g, '').replace(/\s/g, '');
-  assert.ok(plain.length < 2400, `九份详情合计 ${plain.length} 字，仍然太长`);
+  assert.ok(plain.length < 2800, `前三项详介、后六项简介合计 ${plain.length} 字，仍然太长`);
   for (let i = 4; i <= 9; i += 1) {
     const tpl = between(`<template id="tpl-p${i}">`, '</template>');
     const len = tpl.replace(/<[^>]+>/g, '').replace(/\s/g, '').length;
@@ -210,21 +216,23 @@ test('页脚只保留版权、版本和回顶，版本与本次发布一致', ()
   assert.doesNotMatch(footer, /这个页面|@mac|纯静态|无追踪/);
   assert.doesNotMatch(html, /这个页面\s*纯静态|id="contact"|class="contact-panel"|data-copy/);
   assert.match(html, /<header[\s\S]*?2336097716@qq\.com[\s\S]*?github\.com\/zhoujinq[\s\S]*?<\/header>/);
-  assert.match(footer, /<span class="ver">v3\.1\.0<\/span>/);
+  assert.match(footer, /<span class="ver">v3\.2\.0<\/span>/);
   assert.doesNotMatch(footer, /github\.com/, '页脚不再外链代码仓库');
 });
 
 test('首屏三张项目图内联且立即解码，卡片不依赖滚动脚本才能显示', () => {
   const featured = between('<div class="grid featured-grid">', '<div class="grid secondary-grid">');
   assert.doesNotMatch(featured, /src="assets\/shot-/, '首屏主图不应再等待独立网络请求');
-  for (const [id, asset] of [['p1', 'shot-sales.svg'], ['p2', 'shot-cutline.svg'], ['p3', 'shot-growing.svg']]) {
+  for (const [id, asset, mime] of [['p1', 'shot-sales.svg', 'svg\\+xml'], ['p2', 'shot-cutline.svg', 'svg\\+xml'], ['p3', 'shot-n1.webp', 'webp']]) {
     const card = between(`<article class="card" data-id="${id}"`, '</article>');
-    const embedded = card.match(/<img src="data:image\/svg\+xml;base64,([A-Za-z0-9+/=]+)"/);
-    assert.ok(embedded, `${id} 应内嵌对应 SVG`);
-    assert.ok(Buffer.from(embedded[1], 'base64').equals(fs.readFileSync(path.join(__dirname, '..', 'assets', asset))), `${id} 内联图必须与源 SVG 完全一致`);
+    const embedded = card.match(new RegExp(`<img src="data:image/${mime};base64,([A-Za-z0-9+/=]+)"`));
+    assert.ok(embedded, `${id} 应内嵌对应图片`);
+    assert.ok(Buffer.from(embedded[1], 'base64').equals(fs.readFileSync(path.join(__dirname, '..', 'assets', asset))), `${id} 内联图必须与源文件完全一致`);
     assert.match(card, /loading="eager"/, `${id} 不应懒加载`);
     assert.match(card, /decoding="sync"/, `${id} 不应异步推迟解码`);
   }
+  const personal = between('<article class="card secondary" data-id="p4"', '</article>');
+  assert.match(personal, /src="assets\/shot-growing\.svg"[^>]*loading="lazy" decoding="async"/, 'Personal AI 退出首屏后恢复独立懒加载');
   assert.match(html, /\.card\{[^}]*opacity:1;transform:translateY\(16px\)/, '卡片默认必须可见，滚动入场只保留位移');
 });
 

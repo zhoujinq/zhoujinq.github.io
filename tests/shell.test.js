@@ -117,9 +117,9 @@ test('ps 与 neofetch 只描述页面虚拟会话', () => {
   assert.doesNotMatch(info, /CPU|内存|显卡|Windows|macOS|Linux/);
 });
 
-test('页面命令在终端内返回 100～200 字简介，不跳转页面', () => {
+test('页面命令在终端内返回简介，不跳转页面', () => {
   const shell = createShell();
-  for (const command of ['about', 'projects', 'life']) {
+  for (const command of ['about', 'life']) {
     const result = ok(shell, command);
     assert.equal(result.action, null, `${command} 不应触发页面动作`);
     const length = result.text.replace(/\s/g, '').length;
@@ -132,6 +132,30 @@ test('页面命令在终端内返回 100～200 字简介，不跳转页面', () 
   assert.equal(ok(shell, 'exit').action, null);
   assert.match(ok(shell, 'exit').text, /不会关闭或离开页面/);
   assert.deepEqual(ok(shell, 'clear').action, { type: 'clear' });
+});
+
+test('projects 返回完整九项，前三项详介且后六项简短', () => {
+  const shell = createShell();
+  const result = ok(shell, 'projects');
+  assert.equal(result.action, null);
+  const blocks = result.text.split('\n\n');
+  const names = ['销售助手 · 客户管理系统', 'AI 模型斩杀线', '日语 N1 备考教练', 'Personal AI · 会成长的个人助手', '个人理财投资助手', '外卖吃啥', '破万卷', 'API 商机雷达', '简历工坊 Pro'];
+  assert.equal(blocks.length, 9, `projects 应输出九段，当前为 ${blocks.length} 段`);
+  names.forEach((name, i) => {
+    const number = String(i + 1).padStart(2, '0');
+    assert.ok(blocks[i].startsWith(`${number} ${name}`), `第 ${i + 1} 段应为 ${name}`);
+  });
+  for (let i = 0; i < 3; i += 1) {
+    for (const label of ['痛点：', '思路：', '结果：']) assert.ok(blocks[i].includes(label), `第 ${i + 1} 项缺少${label}`);
+    assert.ok(blocks[i].length > 150, `第 ${i + 1} 项应重点介绍`);
+  }
+  for (let i = 3; i < 9; i += 1) {
+    assert.ok(!/痛点：|思路：|结果：/.test(blocks[i]), `第 ${i + 1} 项只保留简单介绍`);
+    assert.ok(blocks[i].length < 180, `第 ${i + 1} 项介绍过长`);
+  }
+  for (const text of ['累计辅助首次建联 80 家新客户', '80:13:7', '58.3 vs 59.1', '1992—2026 年 50 余套真题', '累计背词 8000 余个', '完成 13 套真题练习']) assert.ok(result.text.includes(text), `projects 缺少简历口径：${text}`);
+  assert.match(ok(shell, 'cat /projects/03').text, /日语 N1 备考教练/);
+  assert.match(ok(shell, 'index').text, /\/projects：9 个项目/);
 });
 
 test('help 列出真实命令，未知命令和不支持的选项明确报错', () => {

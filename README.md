@@ -2,15 +2,15 @@
 
 个人主页：一个 `index.html` + 本地素材，没有构建步骤，没有外部请求，断网也能打开。
 
-线上：<https://zhoujinq.github.io/> ｜ 版本 v3.1.0（2026-11-23）
+线上：<https://zhoujinq.github.io/> ｜ 版本 v3.2.0（2026-11-24）
 
 ## 页面结构
 
 首屏（像素名字、Maple Mono 三行简介、自动聚焦且光标闪烁的终端）之后只有两大内容块：**项目**（两行九项目）→ **关于我**（简介、打卡、三项热爱、折叠履历、目标与信念、折叠的相信 / 喜欢 / 讨厌清单）。桌面关于我采用“日常 / 思考”双栏紧凑布局，在 1366×625 内容区、四层均折叠时整区约 608px，可在一屏内完整显示；手机保持单栏。
 
-项目区只有两行：第一行是 3 张主卡（销售助手 / 模型斩杀线 / Personal AI）；第二行由 04 API 商机雷达 / 05 个人理财投资助手 / 06 日语 N1 三张缩小微倾斜图卡在上，07 破万卷、08 外卖吃啥、09 简历工坊 Pro 分别夹在其下。09 缩至列宽 82%、高度 58px，并以 -1.8° 倾斜，宽度接近 06 且明显小于主卡。详情里直接贴原始网址，不放代码仓库；销售助手分别标注真实使用规模与虚构演示数据。
+项目区只有两行：第一行是 3 张主卡（销售助手 / AI 模型斩杀线 / 日语 N1 备考教练）；第二行由 04 Personal AI / 05 个人理财投资助手 / 06 外卖吃啥三张缩小微倾斜图卡在上，07 破万卷、08 API 商机雷达、09 简历工坊 Pro 分别夹在其下。09 缩至列宽 82%、高度 58px，并以 -1.8° 倾斜，宽度接近 06 且明显小于主卡。前三项详情按确认的简历终稿采用“痛点 / 思路 / 结果”，后六项保持短简介；终端 `projects` 同样返回完整九项，并从第一项开始展示。详情里直接贴原始网址，不放代码仓库；销售助手分别标注真实使用规模与虚构演示数据。
 
-首屏三张主图按源 SVG 原字节内嵌为 data URI（合计约 8 KB），随 HTML 一次到达并同步解码，不再发起独立图片请求；源 SVG 保留，自动测试逐字节校验内嵌图与源文件一致。卡片默认可见，滚动入场只保留位移；王者图标已压缩至 253×256、约 18.4 KB，避免冷启动时大图争抢带宽。
+首屏三张主图按源文件原字节内嵌为 data URI（两张 SVG + 一张 N1 WebP），随 HTML 一次到达并同步解码，不再发起独立图片请求；源图保留，自动测试逐字节校验内嵌图与源文件一致。卡片默认可见，滚动入场只保留位移；王者图标已压缩至 253×256、约 18.4 KB，避免冷启动时大图争抢带宽。
 
 履历与三个喜恶清单默认折叠；折叠态使用与 09 夹页同族的 `#eadcc3` 暖纸底、22px 大三角和“已折叠 · 点击展开”提示，展开后退底并可再次收起。
 
@@ -19,8 +19,9 @@ index.html                  结构、样式、终端与覆盖层脚本，全在�
 assets/maple-*.woff2        Maple Mono CN 子集（正文 / 粗体）
 assets/shot-sales.svg       01 销售助手工作流示意
 assets/shot-cutline.svg     02 模型斩杀线示意
-assets/shot-growing.svg     03 Personal AI 示意
-assets/shot-*.webp          04–09 次卡与折叠页截图
+assets/shot-growing.svg     04 Personal AI 示意
+assets/shot-n1.webp         03 日语 N1 备考教练截图（首屏内嵌）
+assets/shot-*.webp          其他项目截图
 assets/life-*.webp|jpg      关于我三项热爱素材
 assets/particles.js         首屏粒子（vendored particles.js）
 assets/og.png               社交分享卡 1200×630
@@ -55,7 +56,7 @@ python -m http.server 8080
 
 ## 字体
 
-正文 Maple Mono CN（OFL），**只保留页面实际用到的约 900 个字符**（整包中文版 18MB）。
+正文 Maple Mono CN（OFL），当前子集包含 **973 个字符**（整包中文版 18MB）。
 改了文案出现新字，就要重新子集化，否则新字回退系统字体：
 
 ```python
@@ -67,7 +68,7 @@ chars = set(open("index.html", encoding="utf-8").read()) | {chr(c) for c in rang
 ## 测试与上线
 
 ```bash
-node --test tests/page.test.js tests/shell.test.js tests/streak.test.js   # 34 项
+node --test tests/page.test.js tests/shell.test.js tests/streak.test.js   # 35 项
 ```
 
 仓库名必须是 `zhoujinq.github.io`，Pages 才伺服在根域名。推 `main` 自动构建；页脚版本号是静态文本，不再外链 Release。
