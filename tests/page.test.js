@@ -210,6 +210,26 @@ test('页脚只保留版权、版本和回顶，版本与本次发布一致', ()
   assert.doesNotMatch(footer, /这个页面|@mac|纯静态|无追踪/);
   assert.doesNotMatch(html, /这个页面\s*纯静态|id="contact"|class="contact-panel"|data-copy/);
   assert.match(html, /<header[\s\S]*?2336097716@qq\.com[\s\S]*?github\.com\/zhoujinq[\s\S]*?<\/header>/);
-  assert.match(footer, /<span class="ver">v3\.0\.1<\/span>/);
+  assert.match(footer, /<span class="ver">v3\.1\.0<\/span>/);
   assert.doesNotMatch(footer, /github\.com/, '页脚不再外链代码仓库');
+});
+
+test('首屏三张项目图立即请求，卡片不依赖滚动脚本才能显示', () => {
+  for (const asset of ['shot-sales.svg', 'shot-cutline.svg', 'shot-growing.svg']) {
+    assert.match(html, new RegExp(`<link rel="preload" href="assets/${asset}" as="image" fetchpriority="high">`), `${asset} 应在头部预加载`);
+  }
+  const featured = between('<div class="grid featured-grid">', '<div class="grid secondary-grid">');
+  for (const id of ['p1', 'p2', 'p3']) {
+    const card = between(`<article class="card" data-id="${id}"`, '</article>');
+    assert.match(card, /loading="eager"/, `${id} 不应懒加载`);
+    assert.match(card, /decoding="sync"/, `${id} 不应异步推迟解码`);
+    assert.match(card, /fetchpriority="high"/, `${id} 应提高请求优先级`);
+  }
+  assert.match(html, /\.card\{[^}]*opacity:1;transform:translateY\(16px\)/, '卡片默认必须可见，滚动入场只保留位移');
+});
+
+test('生活区王者图标不再用超大原图争抢冷启动带宽', () => {
+  const size = fs.statSync(path.join(__dirname, '..', 'assets', 'life-honor-app.jpg')).size;
+  assert.ok(size < 32768, `王者图标应压缩到 32 KB 内，当前 ${size} 字节`);
+  assert.match(html, /src="assets\/life-honor-app\.jpg"[^>]*width="104" height="104"/);
 });

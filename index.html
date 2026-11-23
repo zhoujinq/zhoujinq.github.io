@@ -20,6 +20,9 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231f242b'/%3E%3Cpath d='M8.5 10.5 L14 16 L8.5 21.5' fill='none' stroke='%2355e08a' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M16.5 21.5 L23.5 21.5' stroke='%2355e08a' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preload" href="assets/maple-regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/maple-bold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/shot-sales.svg" as="image" fetchpriority="high">
+<link rel="preload" href="assets/shot-cutline.svg" as="image" fetchpriority="high">
+<link rel="preload" href="assets/shot-growing.svg" as="image" fetchpriority="high">
 <style>
 @font-face{font-family:"Maple Mono";src:url("assets/maple-regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
 @font-face{font-family:"Maple Mono";src:url("assets/maple-bold.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
@@ -262,7 +265,7 @@ summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-
 
 .card{
   background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;
-  opacity:0;transform:translateY(16px);
+  opacity:1;transform:translateY(16px);
   transition:opacity .52s var(--ease),transform .52s var(--ease),
              border-color .2s var(--ease),box-shadow .2s var(--ease);
 }
@@ -521,8 +524,9 @@ footer .ver{color:var(--faint);border-bottom-color:transparent}
   .ov{padding:0}
   .ov-panel{grid-template-columns:1fr;max-height:100vh;height:100vh;border-radius:0;border:0}
   .ov-media{min-height:0;height:40vh;border-right:0;border-bottom:1px solid var(--line-2)}
-  .ov-body{max-height:60vh;padding:20px 18px 28px}
+  .ov-body{max-height:60vh;padding:18px 18px 22px}
   .ov-name{font-size:21px}
+  .ov-seg{padding:12px 0}
 }
 @media (max-width:560px){
   .ov-panel{display:flex;flex-direction:column}
@@ -798,21 +802,21 @@ body{background-image:none}
     <div class="grid featured-grid">
       <article class="card" data-id="p1" data-name="销售助手 · 客户管理系统">
         <button class="card-btn" type="button" aria-label="打开 销售助手 · 客户管理系统 详情">
-          <div class="media"><img src="assets/shot-sales.svg" style="object-position:center" alt="销售助手的工作流结构预览" loading="lazy" decoding="async"></div>
+          <div class="media"><img src="assets/shot-sales.svg" style="object-position:center" alt="销售助手的工作流结构预览" loading="eager" decoding="sync" fetchpriority="high"></div>
           <div class="card-meta"><span class="card-no">01</span><h3 class="card-name">销售助手 ·<br class="tablet-br"> 客户管理系统</h3></div>
           <div class="card-foot">80 家客户 · 约 130 条 AI 跟进<span class="open">点开 →</span></div>
         </button>
       </article>
       <article class="card" data-id="p2" data-name="AI 模型斩杀线">
         <button class="card-btn" type="button" aria-label="打开 AI 模型斩杀线 详情">
-          <div class="media"><img src="assets/shot-cutline.svg" style="object-position:center" alt="AI 模型斩杀线示意图：延迟与智能指数的取舍" loading="lazy" decoding="async"></div>
+          <div class="media"><img src="assets/shot-cutline.svg" style="object-position:center" alt="AI 模型斩杀线示意图：延迟与智能指数的取舍" loading="eager" decoding="sync" fetchpriority="high"></div>
           <div class="card-meta"><span class="card-no">02</span><h3 class="card-name">AI 模型斩杀线</h3></div>
           <div class="card-foot">85 条配置 / 39 个模型<span class="open">点开 →</span></div>
         </button>
       </article>
       <article class="card" data-id="p3" data-name="Personal AI · 会成长的个人助手">
         <button class="card-btn" type="button" aria-label="打开 Personal AI · 会成长的个人助手 详情">
-          <div class="media"><img src="assets/shot-growing.svg" style="object-position:center" alt="Personal AI 示意图：纠正会变成规则和评测" loading="lazy" decoding="async"></div>
+          <div class="media"><img src="assets/shot-growing.svg" style="object-position:center" alt="Personal AI 示意图：纠正会变成规则和评测" loading="eager" decoding="sync" fetchpriority="high"></div>
           <div class="card-meta"><span class="card-no">03</span><h3 class="card-name">Personal AI ·<br>会成长的个人助手</h3></div>
           <div class="card-foot">5–8 个问题起步<span class="open">点开 →</span></div>
         </button>
@@ -939,7 +943,7 @@ body{background-image:none}
 
   </main>
 
-  <footer><span>© 2026 周锦全</span><span class="ver">v3.0.1</span><span class="sp"><a class="totop" href="#top">↑ 回顶</a></span></footer>
+  <footer><span>© 2026 周锦全</span><span class="ver">v3.1.0</span><span class="sp"><a class="totop" href="#top">↑ 回顶</a></span></footer>
 
 </div>
 
